@@ -1,0 +1,40 @@
+body {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  height: 100%;
+}
+
+html {
+    height: 100%;
+}
+
+.container {
+    height: 100%;	
+}
+
+#topBox, #bottomBox {
+	background-color: rgba(214, 214, 214, 0.35);
+	width: 70%;
+    height: 20%;
+    min-height: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    
+}
+
+#view  {
+	width: 70%;
+    height: 60%;
+    min-height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;	
+}
+
+
+
+h1 {
+	font-weight: bold;
+	color: blue;
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="roodleApp">
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+	<title>Twitter Bootstrap 3 Fixed Layout Example</title>
+	<link href="libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+	<style type="text/css">
+		body {
+			padding-top: 70px;
+		}
+		.yleista input.ng-invalid.ng-dirty {
+    		background-color: #FA787E;
+  		}	
+		.yleista textarea.ng-invalid.ng-dirty {
+    		background-color: #FA787E;
+  		}	  		
+	</style>
+</head>
+<body>
+<div class="container">
+	<div class="jumbotron">
+		<h1>ROODLE</h1>
+		<hr>	
+		<h2>Sovi tapaamisen ajankohta</h2>
+		<h4>
+		<ul class="list-inline">
+  		   <li>1. Yleistä <span class="glyphicon glyphicon-arrow-right"></span></li>
+  		   <li>2. Aikaesitykset <span class="glyphicon glyphicon-arrow-right"></span></li>
+  		   <li>3. Asetukset <span class="glyphicon glyphicon-arrow-right"></span></li>
+  		   <li>4. Kutsu </li>  				
+		</ul>
+		</h4>
+	</div>
+	<div ng-view id="view"></div>
+	<hr>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="libs/angular/angular.min.js"></script>
+<script src="libs/angular-route/angular-route.min.js"></script>
+<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.2.js"></script>
+<script src="js/app.js"></script>
+<script src="js/controllers/yleistaCtrl.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
+</body>
+</html>
