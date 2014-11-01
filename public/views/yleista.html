@@ -1,0 +1,30 @@
+<div class="row">
+	<div class="col-xs-2"></div>
+	<div class="col-xs-8">
+		<form role="form" name="yleista" class="yleista">
+			<div class="form-group">
+				<label for="otsikko">Otsikko</label>
+				<input type="text" class="form-control" ng-model="data.otsikko" ng-maxlength="50" required name="otsikko">
+				<div>valid: {{yleista.otsikko.$valid}}</div>
+			</div>
+  			<div class="form-group">
+    			<label for="sijainti">Sijainti (valinnainen)</label>
+    			<input id="autocomplete" type="text" ng-model="data.sijainti" class="form-control" placeholder="Anna osoite">
+  			</div>
+  			<div class="form-group">
+				<label for="kuvaus">Kuvaus (valinnainen)</label>
+				<textarea class="form-control" rows="3" ng-model="data.kuvaus" ng-maxlength="150" name="kuvaus"></textarea>
+			</div>
+			<div class="form-group">
+				<label for="nimi">Nimesi</label>
+				<input type="text" class="form-control" ng-model="data.nimi" ng-maxlength="25" required name="nimi">				
+			</div>
+			<div class="form-group">
+				<label for="sposti">Sähköposti</label>
+				<input type="email" class="form-control" ng-model="data.sposti" required name="sposti">	
+				<p class="help-block">Jos annat sähköpostiosoitteen, saat linkin kyselyn ylläpitämistä varten.</p>			
+			</div>
+			<button type="button" class="btn btn-primary" ng-model="button" ng-disabled="yleista.$invalid">Seuraava</button>		
+		</form>
+	</div>
+</div>
