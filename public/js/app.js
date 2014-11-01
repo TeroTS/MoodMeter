@@ -7,5 +7,9 @@ app.config(function($routeProvider) {
         .when('/', {
             templateUrl: './views/yleista.html',
             controller: 'yleistaCtrl'
+        })
+        .when('/aika', {
+            templateUrl: './views/aikaEsitys.html',
+            controller: 'aikaEsitysCtrl'
         });
 });
