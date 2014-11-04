@@ -1,1 +1,9 @@
-<div>Toimii !</div>
+<div class="row">
+	<div class="col-xs-2"></div>
+	<div class="col-xs-8">
+		<pre>Selected date is: <em>{{ dt | date:'fullDate' }}</em></pre>
+    	<div style="display:inline-block; min-height:290px;">
+        	<datepicker ng-model="dt" min-date="minDate" show-weeks="true" class="well well-sm"></datepicker>
+    	</div>
+	</div>
+</div>

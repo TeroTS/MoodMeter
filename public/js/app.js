@@ -1,4 +1,4 @@
-var app = angular.module('roodleApp', ['ngRoute']);
+var app = angular.module('roodleApp', ['ngRoute', 'ui.bootstrap']);
 
 app.config(function($routeProvider) {
     
