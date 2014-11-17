@@ -11,5 +11,9 @@ app.config(function($routeProvider) {
         .when('/aika', {
             templateUrl: './views/aikaEsitys.html',
             controller: 'aikaEsitysCtrl'
-        });
+        })
+        .when('/kutsu', {
+            templateUrl: './views/kutsu.html',
+            controller: 'kutsuCtrl'
+        });        
 });

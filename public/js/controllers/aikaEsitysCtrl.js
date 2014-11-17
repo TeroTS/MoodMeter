@@ -1,50 +1,46 @@
 var aikaEsitysCtrl = function ($scope, $filter) {
-    
-  //var prevDate;
-  //$scope.minDate = $scope.minDate ? null : new Date();
-    
-  /*$scope.today = function() {
-    $scope.dt = ''; //new Date();
-  };
-  $scope.today();*/
-  $scope.dateList = {};
+
+  //tämän palauttamaa arvoa käytetään sorttauksessa 
+ /* $scope.pvmSort = function(pvmString) {
+    pvmDate = new Date(pvmString);
+    return $filter('date')(pvmDate, 'yyyy-MM-dd');
+  };*/
+ 
+  var dateList = {};
+  $scope.avaimet = [];
 
   $scope.toggleMin = function() {
     $scope.minDate = $scope.minDate ? null : new Date();
-    //$scope.count = 0;
-    //$scope.prevDate = '';
   };
   $scope.toggleMin();
   
-  $scope.addDate = function(dateData) {
-      tmpDate = $filter('date')(dateData, 'longDate');
+  //lisää valittu pvm taulukkoon, poista dublikaatit(set)
+  $scope.addDate = function(pvm) {
+      tmpDate = $filter('date')(pvm, 'yyyy-MM-dd');
       //lisää pvm property objektiin, jos on klikattu validia pvm:ää (imitoi settiä)
-      if (typeof dateData !== "undefined") {
-          $scope.dateList[tmpDate] = true;
+      if (typeof pvm !== "undefined") {
+         dateList[tmpDate] = true;
       }
-      //console.log($scope.dateList);
       //syötä objektin avaimet(=valitut päivämäärät) listaan
-      var avaimet = [];
-      for(var prop in $scope.dateList) {
-         avaimet.push(prop); 
+      $scope.avaimet = [];
+      for(var prop in dateList) {
+         propDate = new Date(prop);
+         $scope.avaimet.push(propDate); 
       }
-      console.log(avaimet);
-      
+      //$scope.avaimet = avaimet;
+      console.log($scope.avaimet);   
   };
-  
- 
- /* $scope.open = function($event) {
-    $event.preventDefault();
-    $event.stopPropagation();
-    $scope.opened = true;
-  };*/
-
- /* $scope.dateOptions = {
-    formatYear: 'yy',
-    startingDay: 1
-  };*/
-  /*$scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-  $scope.format = $scope.formats[0];*/
+   
+  $scope.deletePvm = function(pvm) {
+    for (var i=0, len=$scope.avaimet.length; i<len; i++) {
+        if ($scope.avaimet[i] === pvm) {
+           $scope.avaimet.splice(i,1);
+           tmpDate = $filter('date')(pvm, 'yyyy-MM-dd');
+           delete dateList[tmpDate];
+           break;
+        }
+    }      
+  };
    
 };
 
