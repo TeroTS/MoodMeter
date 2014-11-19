@@ -3,7 +3,7 @@
 		<form role="form" name="kutsu" class="kutsu">
   			<div class="form-group">
 				<label for="kuvaus">Sähköpostiosoitteet:</label>
-				<textarea class="form-control" rows="4" ng-model="sposti" ng-maxlength="200" name="osoitteet"></textarea>
+				<textarea class="form-control" rows="4" ng-model="sposti" ng-maxlength="200" required name="osoitteet"></textarea>
 				<p class="help-block">Erota useat sähköpostin vastaanottajat pilkuilla.</p>
 			</div>
 		</form>
@@ -12,6 +12,6 @@
 <div class="row">
 	<div class="col-md-4 col-md-offset-2">
 		<a class="btn btn-primary" href="#/aika">Takaisin</a>
-		<a class="btn btn-primary" href="#/loppu">Lähetä ja lopeta</a>
+		<a class="btn btn-primary" href="#/loppu" ng-click="lahetaSposti()" ng-disabled="kutsu.$invalid">Lähetä ja lopeta</a>
 	</div>
 </div>

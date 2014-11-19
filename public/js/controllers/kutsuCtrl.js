@@ -1,4 +1,10 @@
-var kutsuCtrl = function ($scope, $filter) {
+var kutsuCtrl = function ($scope) {
+    
+    $scope.sposti = "";
+    
+    $scope.lahetaSposti = function() {
+        console.log($scope.sposti);
+    };
     
 };
 
