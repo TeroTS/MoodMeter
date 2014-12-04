@@ -1,5 +1,5 @@
-// grab the nerd model we just created
-//var Nerd = require('./models/nerd');
+
+var Poll = require('./models/poll');
 
 module.exports = function(app) {
 
@@ -20,14 +20,33 @@ module.exports = function(app) {
             res.json(nerds); // return all nerds in JSON format
         });
     });*/
-
+        
     // route to handle creating goes here (app.post)
+    app.post('/rest/polls', function(req, res) {
+
+        Todo.create({
+            title : req.body.otsikko,
+            location : req.body.sijainti,
+            description : req.body.kuvaus,
+            creatorName : req.body.nimi,
+            creatorEmail : req.body.sposti,
+            dates : req.body.pvm,
+            participantEmails : req.body.osallistujatSposti,
+            participants : req.body.osallistujat,
+            adminUrl : req.body.hallinnointiUrl,
+            pollUrl : req.body.kyselyUrl
+        }, function(err, todo) {
+            if (err)
+                res.send(err);
+           }
+        );
+    });   
     // route to handle delete goes here (app.delete)
 
     // frontend routes =========================================================
     // route to handle all angular requests
     app.get('*', function(req, res) {
-        res.sendfile('./public/index.html'); // load our public/index.html file
+        res.sendfile('./public/index.html');
     });
 
 };

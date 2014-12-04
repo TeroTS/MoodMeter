@@ -8,7 +8,7 @@
 			</div>
   			<div class="form-group">
     			<label for="sijainti">Sijainti (valinnainen)</label>
-    			<input id="autocomplete" type="text" ng-model="data.sijainti" class="form-control" placeholder="Anna osoite">
+    			<input id="autocomplete" class="form-control" type="text" ng-model="data.sijainti" placeholder="Anna osoite">
   			</div>
   			<div class="form-group">
 				<label for="kuvaus">Kuvaus (valinnainen)</label>
@@ -23,7 +23,7 @@
 				<input type="email" class="form-control" ng-model="data.sposti" required name="sposti">	
 				<p class="help-block">Jos annat sähköpostiosoitteen, saat linkin kyselyn ylläpitämistä varten.</p>			
 			</div>
-			<a class="btn btn-primary" href="#/aika">Seuraava</a>
+			<a class="btn btn-primary" href="#/aika" ng-click="kirjoitaData()">Seuraava</a>
 			<!-- <a class="btn btn-primary" href="#/aika" ng-disabled="yleista.$invalid">Seuraava</a>	-->
 		</form>
 	</div>
