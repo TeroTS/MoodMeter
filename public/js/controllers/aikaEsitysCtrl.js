@@ -1,4 +1,4 @@
-var aikaEsitysCtrl = function ($scope, $filter) {
+var aikaEsitysCtrl = function ($scope, $filter, dataService) {
 
   //tämän palauttamaa arvoa käytetään sorttauksessa 
  /* $scope.pvmSort = function(pvmString) {
@@ -41,6 +41,11 @@ var aikaEsitysCtrl = function ($scope, $filter) {
         }
     }      
   };
+  
+  //kirjoita data servicen kautta persistence objektiin
+  $scope.kirjoitaData = function() {
+      dataService.kirjoitaData('pvm', $scope.avaimet);
+  };  
    
 };
 
