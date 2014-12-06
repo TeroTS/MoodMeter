@@ -11,8 +11,8 @@ var kutsuCtrl = function ($scope, dataService, restFactory) {
             .success(function() {
                 console.log("Post data success !");
             })
-            .error(function() {
-                console.log("Post data error !");
+            .error(function(data, status, headers, config) {
+                console.log("Error: " + status);
             });    
         console.log(dataService.lueData());
     };  
