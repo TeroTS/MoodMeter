@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="Tero" >
+    <meta name="author" content="" >
     <link rel="icon" href="../../favicon.ico">
-	<title>Twitter Bootstrap 3 Fixed Layout Example</title>
+	<title>Roodle</title>
 	<link href="libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 	<style type="text/css">
 		body {
@@ -30,7 +30,23 @@
 		}
 		.center {
     		text-align: center;   
-		}			  		
+		}
+		.text-block {
+            float: left;
+            position: relative;
+            left: 50%;
+        }
+		.content {
+            float: left;
+            position: relative;
+            left: -50%;
+        }
+        .wide {
+            line-height: 300%;
+        }
+        .wide-h {
+            line-height: 150%;
+        }   	  		
 	</style>
 </head>
 <body>
@@ -63,6 +79,7 @@
 <script src="js/controllers/yleistaCtrl.js"></script>
 <script src="js/controllers/aikaEsitysCtrl.js"></script>
 <script src="js/controllers/kutsuCtrl.js"></script>
+<script src="js/controllers/loppuCtrl.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
 </body>
 </html>
