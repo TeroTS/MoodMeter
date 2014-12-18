@@ -52,19 +52,24 @@
 			margin-bottom: 0px;
 			margin-top: 0px;
 		}
-		.page-title {
-			position: relative;
-			top: 50%;
-			transform: translateY(-50%);				
+		h1.page-title {
+		    margin-top: 15px;
+		    margin-bottom: 0px;
+		    line-height: 125px;
 		}
+		.btn-block {
+		    height: 100px;
+		    width: 97%;
+		    margin-left: auto;
+            margin-right: auto;
+		}
+		
 	</style>
 </head>
 <body>
 <div class="container">
 	<div class="jumbotron page-header">
-		<div class="page-title">
-			<h1>ROODLE</h1>
-		</div>
+		<h1 class="page-title">ROODLE</h1>
 	</div>
 	<div ng-view id="view"></div>
 	<div class="jumbotron page-footer"></div>

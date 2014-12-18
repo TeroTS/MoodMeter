@@ -1,6 +1,6 @@
 var startCtrl = function ($scope) {
 	
-	$scope.isStartScreen = True
+	$scope.isStartScreen = true;
 
 };
 
