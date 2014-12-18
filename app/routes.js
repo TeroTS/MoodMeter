@@ -17,20 +17,31 @@ module.exports = function(app) {
             if (err)
                 res.send(err);
 
-            res.json(polls); // return all nerds in JSON format
+            res.json(polls);
         });
     });
         
     // route to handle creating goes here (app.post)
     app.post('/rest/polls', function(req, res) {
     	
-    	  //generate objectid for unique poll url
-    	  var objId = mongoose.Types.ObjectId();
-    	  var pollUrlString = objId.toString();
-    	  var adminUrlString = pollUrlString + '/admin';
+        function createAdminUrl()
+        {
+            var text = "";
+            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        
+            for( var i=0; i < 8; i++ )
+                text += possible.charAt(Math.floor(Math.random() * possible.length));
+        
+            return text;
+        }  
+  
+    	//generate objectid for unique poll url
+    	var objId = mongoose.Types.ObjectId();
+    	var pollUrlString = objId.toString();  
+    	var adminUrlString = createAdminUrl() + '/admin';
 
         Poll.create({
-        		_id : objId,
+        	_id : objId,
             title : req.body.otsikko,
             location : req.body.sijainti,
             description : req.body.kuvaus,
@@ -46,7 +57,9 @@ module.exports = function(app) {
                 res.send(err);
            }
         );
-        res.json({ message: 'Poll created !' });
+        
+        res.json({ pollUrl : ollUrlString,
+                   adminUrl : adminUrlString});
     });   
     // route to handle delete goes here (app.delete)
 
