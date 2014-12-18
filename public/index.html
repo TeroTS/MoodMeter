@@ -30,26 +30,28 @@
 		}
 		.center {
     		text-align: center;   
+		}
+		.page-header, .page-footer {
+			height: 250px;
+			margin-bottom: 0px;
+			margin-top: 0px;
+		}
+		.page-title {
+			position: relative;
+			top: 50%;
+			transform: translateY(-50%);				
 		}			  		
 	</style>
 </head>
 <body>
 <div class="container">
-	<div class="jumbotron">
-		<h1>ROODLE</h1>
-		<hr>	
-		<h2>Sovi tapaamisen ajankohta</h2>
-		<h4>
-		<ul class="list-inline">
-  		   <li>1. Yleistä <span class="glyphicon glyphicon-arrow-right"></span></li>
-  		   <li>2. Aikaesitykset <span class="glyphicon glyphicon-arrow-right"></span></li>
-  		   <li>3. Asetukset <span class="glyphicon glyphicon-arrow-right"></span></li>
-  		   <li>4. Kutsu </li>  				
-		</ul>
-		</h4>
+	<div class="jumbotron page-header">
+		<div class="page-title">
+			<h1>ROODLE</h1>
+		</div>
 	</div>
 	<div ng-view id="view"></div>
-	<hr>
+	<div class="jumbotron page-footer"></div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -60,6 +62,7 @@
 <script src="js/app.js"></script>
 <script src="js/services/restFactory.js"></script>
 <script src="js/services/dataService.js"></script>
+<script src="js/controllers/startCtrl.js"></script>
 <script src="js/controllers/yleistaCtrl.js"></script>
 <script src="js/controllers/aikaEsitysCtrl.js"></script>
 <script src="js/controllers/kutsuCtrl.js"></script>
