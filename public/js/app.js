@@ -15,5 +15,10 @@ app.config(function($routeProvider) {
         .when('/kutsu', {
             templateUrl: './views/kutsu.html',
             controller: 'kutsuCtrl'
-        });        
+        })
+         .when('/loppu', {
+            templateUrl: './views/loppu.html',
+            controller: 'loppuCtrl'
+        });     
+               
 });
