@@ -6,9 +6,9 @@ app.config(function($routeProvider) {
         // home page
         .when('/', {
             templateUrl: './views/start.html',
-            controller: 'startCtrl'
+            controller: ''
         })  
-        .when('/general', {
+        .when('/yleista', {
             templateUrl: './views/yleista.html',
             controller: 'yleistaCtrl'
         })
