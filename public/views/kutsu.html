@@ -1,17 +1,28 @@
-<div class="row">
-	<div class="col-md-8 col-md-offset-2">
-		<form role="form" name="kutsu" class="kutsu">
-  			<div class="form-group">
-				<label for="kuvaus">Sähköpostiosoitteet:</label>
-				<textarea class="form-control" rows="4" ng-model="sposti" ng-maxlength="250" required name="osoitteet"></textarea>
-				<p class="help-block">Erota useat sähköpostin vastaanottajat pilkuilla.</p>
-			</div>
-		</form>
-	</div>
+<div class="pagination-header">
+    <h2 class="pagination-text">Schedule an event</h2>
+    <ul class="list-inline">
+          <li>1. General <span class="glyphicon glyphicon-arrow-right"></span></li>
+          <li>2. Time proposals <span class="glyphicon glyphicon-arrow-right"></span></li>
+          <li>3. Invite </li>
+          <li>4. End </li>              
+    </ul>
 </div>
-<div class="row">
-	<div class="col-md-4 col-md-offset-2">
-		<a class="btn btn-primary" href="#/aika">Takaisin</a>
-		<a class="btn btn-primary" href="#/loppu" ng-click="kirjoitaData()" ng-disabled="kutsu.$invalid">Lähetä ja lopeta</a>
-	</div>
+<div class="partial-content">
+    <div class="row">
+    	<div class="col-md-8 col-md-offset-2">
+    		<form role="form" name="kutsu" class="kutsu">
+      			<div class="form-group">
+    				<label for="kuvaus">Sähköpostiosoitteet:</label>
+    				<textarea class="form-control" rows="4" ng-model="sposti" ng-maxlength="250" required name="osoitteet"></textarea>
+    				<p class="help-block">Erota useat sähköpostin vastaanottajat pilkuilla.</p>
+    			</div>
+    		</form>
+    	</div>
+    </div>
+    <div class="row">
+    	<div class="col-md-4 col-md-offset-2">
+    		<a class="btn btn-primary" href="#/aika">Takaisin</a>
+    		<a class="btn btn-primary" href="#/loppu" ng-click="kirjoitaData()" ng-disabled="kutsu.$invalid">Lähetä ja lopeta</a>
+    	</div>
+    </div>
 </div>
