@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-module.exports = mongoose.model('Poll', {
+var Poll = mongoose.model('Poll', {
     title: String,
     location: String,
     description: String,
@@ -12,3 +12,12 @@ module.exports = mongoose.model('Poll', {
     adminUrl: String,
     pollUrl: String
 });
+
+var Comment = mongoose.model('Comment', {
+   _poll : {type: Number, ref: 'Poll'},
+   name : String,
+   text : String
+});
+
+module.exports = Poll;
+//module.exports = Comment;
