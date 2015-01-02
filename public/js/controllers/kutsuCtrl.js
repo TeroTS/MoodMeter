@@ -1,5 +1,6 @@
 var kutsuCtrl = function ($scope, dataService, restFactory) {
     
+    $scope.stage3 = "bold";
     $scope.sposti = "";
 
     //kirjoita data servicen kautta persistence objektiin

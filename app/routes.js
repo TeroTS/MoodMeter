@@ -1,5 +1,8 @@
 var mongoose = require('mongoose');
 var Poll = require('./models/poll');
+//var pollItem = require('./models/poll');
+//var Poll = pollItem.Poll;
+//var Comment = pollItem.Comment;
 
 module.exports = function(app) {
 
@@ -58,7 +61,7 @@ module.exports = function(app) {
            }
         );
         
-        res.json({ pollUrl : ollUrlString,
+        res.json({ pollUrl : pollUrlString,
                    adminUrl : adminUrlString});
     });   
     // route to handle delete goes here (app.delete)

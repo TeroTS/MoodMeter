@@ -5,6 +5,7 @@ var aikaEsitysCtrl = function ($scope, $filter, dataService) {
     pvmDate = new Date(pvmString);
     return $filter('date')(pvmDate, 'yyyy-MM-dd');
   };*/
+  $scope.stage2 = "bold";
  
   var dateList = {};
   $scope.avaimet = [];

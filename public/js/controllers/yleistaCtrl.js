@@ -1,5 +1,7 @@
 var yleistaCtrl = function ($scope, dataService) {
     
+    $scope.stage1 = "bold";
+    
     $scope.data = {
         otsikko: "",
         sijainti: "",

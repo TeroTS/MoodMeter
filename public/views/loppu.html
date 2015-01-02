@@ -1,10 +1,10 @@
 <div class="pagination-header">
     <h2 class="pagination-text">Schedule an event</h2>
     <ul class="list-inline">
-          <li>1. General <span class="glyphicon glyphicon-arrow-right"></span></li>
-          <li>2. Time proposals <span class="glyphicon glyphicon-arrow-right"></span></li>
-          <li>3. Invite <span class="glyphicon glyphicon-arrow-right"></span></li>
-          <li>4. End </li>              
+          <li ng-class="stage1">1. General <span class="glyphicon glyphicon-arrow-right"></span></li>
+          <li ng-class="stage2">2. Time proposals <span class="glyphicon glyphicon-arrow-right"></span></li>
+          <li ng-class="stage3">3. Invite <span class="glyphicon glyphicon-arrow-right"></span></li> 
+          <li ng-class="stage4">4. End </li>                
     </ul>
 </div>
 <div class="partial-content">
@@ -12,8 +12,8 @@
         <div class="text-block">
             <div class="content">
                 <h2 class="wide-h">Kysely luotu !</h2>
-                <p class="wide">Kysely URL:</p>
-                <p class="wide">Kysely admin URL:</p>
+                <p class="wide">Kysely URL: <a ng-href="{{pollUrl}}">{{ pollUrl }}</a></p>
+                <p class="wide">Kysely admin URL: <a ng-href="{{adminUrl}}">{{ adminUrl }}</a></p>
             </div>
         </div>
     </div>
