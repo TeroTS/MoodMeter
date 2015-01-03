@@ -1,0 +1,95 @@
+body {
+    padding-top: 10%;
+    padding-bottom: 10%;
+}
+
+.container {
+    box-shadow: 5px 5px 5px #888888;
+    padding-right: 0px;
+    padding-left: 0px;
+} 
+  
+.yleista input.ng-invalid.ng-dirty {
+    background-color: #FA787E;
+}
+  
+.yleista textarea.ng-invalid.ng-dirty {
+    background-color: #FA787E;
+}
+
+.spacer {
+    margin-left: 20px;
+}
+
+.left {
+    text-align: left;   
+}
+
+.right {
+    text-align: right;   
+}
+.center {
+    text-align: center;   
+}
+
+.text-block {
+    float: left;
+    position: relative;
+    left: 50%;
+}
+
+.content {
+    float: left;
+    position: relative;
+    left: -50%;
+}
+
+.wide {
+    line-height: 300%;
+}
+
+.wide-h {
+    line-height: 150%;
+}
+
+.page-header, .page-footer {
+    height: 250px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+h1.page-title {
+    margin-top: 15px;
+    margin-bottom: 0px;
+    line-height: 125px;
+}
+
+.btn-block {
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    line-height: 80px;
+}
+
+.pagination-header {
+    background-color: #00FFFF;
+    border: 25px;
+    border-style: solid;
+    border-color: #00FFFF;
+}
+
+.pagination-text {
+    margin-top: 0px;
+}
+
+.partial-content {
+    border: 25px;
+    border-style: solid;
+    border-color: #00CCFF;
+    background-color: #00CCFF;
+}
+
+.bold {
+    font-weight: bold;
+}
