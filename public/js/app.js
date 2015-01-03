@@ -23,6 +23,11 @@ app.config(function($routeProvider) {
          .when('/loppu', {
             templateUrl: './views/loppu.html',
             controller: 'loppuCtrl'
-        });     
+        })
+        //poll page
+        .when('/polls/:pollId', {
+            templateUrl: './views/poll.html',
+            controller: 'pollCtrl'
+        });               
                
 });

@@ -6,22 +6,25 @@ var Poll = require('./models/poll');
 
 module.exports = function(app) {
 
-    // server routes ===========================================================
-    // handle things like api calls
-    // authentication routes
-
-    // sample api route
-    app.get('/rest/polls', function(req, res) {
-        // use mongoose to get all nerds in the database
-        Poll.find(function(err, polls) {
-
-            // if there is an error retrieving, send the error. 
-                            // nothing after res.send(err) will execute
+    // find a single poll from database
+/*    app.param('id', function(req, res, next, id) {
+        Poll.findById(id, function (err, poll) {
             if (err)
-                res.send(err);
-
-            res.json(polls);
+                res.json("Error !");
+            req.poll = poll;
         });
+        next();       
+}); */
+
+    // get single poll
+    app.get('/rest/polls/:id', function(req, res) {
+        Poll.findById(req.params.id, function (err, poll) {
+            if (err)
+                res.send("Error !");
+            res.json(poll);
+        });
+        
+        //res.json("test");
     });
         
     // route to handle creating goes here (app.post)
