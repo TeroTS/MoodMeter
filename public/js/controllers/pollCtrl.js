@@ -5,7 +5,7 @@ var pollCtrl = function ($scope, $routeParams, dataService, restFactory) {
         .success(function(data, status, headers, config) {
             //dataService.kirjoitaData('hallinnointiUrl', data.title);
             //dataService.kirjoitaData('kyselyUrl', data.pollUrl);
-            $scope.title = data.title;
+            $scope.poll = data;
             
         })
         .error(function(data, status, headers, config) {

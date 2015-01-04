@@ -1,17 +1,43 @@
 <div class="pagination-header">
-    <h2 class="pagination-text">{{ title }}</h2>
-    <ul class="list-unstyled">
-      <li>Home</li>
-      <li>Products</li>
-      <li>About Us</li>
-      <li>Contact</li>
-    </ul>
+    <h2>{{ poll.title }}</h2>
+    <dl class="dl-horizontal">
+        <div class="first-line">
+            <dt>Kyselyn loi:</dt>
+            <dd>{{ poll.creatorName }}</dd>
+        </div>
+        <dt>Missä:</dt>
+        <dd><a ng-href="https://www.google.com/maps?q={{poll.location}}">{{ poll.location }}</a></dd>
+        <dd>{{ poll.description }}</dd>
+    </dl>
 </div>
 <div class="partial-content">
     <div class="row">
-        <div class="text-block">
-            <div class="content">
-            </div>
+        <div class="col-md-4">
+            <tabset justified="true">
+                <tab heading="Kysely">
+                    <table class="table">
+                        <tr>
+                            <th>Nimi</th>
+                            <th ng-repeat="dt in poll.dates">{{ dt | date:'shortDate' }}</th>
+                        </tr>
+                        <tr>
+                            <td>            
+                                <div class="form-group">
+                                    <input type="text" class="form-control" ng-model="name">
+                                </div>
+                            </td>
+                            <td ng-repeat="dt in poll.dates">
+                                <div class="btn-group">
+                                    <label class="btn btn-primary date-checkbox" ng-model="data" btn-checkbox>
+                                        <span class="glyphicon glyphicon-ok"></span>
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                    </table> 
+                </tab>
+                <tab heading="Editoi">test0 test1 test2</tab>
+            </tabset>
         </div>
     </div>
 </div>
