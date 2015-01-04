@@ -20,23 +20,40 @@
                             <th>Nimi</th>
                             <th ng-repeat="dt in poll.dates">{{ dt | date:'shortDate' }}</th>
                         </tr>
+                        <tr ng-repeat="user in users">
+                            <td>            
+                                <div class="form-group">
+                                    <input type="text" class="form-control" ng-model="user['name']" readonly>
+                                </div>
+                            </td>
+                            <td ng-repeat="dt in poll.dates">
+                                <div class="date-checkbox">
+                                    <div ng-show="user.dates[$index]">
+                                        <span class="glyphicon glyphicon-ok"></span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="glyphicon glyphicon-trash" ng-click="deleteUser()"></span></td>
+                            <td><span class="glyphicon glyphicon-edit" ng-click="editUser()"></span></td>
+                        </tr>                        
                         <tr>
                             <td>            
                                 <div class="form-group">
-                                    <input type="text" class="form-control" ng-model="name">
+                                    <input type="text" class="form-control" ng-model="newUser['name']">
                                 </div>
                             </td>
                             <td ng-repeat="dt in poll.dates">
                                 <div class="btn-group">
-                                    <label class="btn btn-primary date-checkbox" ng-model="data" btn-checkbox>
+                                    <label class="btn btn-primary date-checkbox" ng-model="newUser.dates[$index]" btn-checkbox>
                                         <span class="glyphicon glyphicon-ok"></span>
                                     </label>
                                 </div>
                             </td>
                         </tr>
-                    </table> 
+                    </table>
+                    <button type="button" class="btn btn-primary" ng-click="saveData()">Tallenna</button> 
                 </tab>
-                <tab heading="Editoi">test0 test1 test2</tab>
+                <tab heading="Edit">test0 test1 test2</tab>
             </tabset>
         </div>
     </div>
