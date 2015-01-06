@@ -20,8 +20,9 @@ module.exports = function(app) {
     app.get('/rest/polls/:id', function(req, res) {
         Poll.findById(req.params.id, function (err, poll) {
             if (err)
-                res.send("Error !");
+                res.send(err); //res.sendfile('./public/views/error.html');
             res.json(poll);
+            //res.sendfile('./public/views/error.html');
         });
         
         //res.json("test");
@@ -66,12 +67,41 @@ module.exports = function(app) {
         
         res.json({ pollUrl : pollUrlString,
                    adminUrl : adminUrlString});
-    });   
+    });
+    //update poll
+    app.put('/rest/polls/:id', function(req, res) {
+        //req.write(JSON.stringify());
+        Poll.findById(req.params.id, function (err, poll) {
+            if (err)
+                res.send("Error !");
+            poll.participants = JSON.stringify(req.body); //[{"name":"test","dates":{"0":true,"1":true}}]; //req.body;
+            //poll.participants.dates
+ //          console.log(req.body.users);
+            //poll.title = "test test";
+           
+            poll.markModified('participants');
+            poll.save(function(err) {
+                if (err)
+                    res.send("Error !");
+                res.json(poll);
+            });
+            //res.json(poll);
+        });    
+        //res.json("test");
+    });      
     // route to handle delete goes here (app.delete)
-
+    // get single poll
+    app.delete('/rest/polls/:id', function(req, res) {
+        Poll.findByIdAndRemove(req.params.id, function (err, poll) {
+            if (err)
+                res.send("Error !"); //res.sendfile('./public/views/error.html');
+            res.json(poll);
+            //res.sendfile('./public/views/error.html');
+        });
+    });
     // frontend routes =========================================================
     // route to handle all angular requests
-    app.get('*', function(req, res) {
+    app.get('/', function(req, res) {
         res.sendfile('./public/index.html');
     });
 
