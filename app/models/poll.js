@@ -8,7 +8,7 @@ var Poll = mongoose.model('Poll', {
     creatorEmail: String,
     dates: [{type: Date}],
     participantEmails: [{type: String}],
-    participants: [{type: String}],
+    participants: [{}],
     adminUrl: String,
     pollUrl: String
 });

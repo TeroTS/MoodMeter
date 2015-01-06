@@ -6,15 +6,19 @@
             return $http.get('/rest/polls/' + pollId);
         };
         
+    /*    factory.getPollAdmin = function(pollId) {
+            return $http.get('/rest/polls/' + pollId);
+        }; */        
+        
         factory.createPoll = function(data) {
             return $http.post('/rest/polls', data);
         };
         
-        factory.updatePoll = function(data) {
-            return $http.put('/rest/polls', data);
+        factory.updatePoll = function(pollId, data) {
+            return $http.put('/rest/polls/' + pollId, data);
         };
         
-        factory.deletepoll = function(pollId) {
+        factory.deletePoll = function(pollId) {
             return $http.delete('/rest/polls/' + pollId);
         };
         
