@@ -28,6 +28,18 @@ app.config(function($routeProvider) {
         .when('/polls/:pollId', {
             templateUrl: './views/poll.html',
             controller: 'pollCtrl'
-        });               
-               
+        }) 
+        //poll admin page              
+       /* .when('/polls/:pollId/:admin', {
+            templateUrl: './views/poll.html',
+            controller: 'pollCtrl'
+        })*/
+        .when('/pollNotFound', {
+            templateUrl: './views/pollNotFound.html',
+            controller: ''
+        })
+        .otherwise({
+            templateUrl: '/views/pageNotFound.html',
+            controller: ''
+        });                          
 });

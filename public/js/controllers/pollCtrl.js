@@ -1,25 +1,75 @@
-var pollCtrl = function ($scope, $routeParams, dataService, restFactory) {
+var pollCtrl = function ($scope, $routeParams, $location, dataService, restFactory) {
     
     $scope.users = [];
     $scope.newUser = {};
+    $scope.edit = false;
+    $scope.admin = false;
     
-    console.log($routeParams.pollId);
+    //console.log($routeParams.admin);
+    //admin page
+ /*   if (typeof $routeParams.admin != 'undefined') {
+        $scope.admin = true;
+    }*/
+    
     restFactory.getPoll($routeParams.pollId)
         .success(function(data, status, headers, config) {
-            //dataService.kirjoitaData('hallinnointiUrl', data.title);
-            //dataService.kirjoitaData('kyselyUrl', data.pollUrl);
-            $scope.poll = data;
-            
+            console.log(data);
+            console.log(status);
+            if (data === null) {
+                $location.path("/pollNotFound");
+            } else {
+                $scope.poll = data;
+                $scope.users = JSON.parse(data.participants);               
+            }
+            //admin page
+          /*  if (typeof $routeParams.admin != 'undefined') {
+                $scope.admin = true;
+            }*/       
         })
         .error(function(data, status, headers, config) {
             console.log("Error: " + status);
         });
         
+    $scope.deletePoll = restFactory.deletePoll($routeParams.pollId)
+        .success(function(data, status, headers, config) { 
+            console.log(data);
+        })    
+        .error(function(data, status, headers, config) {
+            console.log("Error: " + status);
+        });   
+        
     $scope.saveData = function() {
-        console.log($scope.newUser);
-        $scope.users.push($scope.newUser); //{'name': $scope.name, 'dates': $scope.dates});
+        //add new user
+        if ($scope.edit == false) {
+           $scope.users.push($scope.newUser);
+        }
+        $scope.edit = false;
         $scope.newUser = {};
         console.log($scope.users);
+        restFactory.updatePoll($routeParams.pollId, $scope.users)
+        .success(function(data, status, headers, config) {
+            //console.log(data);   
+        })
+        .error(function(data, status, headers, config) {
+            console.log("Error: " + status);
+        });       
+    };
+    
+    $scope.deleteUser = function(user) {
+        var index = $scope.users.indexOf(user);
+        $scope.users.splice(index, 1); 
+        restFactory.updatePoll($routeParams.pollId, $scope.users)
+        .success(function(data, status, headers, config) {
+            //console.log(data);   
+        })
+        .error(function(data, status, headers, config) {
+            console.log("Error: " + status);
+        }); 
+    };
+    
+    $scope.editUser = function(user) {
+       $scope.edit = true;
+       $scope.newUser = user;
     };
   
 };

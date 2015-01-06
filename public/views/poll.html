@@ -7,20 +7,21 @@
         </div>
         <dt>Missä:</dt>
         <dd><a ng-href="https://www.google.com/maps?q={{poll.location}}">{{ poll.location }}</a></dd>
+        <dt>Kuvaus:</dt>
         <dd>{{ poll.description }}</dd>
     </dl>
 </div>
 <div class="partial-content">
     <div class="row">
         <div class="col-md-4">
-            <tabset justified="true">
-                <tab heading="Kysely">
+            <!-- <tabset justified="true">
+                <tab heading="Kysely"> -->
                     <table class="table">
                         <tr>
                             <th>Nimi</th>
                             <th ng-repeat="dt in poll.dates">{{ dt | date:'shortDate' }}</th>
                         </tr>
-                        <tr ng-repeat="user in users">
+                        <tr ng-repeat="user in users" ng-hide="edit">
                             <td>            
                                 <div class="form-group">
                                     <input type="text" class="form-control" ng-model="user['name']" readonly>
@@ -33,13 +34,13 @@
                                     </div>
                                 </div>
                             </td>
-                            <td><span class="glyphicon glyphicon-trash" ng-click="deleteUser()"></span></td>
-                            <td><span class="glyphicon glyphicon-edit" ng-click="editUser()"></span></td>
+                            <td><span class="glyphicon glyphicon-trash" ng-click="deleteUser(user)"></span></td>
+                            <td><span class="glyphicon glyphicon-edit" ng-click="editUser(user)"></span></td>
                         </tr>                        
                         <tr>
                             <td>            
                                 <div class="form-group">
-                                    <input type="text" class="form-control" ng-model="newUser['name']">
+                                    <input type="text" class="form-control" ng-model="newUser.name">
                                 </div>
                             </td>
                             <td ng-repeat="dt in poll.dates">
@@ -51,10 +52,11 @@
                             </td>
                         </tr>
                     </table>
-                    <button type="button" class="btn btn-primary" ng-click="saveData()">Tallenna</button> 
-                </tab>
+                    <button type="button" class="btn btn-primary" ng-click="saveData()">Tallenna</button>
+                    <button type="button" class="btn btn-primary" ng-click="deletePoll()">Poista kysely</button>
+             <!--   </tab>
                 <tab heading="Edit">test0 test1 test2</tab>
-            </tabset>
+            </tabset> -->
         </div>
     </div>
 </div>
