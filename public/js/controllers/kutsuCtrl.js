@@ -12,8 +12,8 @@ var kutsuCtrl = function ($scope, dataService, restFactory) {
             .success(function(data, status, headers, config) {
                 dataService.kirjoitaData('hallinnointiUrl', data.adminUrl);
                 dataService.kirjoitaData('kyselyUrl', data.pollUrl);
-                console.log(data.adminUrl);
-                console.log(data.pollUrl);
+                //console.log(data.adminUrl);
+                //console.log(data.pollUrl);
             })
             .error(function(data, status, headers, config) {
                 console.log("Error: " + status);
