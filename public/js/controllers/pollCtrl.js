@@ -30,13 +30,15 @@ var pollCtrl = function ($scope, $routeParams, $location, dataService, restFacto
             console.log("Error: " + status);
         });
         
-    $scope.deletePoll = restFactory.deletePoll($routeParams.pollId)
+    $scope.deletePoll = function() {
+        restFactory.deletePoll($routeParams.pollId)
         .success(function(data, status, headers, config) { 
             console.log(data);
         })    
         .error(function(data, status, headers, config) {
             console.log("Error: " + status);
-        });   
+        });
+    };  
         
     $scope.saveData = function() {
         //add new user
