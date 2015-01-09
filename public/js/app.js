@@ -38,6 +38,10 @@ app.config(function($routeProvider) {
             templateUrl: './views/pollNotFound.html',
             controller: ''
         })
+        .when('/pollRemoved', {
+            templateUrl: './views/pollRemoved.html',
+            controller: ''
+        })        
         .otherwise({
             templateUrl: '/views/pageNotFound.html',
             controller: ''
