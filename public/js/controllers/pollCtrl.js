@@ -1,4 +1,4 @@
-var pollCtrl = function ($scope, $routeParams, $location, dataService, restFactory) {
+var pollCtrl = function ($scope, $routeParams, $location, dataService, restFactory, $modal) {
     
     $scope.users = [];
     $scope.newUser = {};
@@ -13,13 +13,18 @@ var pollCtrl = function ($scope, $routeParams, $location, dataService, restFacto
     
     restFactory.getPoll($routeParams.pollId)
         .success(function(data, status, headers, config) {
-            console.log(data);
-            console.log(status);
+           // console.log(data);
+           // console.log(status);
             if (data === null) {
                 $location.path("/pollNotFound");
             } else {
                 $scope.poll = data;
-                $scope.users = JSON.parse(data.participants);               
+                //console.log(data.participants);
+                if (data.participants.length == 0) {
+                    $scope.users = JSON.parse("[{}]");//data.participants);
+                } else {
+                    $scope.users = JSON.parse(data.participants); 
+                }              
             }
             //admin page
           /*  if (typeof $routeParams.admin != 'undefined') {
@@ -30,10 +35,10 @@ var pollCtrl = function ($scope, $routeParams, $location, dataService, restFacto
             console.log("Error: " + status);
         });
         
-    $scope.deletePoll = function() {
+    var deletePoll = function() {
         restFactory.deletePoll($routeParams.pollId)
         .success(function(data, status, headers, config) { 
-            console.log(data);
+            $location.path("/pollRemoved");
         })    
         .error(function(data, status, headers, config) {
             console.log("Error: " + status);
@@ -73,6 +78,22 @@ var pollCtrl = function ($scope, $routeParams, $location, dataService, restFacto
        $scope.edit = true;
        $scope.newUser = user;
     };
+   
+ //modal control   
+ $scope.open = function (size) {
+
+    var modalInstance = $modal.open({
+      templateUrl: './views/modal.html',
+      controller: 'modalWindowCtrl',
+      size: size,
+    });
+  
+    modalInstance.result.then(function () {
+      deletePoll();
+      //$location.path("/pollRemoved");
+    }, function () {});
+ };
+  
   
 };
 
