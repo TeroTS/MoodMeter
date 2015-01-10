@@ -1,19 +1,27 @@
 <div class="pagination-header">
-    <h2>{{ poll.title }}</h2>
-    <dl class="dl-horizontal">
-        <div class="first-line">
-            <dt>Kyselyn loi:</dt>
-            <dd>{{ poll.creatorName }}</dd>
+    <div class="row">
+        <div class="col-md-4">
+            <h2>{{ poll.title }}</h2>
+            <table class="table poll-data">
+                <tr>
+                    <td>Kyselyn loi:</td>
+                    <td>{{ poll.creatorName }}</td>
+                </tr>
+                <tr>
+                    <td>Missä:</td>
+                    <td><a ng-href="https://www.google.com/maps?q={{poll.location}}" class="poll-link">{{ poll.location }}</a></td>
+                </tr>
+                <tr>
+                    <td>Kuvaus:</td>
+                    <td>{{ poll.description }}</td>
+                </tr>
+            </table>
         </div>
-        <dt>Missä:</dt>
-        <dd><a ng-href="https://www.google.com/maps?q={{poll.location}}">{{ poll.location }}</a></dd>
-        <dt>Kuvaus:</dt>
-        <dd>{{ poll.description }}</dd>
-    </dl>
+    </div>
 </div>
 <div class="partial-content">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6">
             <!-- <tabset justified="true">
                 <tab heading="Kysely"> -->
                     <table class="table">

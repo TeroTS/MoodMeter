@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 var Poll = require('./models/poll');
+var nodemailer = require('nodemailer');
+
 //var pollItem = require('./models/poll');
 //var Poll = pollItem.Poll;
 //var Comment = pollItem.Comment;
@@ -29,24 +31,39 @@ module.exports = function(app) {
     });
         
     // route to handle creating goes here (app.post)
-    app.post('/rest/polls', function(req, res) {
-    	
-        function createAdminUrl()
-        {
-            var text = "";
-            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        
-            for( var i=0; i < 8; i++ )
-                text += possible.charAt(Math.floor(Math.random() * possible.length));
-        
-            return text;
-        }  
+    app.post('/rest/polls', function(req, res) { 	
   
     	//generate objectid for unique poll url
     	var objId = mongoose.Types.ObjectId();
     	var pollUrlString = objId.toString();  
-    	var adminUrlString = createAdminUrl() + '/admin';
-
+    	var adminUrlString = "" + '/admin';
+    	    	
+        // create reusable transporter object using SMTP transport
+        var transporter = nodemailer.createTransport({
+            service: 'Gmail',
+            auth: {
+                user: 'tero.t.suhonen@gmail.com',
+                pass: 'haloo1004'
+            }
+        });
+        
+        // setup e-mail data with unicode symbols
+        var mailOptions = {
+            from: 'roodle.mailer', // sender address
+            to: req.body.osallistujatSposti, // list of receivers
+            subject: 'Roodle: Linkki kyselyyn ' + req.body.otsikko, // Subject line
+            text: 'Hei, ' + req.body.nimi + ' on käynnistänyt Roodle-kyselyn ' +  req.body.otsikko + '. Linkki kyselyyn on: http://localhost:8080/' + pollUrlString, // plaintext body
+        };
+        
+        // send mail with defined transport object
+        transporter.sendMail(mailOptions, function(error, info){
+            if(error){
+                console.log(error);
+            }else{
+                console.log('Message sent: ' + info.response);
+            }
+        });
+    	
         Poll.create({
         	_id : objId,
             title : req.body.otsikko,
