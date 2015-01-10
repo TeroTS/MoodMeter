@@ -21,7 +21,7 @@ var pollCtrl = function ($scope, $routeParams, $location, dataService, restFacto
                 $scope.poll = data;
                 //console.log(data.participants);
                 if (data.participants.length == 0) {
-                    $scope.users = JSON.parse("[{}]");//data.participants);
+                    $scope.users = []; //JSON.parse("[{}]");//data.participants);
                 } else {
                     $scope.users = JSON.parse(data.participants); 
                 }              
