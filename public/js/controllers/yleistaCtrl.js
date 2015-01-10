@@ -27,7 +27,7 @@ var yleistaCtrl = function ($scope, dataService) {
            //console.log($scope.data[prop]);
            dataService.kirjoitaData(prop, $scope.data[prop]);
        };
-       data = dataService.lueData();
+       //data = dataService.lueData();
        //console.log(data.sijainti);
    };
 
