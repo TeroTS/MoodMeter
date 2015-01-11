@@ -1,14 +1,11 @@
-var aikaEsitysCtrl = function ($scope, $filter, dataService) {
-
-  //tämän palauttamaa arvoa käytetään sorttauksessa 
- /* $scope.pvmSort = function(pvmString) {
-    pvmDate = new Date(pvmString);
-    return $filter('date')(pvmDate, 'yyyy-MM-dd');
-  };*/
-  $scope.stage2 = "bold";
+var aikaEsitysCtrl = function ($scope, $filter, dataService) {  
  
+  $scope.stage2 = "bold";
   var dateList = {};
-  $scope.avaimet = [];
+  
+  //init dates list
+  var initData = dataService.lueData();
+  $scope.avaimet = initData.pvm;
 
   $scope.toggleMin = function() {
     $scope.minDate = $scope.minDate ? null : new Date();
