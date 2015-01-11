@@ -31,7 +31,7 @@ var pollCtrl = function ($scope, $routeParams, $location, dataService, restFacto
         });
     };  
         
-    $scope.saveData = function() {
+    $scope.addUser = function() {
         //add new user
         if ($scope.edit == false) {
            $scope.users.push($scope.newUser);

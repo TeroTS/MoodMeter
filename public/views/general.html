@@ -1,0 +1,34 @@
+<div class="pagination-header">
+	<h2 class="pagination-text">Sovi tapaamisen ajankohta</h2>
+	<ul class="list-inline">
+  		  <li ng-class="stage1">1. Yleistä <span class="glyphicon glyphicon-arrow-right"></span></li>
+  		  <li ng-class="stage2">2. Aikaehdotukset <span class="glyphicon glyphicon-arrow-right"></span></li>
+  		  <li ng-class="stage3">3. Kutsu <span class="glyphicon glyphicon-arrow-right"></span></li> 
+  		  <li ng-class="stage4">4. Loppu </li> 				
+	</ul>
+</div>
+<div class="partial-content">
+    <div class="row">
+    	<div class="col-md-8 col-md-offset-2">
+    		<form role="form" name="general" class="general">
+    			<div class="form-group">
+    				<label for="header">Otsikko</label>
+    				<input type="text" class="form-control" ng-model="data.title" ng-maxlength="50" required name="header">
+    			</div>
+      			<div class="form-group">
+        			<label for="sijainti">Sijainti (valinnainen)</label>
+        			<input id="autocomplete" class="form-control" type="text" ng-model="data.location" placeholder="Anna osoite">
+      			</div>
+      			<div class="form-group">
+    				<label for="kuvaus">Kuvaus (valinnainen)</label>
+    				<textarea class="form-control" rows="3" ng-model="data.description" ng-maxlength="150" name="kuvaus"></textarea>
+    			</div>
+    			<div class="form-group">
+    				<label for="nimi">Nimesi</label>
+    				<input type="text" class="form-control" ng-model="data.creatorName" ng-maxlength="25" required name="nimi">				
+    			</div>
+    			<a class="btn btn-primary" href="#/time" ng-click="writeData()" ng-disabled="general.$invalid">Seuraava</a>
+    		</form>
+    	</div>
+    </div>
+</div>

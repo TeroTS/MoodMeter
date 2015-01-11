@@ -10,10 +10,10 @@
 <div class="partial-content">
     <div class="row">
     	<div class="col-md-8 col-md-offset-2">
-    		<form role="form" name="kutsu" class="kutsu">
+    		<form role="form" name="invite" class="invite">
       			<div class="form-group">
-    				<label for="kuvaus">Sähköpostiosoitteet:</label>
-    				<textarea class="form-control" rows="4" ng-model="sposti" ng-maxlength="250" required name="osoitteet"></textarea>
+    				<label for="description">Sähköpostiosoitteet:</label>
+    				<textarea class="form-control" rows="4" ng-model="emailAddress" ng-maxlength="250" required></textarea>
     				<p class="help-block">Erota useat sähköpostin vastaanottajat pilkuilla.</p>
     			</div>
     		</form>
@@ -21,8 +21,8 @@
     </div>
     <div class="row">
     	<div class="col-md-4 col-md-offset-2">
-    		<a class="btn btn-primary" href="#/aika" ng-click="saveEmailAddress()">Takaisin</a>
-    		<a class="btn btn-primary" href="#/loppu" ng-click="sendPoll()" ng-disabled="kutsu.$invalid">Lähetä ja lopeta</a>
+    		<a class="btn btn-primary" href="#/time" ng-click="saveEmailAddress()">Takaisin</a>
+    		<a class="btn btn-primary" href="#/end" ng-click="sendPoll()" ng-disabled="invite.$invalid">Lähetä ja lopeta</a>
     	</div>
     </div>
 </div>

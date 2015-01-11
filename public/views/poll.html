@@ -4,7 +4,7 @@
             <h2>{{ poll.title }}</h2>
             <table class="table poll-data">
                 <tr>
-                    <td>Kyselyn loi:</td>
+                    <td class="poll-column">Kyselyn loi:</td>
                     <td>{{ poll.creatorName }}</td>
                 </tr>
                 <tr>
@@ -44,7 +44,7 @@
                     <td><span class="glyphicon glyphicon-edit" ng-click="editUser(user)"></span></td>
                 </tr>                        
                 <tr>
-                    <td>            
+                    <td>           
                         <div class="form-group">
                             <input type="text" class="form-control form-name" ng-model="newUser.name">
                         </div>
@@ -58,7 +58,7 @@
                     </td>
                 </tr>
             </table>
-            <button type="button" class="btn btn-primary" ng-click="saveData()">Tallenna</button>
+            <button type="button" class="btn btn-primary" ng-click="addUser()" ng-disabled="poll-test.$invalid">Tallenna</button>
             <button type="button" class="btn btn-primary" ng-click="open('sm')">Poista kysely</button>
         </div>
     </div>

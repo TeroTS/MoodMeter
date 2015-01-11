@@ -23,12 +23,15 @@ body {
 .jumbotron {
     background-color: #F8F8F8;
 }
-.yleista input.ng-invalid.ng-dirty {
+.general input.ng-invalid.ng-dirty {
     background-color: #FA787E;
 }   
-.yleista textarea.ng-invalid.ng-dirty {
+.general textarea.ng-invalid.ng-dirty {
     background-color: #FA787E;
 }
+.poll input.ng-invalid.ng-dirty {
+    background-color: #FA787E;
+}   
 .spacer {
     margin-left: 20px;
 }
@@ -86,6 +89,7 @@ body {
 }
 .bold {
     font-weight: bold;
+    color: #000000;
 }
 .dl-horizontal dt, dd {
     margin-bottom: 10px;
@@ -103,10 +107,16 @@ table th, .table {
 .poll-link:link {
     color: #FFFFFF;
 }
+.poll-link:visited {
+    color: #FFFFFF;
+}
 .poll-data td {
     text-align: left;
     border: none !important;
 }
 .form-name {
     width: 130px;
+}
+.poll-column {
+    width: 90px;
 }
