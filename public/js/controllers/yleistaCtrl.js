@@ -2,14 +2,10 @@ var yleistaCtrl = function ($scope, dataService) {
     
     $scope.stage1 = "bold";
     
-    $scope.data = {
-        otsikko: "",
-        sijainti: "",
-        kuvaus: "",
-        nimi: "",
-        sposti: ""
-    };
+    //init form
+    $scope.data = dataService.lueData();
     
+    //Google place typeahead
     var options = { types: ['geocode'], componentRestrictions: {country: 'fi'}};
     var inputFrom = document.getElementById('autocomplete');
     var autocompleteFrom = new google.maps.places.Autocomplete(inputFrom, options);
@@ -18,17 +14,13 @@ var yleistaCtrl = function ($scope, dataService) {
         var place = autocompleteFrom.getPlace();
         $scope.data.sijainti = place.formatted_address;
         $scope.$apply();
-        //console.log($scope.data.sijainti);
     });
    
-   //kirjoita data servicen kautta persistence objektiin
+   //write data to persistence object
    $scope.kirjoitaData = function() {   
        for (var prop in $scope.data) {
-           //console.log($scope.data[prop]);
            dataService.kirjoitaData(prop, $scope.data[prop]);
        };
-       //data = dataService.lueData();
-       //console.log(data.sijainti);
    };
 
 };
