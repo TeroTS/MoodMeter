@@ -16,17 +16,17 @@
         </div>
         <div class="col-md-4">
     	    <table class="table">
-    		    <tr ng-repeat="pvm in avaimet | orderBy">
-    		        <td class="center">{{ pvm | date:'longDate' }}</td>
-    		        <td class="left"><span class="glyphicon glyphicon-trash spacer" ng-click="deletePvm(pvm)"></span></td>
+    		    <tr ng-repeat="dt in dates | orderBy">
+    		        <td class="center">{{ dt | date:'longDate' }}</td>
+    		        <td class="left"><span class="glyphicon glyphicon-trash spacer" ng-click="deleteDate(dt)"></span></td>
     		    </tr>   	
     		</table>
     	</div>
     </div>    
     <div class="row">
     	<div class="col-md-4  col-md-offset-1">
-    		<a class="btn btn-primary" href="#/yleista" ng-click="kirjoitaData()">Takaisin</a>
-    		<a class="btn btn-primary" href="#/kutsu" ng-click="kirjoitaData()">Seuraava</a>
+    		<a class="btn btn-primary" href="#/general" ng-click="writeData()">Takaisin</a>
+    		<a class="btn btn-primary" href="#/invite" ng-click="writeData()">Seuraava</a>
     	</div>
     </div>
 </div>
