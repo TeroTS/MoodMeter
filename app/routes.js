@@ -43,7 +43,7 @@ module.exports = function(app) {
             service: 'Gmail',
             auth: {
                 user: 'tero.t.suhonen@gmail.com',
-                pass: 'haloo1004'
+                pass: '*****'
             }
         });
         
