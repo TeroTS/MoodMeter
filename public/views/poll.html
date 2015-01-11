@@ -22,49 +22,44 @@
 <div class="partial-content">
     <div class="row">
         <div class="col-md-6">
-            <!-- <tabset justified="true">
-                <tab heading="Kysely"> -->
-                    <table class="table">
-                        <tr>
-                            <th>Nimi</th>
-                            <th ng-repeat="dt in poll.dates">{{ dt | date:'shortDate' }}</th>
-                        </tr>
-                        <tr ng-repeat="user in users" ng-hide="edit">
-                            <td>            
-                                <div class="form-group">
-                                    <input type="text" class="form-control" ng-model="user['name']" readonly>
-                                </div>
-                            </td>
-                            <td ng-repeat="dt in poll.dates">
-                                <div class="date-checkbox">
-                                    <div ng-show="user.dates[$index]">
-                                        <span class="glyphicon glyphicon-ok"></span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td><span class="glyphicon glyphicon-trash" ng-click="deleteUser(user)"></span></td>
-                            <td><span class="glyphicon glyphicon-edit" ng-click="editUser(user)"></span></td>
-                        </tr>                        
-                        <tr>
-                            <td>            
-                                <div class="form-group">
-                                    <input type="text" class="form-control" ng-model="newUser.name">
-                                </div>
-                            </td>
-                            <td ng-repeat="dt in poll.dates">
-                                <div class="btn-group">
-                                    <label class="btn btn-primary date-checkbox" ng-model="newUser.dates[$index]" btn-checkbox>
-                                        <span class="glyphicon glyphicon-ok"></span>
-                                    </label>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                    <button type="button" class="btn btn-primary" ng-click="saveData()">Tallenna</button>
-                    <button type="button" class="btn btn-primary" ng-click="open('sm')">Poista kysely</button>
-             <!--   </tab>
-                <tab heading="Edit">test0 test1 test2</tab>
-            </tabset> -->
+            <table class="table">
+                <tr>
+                    <th>Nimi</th>
+                    <th ng-repeat="dt in poll.dates">{{ dt | date:'shortDate' }}</th>
+                </tr>
+                <tr ng-repeat="user in users" ng-hide="edit">
+                    <td>            
+                        <div class="form-group">
+                            <input type="text" class="form-control form-name" ng-model="user['name']" readonly>
+                        </div>
+                    </td>
+                    <td ng-repeat="dt in poll.dates">
+                        <div class="date-checkbox">
+                            <div ng-show="user.dates[$index]">
+                                <span class="glyphicon glyphicon-ok"></span>
+                            </div>
+                        </div>
+                    </td>
+                    <td><span class="glyphicon glyphicon-trash" ng-click="deleteUser(user)"></span></td>
+                    <td><span class="glyphicon glyphicon-edit" ng-click="editUser(user)"></span></td>
+                </tr>                        
+                <tr>
+                    <td>            
+                        <div class="form-group">
+                            <input type="text" class="form-control form-name" ng-model="newUser.name">
+                        </div>
+                    </td>
+                    <td ng-repeat="dt in poll.dates">
+                        <div class="btn-group">
+                            <label class="btn btn-primary date-checkbox" ng-model="newUser.dates[$index]" btn-checkbox>
+                                <span class="glyphicon glyphicon-ok"></span>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <button type="button" class="btn btn-primary" ng-click="saveData()">Tallenna</button>
+            <button type="button" class="btn btn-primary" ng-click="open('sm')">Poista kysely</button>
         </div>
     </div>
 </div>
