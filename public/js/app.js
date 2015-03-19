@@ -33,10 +33,11 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
     //================================================
     // Add an interceptor for AJAX errors
     //================================================
-/*    $httpProvider.interceptors.push(function($q, $location) {
+    $httpProvider.interceptors.push(function($q, $location) {
       return {
         response: function(response) {
           // do something on success
+          //console.log(response);
           return response;
         },
         responseError: function(response) {
@@ -45,7 +46,7 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
           return $q.reject(response);
         }
       };
-    }); */
+    });
     
     $routeProvider 
         // home page
@@ -61,6 +62,6 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
             }
         })
         .otherwise({
-        	redirectTo: '/home'
+        	redirectTo: '/login'
         });                      
 });
