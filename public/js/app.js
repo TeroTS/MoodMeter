@@ -14,6 +14,8 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
         // Authenticated
         if (user !== '0') {
           console.log('You are logged in.');
+          $rootScope.email = user.google.email;
+          //console.log(user.google.email);
           /*$timeout(deferred.resolve, 0);*/
           deferred.resolve();
 
@@ -42,7 +44,7 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
         },
         responseError: function(response) {
           if (response.status === 401)
-            $location.url('#/login');
+            $location.url('/login');
           return $q.reject(response);
         }
       };
