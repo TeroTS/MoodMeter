@@ -1,13 +1,15 @@
-<div class="row">
-	<!-- LOCAL INFORMATION -->
-	<div class="col-sm-6">
-		<div class="well">
-			<h3><span class="fa fa-user"></span>Local</h3>
-			<p>
-				<strong>id</strong>: <br>
-				<strong>email</strong>: {{email}}<br>
-				<strong>password</strong>: 
-			</p>
-		</div>
-	</div>
+<div class="container-fluid">     
+  <div class="row">
+	 <div class="col-md-6 col-md-offset-3">
+		<h3>Home</h3>
+		<hr/>
+		<h4>Happiness Meter</h4>
+		<div class="meter">
+		    <rating ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
+		    <span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>		
+ 		</div>
+ 		{{rate}}
+ 		<br><a href="#/my-account">My Account</a></br>
+	 </div>
+  </div>
 </div>

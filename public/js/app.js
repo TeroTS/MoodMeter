@@ -1,4 +1,4 @@
-var app = angular.module('roodleApp', ['ngRoute', 'ui.bootstrap']);
+var app = angular.module('roodleApp', ['ngRoute', 'ui.bootstrap', 'chart.js']);
 
 app.config(function($routeProvider, $locationProvider, $httpProvider) {
 	
@@ -58,11 +58,18 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
         })  
         .when('/home', {
             templateUrl: './views/home.html',
-            controller: '',
+            controller: 'homeCtrl',
             resolve: {
             	loggedin: checkLoggedin
             }
         })
+        .when('/my-account', {
+            templateUrl: './views/myAccount.html',
+            controller: 'myAccountCtrl',
+            resolve: {
+            	loggedin: checkLoggedin
+            }
+        })        
         .otherwise({
         	redirectTo: '/login'
         });                      

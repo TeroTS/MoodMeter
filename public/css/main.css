@@ -1,122 +1,15 @@
-body {
-    padding-top: 5%;
-    padding-bottom: 5%;
-    background-color: #F0F0F0;
+/*user home page*/
+.glyphicon.glyphicon-star, .glyphicon.glyphicon-star-empty {
+	font-size: 2em;
 }
-.page-title {
-    font-family: Arial;
-    font-size: 75px;
-    font-weight: bold;
-    color: #428BCA;
-    margin-top: 15px;
-    margin-bottom: 0px;
-    line-height: 125px;
+
+span.label {
+	font-size: 2em;
 }
-.container {
-    -webkit-box-shadow: 0px 1px 5px 5px rgba(99, 101, 103, 1);
-    -moz-box-shadow:    0px 1px 5px 5px rgba(99, 101, 103, 1);
-    box-shadow:         0px 1px 5px 5px rgba(99, 101, 103, 1);
-    padding-right: 0px;
-    padding-left: 0px;
-    width: 800px;
+
+div.meter {
+	padding: 10px 10px 10px 0px;
 }
-.jumbotron {
-    background-color: #F8F8F8;
-}
-.general input.ng-invalid.ng-dirty {
-    background-color: #FA787E;
-}   
-.general textarea.ng-invalid.ng-dirty {
-    background-color: #FA787E;
-}
-.poll input.ng-invalid.ng-dirty {
-    background-color: #FA787E;
-}   
-.spacer {
-    margin-left: 20px;
-}
-.left {
-    text-align: left;   
-}
-.right {
-    text-align: right;   
-}
-.center {
-    text-align: center;   
-}
-.text-block {
-    float: left;
-    position: relative;
-    left: 50%;
-}
-.content {
-    float: left;
-    position: relative;
-    left: -50%;
-}
-.wide {
-    line-height: 300%;
-}
-.wide-h {
-    line-height: 150%;
-}
-.page-header, .page-footer {
-    height: 250px;
-    margin-bottom: 0px;
-    margin-top: 0px;
-}
-.btn-block {
-    height: 100px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    line-height: 80px;
-}
-.pagination-header {
-    background-color: #428BCA;
-    border: 25px;
-    border-style: solid;
-    border-color: #428BCA;
-    color: #FFFFFF;
-}
-.pagination-text {
-    margin-top: 0px;
-}
-.partial-content {
-    border: 25px;
-    border-style: solid;
-    border-color: #F0F0F0;
-}
-.bold {
-    font-weight: bold;
-    color: #000000;
-}
-.dl-horizontal dt, dd {
-    margin-bottom: 10px;
-}
-.first-line {
-    margin-top: 20px;
-}
-table th, .table {
-    text-align: center;
-}
-.date-checkbox {
-    background-color: #FFFFFF;
-    border-color: #CCC;
-}
-.poll-link:link {
-    color: #FFFFFF;
-}
-.poll-link:visited {
-    color: #FFFFFF;
-}
-.poll-data td {
-    text-align: left;
-    border: none !important;
-}
-.form-name {
-    width: 130px;
-}
-.poll-column {
-    width: 90px;
-}
+
+/*my-account page*/
+
