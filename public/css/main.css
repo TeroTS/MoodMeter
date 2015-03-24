@@ -12,4 +12,6 @@ div.meter {
 }
 
 /*my-account page*/
-
+select { 
+    width: 8em; 
+}

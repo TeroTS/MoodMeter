@@ -10,9 +10,7 @@ app.controller('myAccountCtrl', function($scope) {
 	  $scope.onClick = function (points, evt) {
 	    console.log(points, evt);
 	  };
-
-	  $scope.status = {
-	    isopen: false
-      };
+      
+      $scope.items = ['1 week', '1 month', '3 months', '6 months'];
 
 });
