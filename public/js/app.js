@@ -69,6 +69,13 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
             resolve: {
             	loggedin: checkLoggedin
             }
+        })
+        .when('/dashboard', {
+            templateUrl: './views/dashboard.html',
+            controller: 'dashboardCtrl'
+  /*          resolve: {
+            	loggedin: checkLoggedin
+            }*/
         })        
         .otherwise({
         	redirectTo: '/login'

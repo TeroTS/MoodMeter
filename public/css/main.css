@@ -15,3 +15,27 @@ div.meter {
 select { 
     width: 8em; 
 }
+
+/*div.container {
+    display: table-cell;
+    vertical-align: middle;
+}*/
+
+/*dashboard*/
+.well {
+	width: 10em;
+	height: 8em;
+	text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+h3 {
+	margin-top: 10px;
+}
+
+#userWell, #managerWell, #adminWell {
+	width: 200px;
+}
+
+  
