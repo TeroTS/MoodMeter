@@ -2,32 +2,46 @@
 var mongoose = require('mongoose');
 var bcrypt   = require('bcrypt-nodejs');
 
-// define the schema for our user model
+// schema for user model
 var userSchema = mongoose.Schema({
 
-    local            : {
-        email        : String,
-        password     : String,
-    },
+    id		: String,
+    token   : String,
+    email   : String,
+    name    : String
 
-    google           : {
-        id           : String,
-        token        : String,
-        email        : String,
-        name         : String
-    }
+});
+
+// schema for user data model
+var userDataSchema = mongoose.Schema({
+	
+	user		: {type: String, ref: 'User'},
+	timeStamp	: Date,
+	value		: Number
+	
+});
+
+// schema for admin model
+var adminSchema = mongoose.Schema({
+	
+    email        : String,
+    password     : String	
 
 });
 
 // generating a hash
-userSchema.methods.generateHash = function(password) {
+adminSchema.methods.generateHash = function(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
 
 // checking if password is valid
-userSchema.methods.validPassword = function(password) {
+adminSchema.methods.validPassword = function(password) {
     return bcrypt.compareSync(password, this.local.password);
 };
 
-// create the model for users and expose it to our app
-module.exports = mongoose.model('User', userSchema);
+// create the model for users, admins and data and expose it to our app
+module.exports = {
+	user: 		mongoose.model('User', userSchema),
+	userData:	mongoose.model('UserData', userSchema),
+	admin:		mongoose.model('Admin', userSchema)
+}

@@ -2,8 +2,9 @@
 var LocalStrategy    = require('passport-local').Strategy;
 var GoogleStrategy   = require('passport-google-oauth').OAuth2Strategy;
 
-// load up the user model
-var User = require('../app/models/user');
+// load up the user and admin models
+var User = require('../app/models/user').user;
+var Admin = require('../app/models/user').admin;
 
 // load the auth variables
 var configAuth = require('./auth'); // use this one for testing
@@ -16,16 +17,26 @@ module.exports = function(passport) {
     // required for persistent login sessions
     // passport needs ability to serialize and unserialize users out of session
 
-    // used to serialize the user for the session
+    // used to serialize the user (=user or admin) for the session
     passport.serializeUser(function(user, done) {
-        done(null, user.id);
+        done(null, user._id);
     });
 
-    // used to deserialize the user
+    // used to deserialize the user (=user or admin)
     passport.deserializeUser(function(id, done) {
-        User.findById(id, function(err, user) {
-            done(err, user);
-        });
+    	User.findById(id, function(err, user){
+    		if(err) 
+    			done(err);
+    		if(user){
+    			done(null, user);
+	       } else {
+	    	   	Admin.findById(id, function(err, user){
+	    	   		if(err) 
+	    	   			done(err);
+	    	   		done(null, user);
+	    	   	})
+	       }
+    	})
     });
 
     // =========================================================================
