@@ -14,8 +14,9 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
         // Authenticated
         if (user !== '0') {
           console.log('You are logged in.');
-          $rootScope.email = user.google.email;
-          //console.log(user.google.email);
+          //save user object
+          $rootScope.user = user;
+          //console.log(user);
           /*$timeout(deferred.resolve, 0);*/
           deferred.resolve();
 
@@ -55,7 +56,11 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
         .when('/login', {
             templateUrl: './views/login.html',
             controller: 'loginCtrl'
-        })  
+        })
+        .when('/signup', {
+            templateUrl: './views/signup.html',
+            controller: 'signupCtrl'
+        })
         .when('/home', {
             templateUrl: './views/home.html',
             controller: 'homeCtrl',

@@ -24,13 +24,13 @@ module.exports = function(passport) {
 
     // used to deserialize the user (=user or admin)
     passport.deserializeUser(function(id, done) {
-    	User.findById(id, function(err, user){
+    	User.findById(id, function(err, user) {
     		if(err) 
     			done(err);
-    		if(user){
+    		if(user) {
     			done(null, user);
 	       } else {
-	    	   	Admin.findById(id, function(err, user){
+	    	   	Admin.findById(id, function(err, user) {
 	    	   		if(err) 
 	    	   			done(err);
 	    	   		done(null, user);
@@ -54,7 +54,7 @@ module.exports = function(passport) {
 
         // asynchronous
         process.nextTick(function() {
-            User.findOne({ 'local.email' :  email }, function(err, user) {
+            Admin.findOne({ 'email' :  email }, function(err, user) {
                 // if there are any errors, return the error
                 if (err)
                     return done(err);
@@ -91,7 +91,7 @@ module.exports = function(passport) {
         process.nextTick(function() {
             // if the user is not already logged in:
             if (!req.user) {
-                User.findOne({ 'local.email' :  email }, function(err, user) {
+                Admin.findOne({ 'email' :  email }, function(err, user) {
                     // if there are any errors, return the error
                     if (err)
                         return done(err);
@@ -102,16 +102,16 @@ module.exports = function(passport) {
                     } else {
 
                         // create the user
-                        var newUser            = new User();
+                        var newAdmin            = new Admin();
 
-                        newUser.local.email    = email;
-                        newUser.local.password = newUser.generateHash(password);
+                        newAdmin.email    = email;
+                        newAdmin.password = newAdmin.generateHash(password);
 
-                        newUser.save(function(err) {
+                        newAdmin.save(function(err) {
                             if (err)
                                 return done(err);
 
-                            return done(null, newUser);
+                            return done(null, newAdmin);
                         });
                     }
 
@@ -129,7 +129,7 @@ module.exports = function(passport) {
     // =========================================================================
     // GOOGLE ==================================================================
     // =========================================================================
-    passport.use(new GoogleStrategy({
+    passport.use('google', new GoogleStrategy({
 
         clientID        : configAuth.googleAuth.clientID,
         clientSecret    : configAuth.googleAuth.clientSecret,
@@ -152,7 +152,7 @@ module.exports = function(passport) {
             // check if the user is already logged in
             if (!req.user) {
 
-                User.findOne({ 'google.id' : profile.id }, function(err, user) {
+                User.findOne({ 'id' : profile.id }, function(err, user) {
                     if (err)
                         return done(err);
                     // if a user is found, log them in
@@ -162,10 +162,10 @@ module.exports = function(passport) {
                     } else {
                         var newUser          = new User();
 
-                        newUser.google.id    = profile.id;
-                        newUser.google.token = token;
-                        newUser.google.name  = profile.displayName;
-                        newUser.google.email = mailAddr;
+                        newUser.id    = profile.id;
+                        newUser.token = token;
+                        newUser.name  = profile.displayName;
+                        newUser.email = mailAddr;
 
                         newUser.save(function(err) {
                             if (err)
@@ -180,10 +180,10 @@ module.exports = function(passport) {
                 // user already exists and is logged in, we have to link accounts
                 var user = req.user; // pull the user out of the session
 
-                user.google.id    = profile.id;
-                user.google.token = token;
-                user.google.name  = profile.displayName;
-                user.google.email = (profile.emails[0].value || '').toLowerCase(); // pull the first email
+                user.id    = profile.id;
+                user.token = token;
+                user.name  = profile.displayName;
+                user.email = (profile.emails[0].value || '').toLowerCase(); // pull the first email
                 //return user
                 return done(null, user);
 

@@ -2,11 +2,11 @@ var restFactory = function($http) {
 
     var factory = {};
     
-    factory.getPoll = function(pollId) {
-        return $http.get('/rest/polls/' + pollId);
+    factory.postData = function(id, data) {
+        return $http.post('/users/' + id + '/data', data);
     };      
     
-    factory.createPoll = function(data) {
+/*    factory.createPoll = function(data) {
         return $http.post('/rest/polls', data);
     };
     
@@ -16,7 +16,7 @@ var restFactory = function($http) {
     
     factory.deletePoll = function(pollId) {
         return $http.delete('/rest/polls/' + pollId);
-    };
+    };*/
     
     return factory;
 };

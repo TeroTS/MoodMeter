@@ -36,12 +36,12 @@ adminSchema.methods.generateHash = function(password) {
 
 // checking if password is valid
 adminSchema.methods.validPassword = function(password) {
-    return bcrypt.compareSync(password, this.local.password);
+    return bcrypt.compareSync(password, this.password);
 };
 
 // create the model for users, admins and data and expose it to our app
 module.exports = {
 	user: 		mongoose.model('User', userSchema),
-	userData:	mongoose.model('UserData', userSchema),
-	admin:		mongoose.model('Admin', userSchema)
+	userData:	mongoose.model('UserData', userDataSchema),
+	admin:		mongoose.model('Admin', adminSchema)
 }
