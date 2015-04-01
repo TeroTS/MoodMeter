@@ -15,7 +15,7 @@ app.controller('myAccountCtrl', function($scope, $rootScope, restFactory) {
 	  
 	  $scope.selectedItem = '';
 	  
-	  // 
+	  // get selected time period user data
 	  $scope.getPeriodData = function() {
 	      var userId = $rootScope.user.id;
 		  var period = $scope.selectedItem;
