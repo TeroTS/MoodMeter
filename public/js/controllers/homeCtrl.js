@@ -9,11 +9,12 @@ app.controller('homeCtrl', function($scope, $rootScope, restFactory) {
     $scope.percent = 100 * (value / $scope.max);
   };
   
-  userId = $rootScope.user.id;
-  
   // 
   $scope.postData = function() {
-      restFactory.postData(userId, $scope.rate)
+	  var userId = $rootScope.user.id;
+	  //create object for backend json parser
+	  var valueObject = {"value" : $scope.rate};
+      restFactory.postData(userId, valueObject)
           .success(function(data, status, headers, config) {
         	  console.log("Data post success !");
           })

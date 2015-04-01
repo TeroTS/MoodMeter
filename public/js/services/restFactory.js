@@ -4,6 +4,10 @@ var restFactory = function($http) {
     
     factory.postData = function(id, data) {
         return $http.post('/users/' + id + '/data', data);
+    };
+    
+    factory.getData = function(id, timePeriod) {
+        return $http.get('/users/' + id + '/data', {params: {period: timePeriod}});
     };      
     
 /*    factory.createPoll = function(data) {

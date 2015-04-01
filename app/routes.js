@@ -1,5 +1,5 @@
 
-var UserData = require('../app/models/user').userData;
+var UserData = require('./models/user').userData;
 
 module.exports = function(app, passport) {
 	
@@ -53,19 +53,42 @@ module.exports = function(app, passport) {
     // user (user and manager) happiness data post
     app.post('/users/:id/data', function(req, res) {
     	
-        UserData.create({
-        	user		: req.params.id,
-        	timeStamp	: Date.now,
-        	value		: req.body.value   	
- 
-        }, function(err, todo) {
-            if (err)
-                res.send(err);
-           }
-        );
-        
-        res.json({});
+        var d = new Date();
+        var day = d.getDate();
+        var month = d.getMonth() + 1;
+        var year = d.getFullYear();
+        var date = day + "/" + month + "/" + year;
     	
+    	var query = {$and: [{'user': req.params.id}, {'timeStamp': date}]};
+    	//save or update
+    	UserData.findOne(query, function(err, data) {
+    		if (err) res.send(err);
+    		//first write
+    		if (data == null) {
+    	    	var data = new UserData({
+    	        	user		: req.params.id,
+    	        	timeStamp	: date,
+    	        	value		: req.body.value       		
+    	    	});
+    	    //update
+    		} else {
+				data.user = req.params.id;
+				data.timeStamp = date;
+				data.value = req.body.value;
+    		}
+	        data.save(function(err, data) {
+	            if (err)
+	                res.send(err);
+	            res.json(data);
+	        }); 
+    	});
+    	
+    });
+    
+    // user (user and manager) happiness data get
+    app.get('/users/:id/data', function(req, res) {
+    	var timePeriod = req.param('period');
+    	res.send(timePeriod);
     });
     
 

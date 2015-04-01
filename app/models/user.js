@@ -15,8 +15,8 @@ var userSchema = mongoose.Schema({
 // schema for user data model
 var userDataSchema = mongoose.Schema({
 	
-	user		: {type: String, ref: 'User'},
-	timeStamp	: Date,
+	user		: String, //{type: String, ref: 'User'},
+	timeStamp	: String,
 	value		: Number
 	
 });
