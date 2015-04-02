@@ -50,14 +50,39 @@ module.exports = function(app, passport) {
     
     // REST API
     
-    // user (user and manager) happiness data post
-    app.post('/users/:id/data', function(req, res) {
-    	
+    // get todays date without time
+    function dateToday() {
         var d = new Date();
         var day = d.getDate();
         var month = d.getMonth() + 1;
         var year = d.getFullYear();
-        var date = day + "/" + month + "/" + year;
+        return new Date(year, month, day);    	
+    }
+    
+    // encode time periods from client from string to milliseconds
+    function periodInMilliseconds(period) {
+    	var timeMilliseconds;
+    	switch (period) {
+	        case '1 week':
+	        	timeMilliseconds = 7*24*60*60*1000;
+	            break;
+	        case '1 month':
+	        	timeMilliseconds = 28*24*60*60*1000;
+	            break;
+	        case '3 months':
+	        	timeMilliseconds = 84*24*60*60*1000;
+	            break;
+	        case '6 months':
+	        	timeMilliseconds = 168*24*60*60*1000;
+	            break;           
+    	}
+    	return timeMilliseconds;
+    }
+       
+    // user (user and manager) happiness data post
+    app.post('/users/:id/data', function(req, res) {
+    	
+    	var date = dateToday();
     	
     	var query = {$and: [{'user': req.params.id}, {'timeStamp': date}]};
     	//save or update
@@ -85,10 +110,23 @@ module.exports = function(app, passport) {
     	
     });
     
-    // user (user and manager) happiness data get
+    // get user (user and manager) happiness data
     app.get('/users/:id/data', function(req, res) {
-    	var timePeriod = req.param('period');
-    	res.send(timePeriod);
+    	var period = req.param('period');
+    	var timePeriod = periodInMilliseconds(period);
+    	//use lean() to return javascript objects instead of BSON
+    	UserData.find().lean().exec({'user': req.params.id}, function (err, data) {
+            if (err) res.send(err);
+            var resultData = [];
+            var arrayLength = data.length;
+            for (var i = 0; i < arrayLength; i++) {
+            	var itemAge = dateToday() - data[i].timeStamp;
+            	if (itemAge <= timePeriod) {
+            		resultData.push(data[i]);
+            	}
+            } 
+            res.json(resultData);
+    	});
     });
     
 

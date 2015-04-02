@@ -16,7 +16,7 @@ var userSchema = mongoose.Schema({
 var userDataSchema = mongoose.Schema({
 	
 	user		: String, //{type: String, ref: 'User'},
-	timeStamp	: String,
+	timeStamp	: Date,
 	value		: Number
 	
 });
