@@ -1,7 +1,7 @@
 app.controller('myAccountCtrl', function($scope, $rootScope, $filter, restFactory) {
 	
 	  $scope.labels = [];
-	  $scope.data = [];
+	  $scope.data = [[]];
 	  
 	  $scope.onClick = function (points, evt) {
 	      console.log(points, evt);
@@ -18,12 +18,13 @@ app.controller('myAccountCtrl', function($scope, $rootScope, $filter, restFactor
 		  if (period != '') {
 			  restFactory.getData(userId, period)
 		      .success(function(data, status) {
-		    	  $scope.data = data.data;
+		    	  $scope.data[0] = data.data;
+		    	  $scope.labels = [];
 		    	  for (var i = 0; i < data.dates.length; i++) {
 		    		  $scope.labels.push($filter('date')(data.dates[i], "shortDate"));
 		    	  }	
-		    	  console.log($scope.data);
-		    	  console.log($scope.labels);
+		    	  //console.log($scope.data[0]);
+		    	  //console.log($scope.labels);
 		      })
 		      .error(function() {console.log('User data GET failed !')});
 		  }

@@ -54,7 +54,7 @@ module.exports = function(app, passport) {
     function dateToday() {
         var d = new Date();
         var day = d.getDate();
-        var month = d.getMonth() + 1;
+        var month = d.getMonth();
         var year = d.getFullYear();
         return new Date(year, month, day);    	
     }
