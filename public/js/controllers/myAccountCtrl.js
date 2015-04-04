@@ -1,11 +1,7 @@
-app.controller('myAccountCtrl', function($scope, $rootScope, restFactory) {
+app.controller('myAccountCtrl', function($scope, $rootScope, $filter, restFactory) {
 	
-	  $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-	  //$scope.series = [];
-	  
-	  $scope.data = [
-	      [65, 59, 80, 81, 56, 55, 40]
-	  ];
+	  $scope.labels = [];
+	  $scope.data = [];
 	  
 	  $scope.onClick = function (points, evt) {
 	      console.log(points, evt);
@@ -21,7 +17,14 @@ app.controller('myAccountCtrl', function($scope, $rootScope, restFactory) {
 		  var period = $scope.selectedItem;
 		  if (period != '') {
 			  restFactory.getData(userId, period)
-		      .success(function() {})
+		      .success(function(data, status) {
+		    	  $scope.data = data.data;
+		    	  for (var i = 0; i < data.dates.length; i++) {
+		    		  $scope.labels.push($filter('date')(data.dates[i], "shortDate"));
+		    	  }	
+		    	  console.log($scope.data);
+		    	  console.log($scope.labels);
+		      })
 		      .error(function() {console.log('User data GET failed !')});
 		  }
 	  };

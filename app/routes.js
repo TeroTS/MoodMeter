@@ -117,15 +117,17 @@ module.exports = function(app, passport) {
     	//use lean() to return javascript objects instead of BSON
     	UserData.find().lean().exec({'user': req.params.id}, function (err, data) {
             if (err) res.send(err);
-            var resultData = [];
+            var dataArray = [];
+            var dateArray = [];
             var arrayLength = data.length;
             for (var i = 0; i < arrayLength; i++) {
             	var itemAge = dateToday() - data[i].timeStamp;
             	if (itemAge <= timePeriod) {
-            		resultData.push(data[i]);
+            		dataArray.push(data[i].value); 
+            		dateArray.push(data[i].timeStamp);
             	}
             } 
-            res.json(resultData);
+            res.json({data : dataArray, dates : dateArray});
     	});
     });
     
