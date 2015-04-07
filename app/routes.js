@@ -1,5 +1,7 @@
 
 var UserData = require('./models/user').userData;
+var User = require('./models/user').user;
+var Admin = require('./models/user').admin;
 
 module.exports = function(app, passport) {
 	
@@ -78,7 +80,8 @@ module.exports = function(app, passport) {
     	}
     	return timeMilliseconds;
     }
-       
+     
+    // /home
     // user (user and manager) happiness data post
     app.post('/users/:id/data', function(req, res) {
     	
@@ -110,12 +113,13 @@ module.exports = function(app, passport) {
     	
     });
     
+    // /my-account
     // get user (user and manager) happiness data
     app.get('/users/:id/data', function(req, res) {
     	var period = req.param('period');
     	var timePeriod = periodInMilliseconds(period);
     	//use lean() to return javascript objects instead of BSON
-    	UserData.find().lean().exec({'user': req.params.id}, function (err, data) {
+    	UserData.find().lean().exec({'user': req.params.id}, function(err, data) {
             if (err) res.send(err);
             var dataArray = [];
             var dateArray = [];
@@ -128,6 +132,68 @@ module.exports = function(app, passport) {
             	}
             } 
             res.json({data : dataArray, dates : dateArray});
+    	});
+    });
+    
+    // dashboard/users
+    // dashboard/managers
+    // get users 
+    app.get('/users', function(req, res) {
+    	areManagers = req.param('managers');
+    	if (areManagers) {
+	    	User.find({'isManager': true}, function (err, users) { 
+	    		res.json(users);
+	    	});
+    	} else {
+	    	User.find({'isManager': false}, function (err, users) { 
+	    		res.json(users);
+	    	});    		
+    	}
+    });
+    
+    // dashboard/users
+    // dashboard/managers
+    // delete user
+    app.delete('/users/:id', function(req, res) {
+    	User.remove({'id': req.params.id}, function(err, user) {
+            if (err)
+                res.send(err);
+            res.json(user);	    	
+    	});
+    });
+    	
+    // dashboard/users
+    // update user
+    app.put('/users/:id', function(req, res) {
+    	User.findone({'id': req.params.id}, function(err, user) {
+    		if (err) res.send(err);
+    		user.isManager = req.body.user.isManager;
+    		user.managerName = req.body.user.managerName;
+	        user.save(function(err, user) {
+	            if (err)
+	                res.send(err);
+	            res.json(user);
+	        });     		
+    	});
+    });
+    
+    // dashboard/admins
+    // get admins
+    app.get('/admins', function(req, res) {
+    	Admin.find(function(err, admins) {
+            if (err)
+                res.send(err);
+            res.json(admins);    		
+    	});	
+    });
+    
+    // dashboard/admins
+    // delete admin
+    app.delete('/admins/:email', function(req, res) {
+    	Admin.remove({'email': req.params.email}, function(err, admin) {
+            if (err)
+                res.send(err);
+            res.json(admin);	    	
     	});
     });
     

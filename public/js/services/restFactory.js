@@ -8,19 +8,27 @@ var restFactory = function($http) {
     
     factory.getData = function(id, timePeriod) {
         return $http.get('/users/' + id + '/data', {params: {period: timePeriod}});
-    };      
-    
-/*    factory.createPoll = function(data) {
-        return $http.post('/rest/polls', data);
     };
     
-    factory.updatePoll = function(pollId, data) {
-        return $http.put('/rest/polls/' + pollId, data);
+    factory.getUsers = function() {
+        return $http.get('/users');
+    }; 
+    
+    factory.deleteUser = function(id) {
+        return $http.delete('/users/' + id);
     };
     
-    factory.deletePoll = function(pollId) {
-        return $http.delete('/rest/polls/' + pollId);
-    };*/
+    factory.updateUser = function(id, data) {
+        return $http.put('/users/' + id, data);
+    };
+    
+    factory.getAdmins = function() {
+        return $http.get('/admins');
+    };
+    
+    factory.deleteAdmin = function(email) {
+        return $http.delete('/admins/' + email);
+    };
     
     return factory;
 };
