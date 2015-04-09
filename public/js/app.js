@@ -16,7 +16,7 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
           console.log('You are logged in.');
           //save user object
           $rootScope.user = user;
-          //console.log(user);
+          console.log(user);
           /*$timeout(deferred.resolve, 0);*/
           deferred.resolve();
 

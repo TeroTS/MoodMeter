@@ -10,8 +10,10 @@ module.exports = function(app, passport) {
 	    if (!req.isAuthenticated())
 	    	res.send(401);
 	    else
+	    // managers and admins need extra database read to check that they exist in database
 	    	next();
 	};
+	// create separate auth function for user, manager and admin
 
     // route to handle all angular requests
     app.get('/', function(req, res) {
