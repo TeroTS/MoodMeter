@@ -46,4 +46,4 @@ module.exports = {
 	user: 		mongoose.model('User', userSchema),
 	userData:	mongoose.model('UserData', userDataSchema),
 	admin:		mongoose.model('Admin', adminSchema)
-}
+};

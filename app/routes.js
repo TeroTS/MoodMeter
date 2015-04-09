@@ -83,7 +83,7 @@ module.exports = function(app, passport) {
      
     // /home
     // user (user and manager) happiness data post
-    app.post('/users/:id/data', function(req, res) {
+    app.post('/users/:id/data', auth, function(req, res) {
     	
     	var date = dateToday();
     	
@@ -115,7 +115,7 @@ module.exports = function(app, passport) {
     
     // /my-account
     // get user (user and manager) happiness data
-    app.get('/users/:id/data', function(req, res) {
+    app.get('/users/:id/data', auth, function(req, res) {
     	var period = req.param('period');
     	var timePeriod = periodInMilliseconds(period);
     	//use lean() to return javascript objects instead of BSON
@@ -138,7 +138,7 @@ module.exports = function(app, passport) {
     // dashboard/users
     // dashboard/managers
     // get users 
-    app.get('/users', function(req, res) {
+    app.get('/users', auth, function(req, res) {
     	areManagers = req.param('managers');
     	if (areManagers) {
 	    	User.find({'isManager': true}, function (err, users) { 
@@ -154,7 +154,7 @@ module.exports = function(app, passport) {
     // dashboard/users
     // dashboard/managers
     // delete user
-    app.delete('/users/:id', function(req, res) {
+    app.delete('/users/:id', auth, function(req, res) {
     	User.remove({'id': req.params.id}, function(err, user) {
             if (err)
                 res.send(err);
@@ -164,7 +164,7 @@ module.exports = function(app, passport) {
     	
     // dashboard/users
     // update user
-    app.put('/users/:id', function(req, res) {
+    app.put('/users/:id', auth, function(req, res) {
     	User.findone({'id': req.params.id}, function(err, user) {
     		if (err) res.send(err);
     		user.isManager = req.body.user.isManager;
@@ -179,7 +179,7 @@ module.exports = function(app, passport) {
     
     // dashboard/admins
     // get admins
-    app.get('/admins', function(req, res) {
+    app.get('/admins', auth, function(req, res) {
     	Admin.find(function(err, admins) {
             if (err)
                 res.send(err);
@@ -189,7 +189,7 @@ module.exports = function(app, passport) {
     
     // dashboard/admins
     // delete admin
-    app.delete('/admins/:email', function(req, res) {
+    app.delete('/admins/:email', auth, function(req, res) {
     	Admin.remove({'email': req.params.email}, function(err, admin) {
             if (err)
                 res.send(err);

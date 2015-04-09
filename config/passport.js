@@ -34,9 +34,9 @@ module.exports = function(passport) {
 	    	   		if(err) 
 	    	   			done(err);
 	    	   		done(null, user);
-	    	   	})
+	    	   	});
 	       }
-    	})
+    	});
     });
 
     // =========================================================================
