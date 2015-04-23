@@ -131,10 +131,10 @@ module.exports = function(passport) {
     // =========================================================================
     passport.use('google', new GoogleStrategy({
 
-        clientID        : configAuth.googleAuth.clientID,
-        clientSecret    : configAuth.googleAuth.clientSecret,
-        callbackURL     : configAuth.googleAuth.callbackURL,
-        passReqToCallback : true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
+        clientID            : configAuth.googleAuth.clientID,
+        clientSecret        : configAuth.googleAuth.clientSecret,
+        callbackURL         : configAuth.googleAuth.callbackURL,
+        passReqToCallback   : true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
 
     },
     function(req, token, refreshToken, profile, done) {
@@ -166,6 +166,7 @@ module.exports = function(passport) {
                         newUser.token = token;
                         newUser.name  = profile.displayName;
                         newUser.email = mailAddr;
+                        newUser.role = 'user';
 
                         newUser.save(function(err) {
                             if (err)
@@ -179,7 +180,8 @@ module.exports = function(passport) {
             } else {
                 // user already exists and is logged in, we have to link accounts
                 var user = req.user; // pull the user out of the session
-
+                
+                //are these needed ?
                 user.id    = profile.id;
                 user.token = token;
                 user.name  = profile.displayName;

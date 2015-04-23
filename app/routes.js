@@ -5,15 +5,28 @@ var Admin = require('./models/user').admin;
 
 module.exports = function(app, passport) {
 	
-	// Define a middleware function to be used for every secured routes
-	var auth = function(req, res, next) {
-	    if (!req.isAuthenticated())
-	    	res.send(401);
-	    else
-	    // managers and admins need extra database read to check that they exist in database
-	    	next();
-	};
-	// create separate auth function for user, manager and admin
+	// Define a middleware functions to be used for every secured routes
+	//
+    //this checks only that user is logged in, all users can access these routes
+    var auth = function(req, res, next) {
+        if (!req.isAuthenticated())
+            res.send(401);
+        else
+            next();
+    };
+	
+	//this is used to check that certain route can be accessed only by user
+	//with certain role
+    function requireRole(roleArray) {
+        return function(req, res, next) {
+            for(var i = 0; i < roleArray.length; i++) {
+                if(req.isAuthenticated() && req.user.role === roleArray[i])
+                    next();
+                else
+                    res.send(403);
+            };
+        };
+    };
 
     // route to handle all angular requests
     app.get('/', function(req, res) {
@@ -139,24 +152,31 @@ module.exports = function(app, passport) {
     
     // dashboard/users
     // dashboard/managers
-    // get users 
-    app.get('/users', auth, function(req, res) {
+    // get users, only admin and manager
+    app.get('/users', requireRole(['admin', 'manager']), function(req, res) {
     	areManagers = req.param('managers');
-    	if (areManagers) {
-	    	User.find({'isManager': true}, function (err, users) { 
-	    		res.json(users);
-	    	});
+    	if (req.user.role === 'admin') {
+        	if (areManagers) {
+    	    	User.find({'role': 'manager'}, function (err, users) { 
+    	    		res.json(users);
+    	    	});
+        	} else {
+    	    	User.find({'role': 'user'}, function (err, users) { 
+    	    		res.json(users);
+    	    	});
+    	    }    		
     	} else {
-	    	User.find({'isManager': false}, function (err, users) { 
-	    		res.json(users);
-	    	});    		
+    	    var query = {$and: [{'role': 'user'}, {'managerName': req.user.name}]};
+            User.find(query, function (err, users) { 
+                res.json(users);
+            });    	    
     	}
-    });
+    }); 
     
     // dashboard/users
     // dashboard/managers
-    // delete user
-    app.delete('/users/:id', auth, function(req, res) {
+    // delete user, only admin
+    app.delete('/users/:id', requireRole(['admin']), function(req, res) {
     	User.remove({'id': req.params.id}, function(err, user) {
             if (err)
                 res.send(err);
@@ -165,8 +185,8 @@ module.exports = function(app, passport) {
     });
     	
     // dashboard/users
-    // update user
-    app.put('/users/:id', auth, function(req, res) {
+    // update user, only admin
+    app.put('/users/:id', requireRole(['admin']), function(req, res) {
     	User.findone({'id': req.params.id}, function(err, user) {
     		if (err) res.send(err);
     		user.isManager = req.body.user.isManager;
@@ -180,8 +200,8 @@ module.exports = function(app, passport) {
     });
     
     // dashboard/admins
-    // get admins
-    app.get('/admins', auth, function(req, res) {
+    // get admins, only admin
+    app.get('/admins', requireRole(['admin']), function(req, res) {
     	Admin.find(function(err, admins) {
             if (err)
                 res.send(err);
@@ -190,8 +210,8 @@ module.exports = function(app, passport) {
     });
     
     // dashboard/admins
-    // delete admin
-    app.delete('/admins/:email', auth, function(req, res) {
+    // delete admin, only admin
+    app.delete('/admins/:email', requireRole(['admin']), function(req, res) {
     	Admin.remove({'email': req.params.email}, function(err, admin) {
             if (err)
                 res.send(err);

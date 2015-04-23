@@ -9,7 +9,8 @@ var userSchema = mongoose.Schema({
     token   	: String,
     email   	: String,
     name    	: String,
-    isManager 	: {type: Boolean, default: false},
+    //isManager 	: {type: Boolean, default: false},
+    role        : String,
     managerName	: {type: String, default: ''}
 
 });
@@ -27,7 +28,8 @@ var userDataSchema = mongoose.Schema({
 var adminSchema = mongoose.Schema({
 	
     email        : String,
-    password     : String	
+    password     : String,
+    role         : {type: String, default: 'admin'}	
 
 });
 
