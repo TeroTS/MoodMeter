@@ -1,8 +1,13 @@
-app.controller('dashboardCtrl', function($scope) {
+app.controller('dashboardCtrl', function($scope, restFactory) {
 	
 	$scope.user = 'Admin';
 	
-	$scope.numberOf = {users: '15', managers: '8', admin: '3'};
-	
+	restFactory.getCounts()
+        .success(function(data, status, headers, config) {
+            $scope.numberOf = {users: data.users, managers: data.managers, admin: data.admins};
+        })
+        .error(function(data, status, headers, config) {
+            console.log("Error: " + status);
+        });	
 	
 });

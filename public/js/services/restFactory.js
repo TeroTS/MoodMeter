@@ -30,6 +30,10 @@ var restFactory = function($http) {
         return $http.delete('/admins/' + email);
     };
     
+    factory.getCounts = function() {
+        return $http.get('/counts');  
+    };
+    
     return factory;
 };
     

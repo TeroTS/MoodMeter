@@ -219,5 +219,24 @@ module.exports = function(app, passport) {
     	});
     });
     
+    //get the number of users, managers and admins
+    app.get('/counts', requireRole(['admin', 'manager']), function(req, res) {
+         Admin.count({role: 'admin'}, function(err, adminCount) {
+             if (err)
+                res.send(err);
+             User.count({role: 'manager'}, function(err, managerCount) {
+                if (err)
+                    res.send(err); 
+                User.count({role: 'user'}, function(err, userCount) {
+                    if (err)
+                        res.send(err);
+                    res.json({admins: adminCount,
+                              managers: managerCount,
+                              users: userCount});              
+                });              
+             });    
+         });
+    });    
+        
 
 };
