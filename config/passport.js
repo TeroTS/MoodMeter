@@ -4,7 +4,7 @@ var GoogleStrategy   = require('passport-google-oauth').OAuth2Strategy;
 
 // load up the user and admin models
 var User = require('../app/models/user').user;
-var Admin = require('../app/models/user').admin;
+//var Admin = require('../app/models/user').admin;
 
 // load the auth variables
 var configAuth = require('./auth'); // use this one for testing
@@ -19,25 +19,14 @@ module.exports = function(passport) {
 
     // used to serialize the user (=user or admin) for the session
     passport.serializeUser(function(user, done) {
-        done(null, user._id);
+        done(null, user);
     });
 
     // used to deserialize the user (=user or admin)
-    passport.deserializeUser(function(id, done) {
-    	User.findById(id, function(err, user) {
-    		if(err) 
-    			done(err);
-    		if(user) {
-    			done(null, user);
-	       } else {
-	    	   	Admin.findById(id, function(err, user) {
-	    	   		if(err) 
-	    	   			done(err);
-	    	   		done(null, user);
-	    	   	});
-	       }
-    	});
+    passport.deserializeUser(function(user, done) {
+        done(null, user);
     });
+
 
     // =========================================================================
     // LOCAL LOGIN =============================================================
@@ -54,7 +43,7 @@ module.exports = function(passport) {
 
         // asynchronous
         process.nextTick(function() {
-            Admin.findOne({ 'email' :  email }, function(err, user) {
+            User.findOne({$and: [{'role': 'admin'}, {'email': email}]}, function(err, user) {
                 // if there are any errors, return the error
                 if (err)
                     return done(err);
@@ -71,7 +60,6 @@ module.exports = function(passport) {
                     return done(null, user);
             });
         });
-
     }));
 
     // =========================================================================
@@ -91,33 +79,29 @@ module.exports = function(passport) {
         process.nextTick(function() {
             // if the user is not already logged in:
             if (!req.user) {
-                Admin.findOne({ 'email' :  email }, function(err, user) {
+                User.findOne({'email' :  email}, function(err, user) {
                     // if there are any errors, return the error
                     if (err)
                         return done(err);
-
                     // check to see if theres already a user with that email
                     if (user) {
                         return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
                     } else {
-
                         // create the user
-                        var newAdmin            = new Admin();
+                        var newUser = new User();
+                        newUser.email = email;
+                        newUser.password = newUser.generateHash(password);
+                        newUser.role = 'admin';
 
-                        newAdmin.email    = email;
-                        newAdmin.password = newAdmin.generateHash(password);
-
-                        newAdmin.save(function(err) {
+                        newUser.save(function(err) {
                             if (err)
                                 return done(err);
-
-                            return done(null, newAdmin);
+                            return done(null, newUser);
                         });
                     }
-
                 });
              // user is logged in and already has a local account. Ignore signup. 
-             // (You should log out before trying to create a new account, user!)
+             // (You should log out before trying to create a new account)
             } else {           
                 return done(null, req.user);
             }

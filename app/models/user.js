@@ -9,9 +9,9 @@ var userSchema = mongoose.Schema({
     token   	: String,
     email   	: String,
     name    	: String,
-    //isManager 	: {type: Boolean, default: false},
-    role        : String,
-    managerName	: {type: String, default: ''}
+    role        : {type: String, enum: ['user', 'manager', 'admin']},
+    managerName	: String,
+    password    : String
 
 });
 
@@ -25,21 +25,21 @@ var userDataSchema = mongoose.Schema({
 });
 
 // schema for admin model
-var adminSchema = mongoose.Schema({
+/*var adminSchema = mongoose.Schema({
 	
     email        : String,
     password     : String,
     role         : {type: String, default: 'admin'}	
 
-});
+}); */
 
 // generating a hash
-adminSchema.methods.generateHash = function(password) {
+userSchema.methods.generateHash = function(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
 
 // checking if password is valid
-adminSchema.methods.validPassword = function(password) {
+userSchema.methods.validPassword = function(password) {
     return bcrypt.compareSync(password, this.password);
 };
 
@@ -47,5 +47,5 @@ adminSchema.methods.validPassword = function(password) {
 module.exports = {
 	user: 		mongoose.model('User', userSchema),
 	userData:	mongoose.model('UserData', userDataSchema),
-	admin:		mongoose.model('Admin', adminSchema)
+	//admin:		mongoose.model('Admin', adminSchema)
 };

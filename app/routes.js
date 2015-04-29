@@ -19,12 +19,17 @@ module.exports = function(app, passport) {
 	//with certain role
     function requireRole(roleArray) {
         return function(req, res, next) {
+            //var session_user = req.session.passport.user;
+            //var req_user = req.user;
+            var authOk = false;
             for(var i = 0; i < roleArray.length; i++) {
                 if(req.isAuthenticated() && req.user.role === roleArray[i])
-                    next();
-                else
-                    res.send(403);
+                    authOk = true;
             };
+            if (authOk)
+                next();
+            else
+                res.send(403);
         };
     };
 
@@ -202,7 +207,7 @@ module.exports = function(app, passport) {
     // dashboard/admins
     // get admins, only admin
     app.get('/admins', requireRole(['admin']), function(req, res) {
-    	Admin.find(function(err, admins) {
+    	User.find({role: 'admin'}, function(err, admins) {
             if (err)
                 res.send(err);
             res.json(admins);    		
@@ -211,8 +216,9 @@ module.exports = function(app, passport) {
     
     // dashboard/admins
     // delete admin, only admin
-    app.delete('/admins/:email', requireRole(['admin']), function(req, res) {
-    	Admin.remove({'email': req.params.email}, function(err, admin) {
+    app.delete('/admins/:id', requireRole(['admin']), function(req, res) {
+        var query = {$and: [{'role': 'admin'}, {'email': req.params.id}]};
+    	User.remove(query, function(err, admin) {
             if (err)
                 res.send(err);
             res.json(admin);	    	
@@ -221,7 +227,7 @@ module.exports = function(app, passport) {
     
     //get the number of users, managers and admins
     app.get('/counts', requireRole(['admin', 'manager']), function(req, res) {
-         Admin.count({role: 'admin'}, function(err, adminCount) {
+         User.count({role: 'admin'}, function(err, adminCount) {
              if (err)
                 res.send(err);
              User.count({role: 'manager'}, function(err, managerCount) {
