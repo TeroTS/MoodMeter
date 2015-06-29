@@ -1,25 +1,18 @@
-var dataService = function() {
+app.service('dataService', function() {
+
+   /* userData = {
+        id: "",
+        name: "",
+        email: ""
+    };*/
+    var userData = {};
     
-    
-    pollData = {
-        title: "",
-        location: "",
-        description: "",
-        creatorName: "",
-        dates: [],
-        participantEmails: "",
-        participants: [],
-        pollUrl: ""
+    this.writeUserData = function(prop, data) {      
+        userData[prop] = data; 
     };
     
-    this.writePollData = function(prop, data) {      
-        pollData[prop] = data; 
-    };
-    
-    this.readPollData = function() {
-        return pollData;
+    this.readUserData = function() {
+        return userData;
     };
        
-};
-
-angular.module('roodleApp').service('dataService', dataService);
+});

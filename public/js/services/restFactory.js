@@ -12,7 +12,11 @@ var restFactory = function($http) {
     
     factory.getUsers = function() {
         return $http.get('/users');
-    }; 
+    };
+    
+    factory.getUser = function(id) {
+        return $http.get('/users/' + id);
+    };     
     
     factory.deleteUser = function(id) {
         return $http.delete('/users/' + id);

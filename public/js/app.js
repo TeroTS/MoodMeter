@@ -81,6 +81,20 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
             resolve: {
             	loggedin: checkLoggedin
             }
+        })
+        .when('/users', {
+            templateUrl: './views/users.html',
+            controller: 'usersCtrl',
+           // resolve: {
+           //     loggedin: checkLoggedin
+           // }
+        })
+        .when('/user', {
+            templateUrl: './views/user.html',
+            controller: 'userCtrl',
+           // resolve: {
+           //     loggedin: checkLoggedin
+           // }
         })        
         .otherwise({
         	redirectTo: '/login'

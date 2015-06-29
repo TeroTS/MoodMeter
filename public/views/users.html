@@ -1,0 +1,20 @@
+<div class="container-fluid">     
+      <div class="row">
+         <div class="col-md-6 col-md-offset-3">
+            <h3>Users</h3>
+               <hr/>
+               <div class="col-xs-4">
+                  <input type="text" class="form-control" placeholder="Name">
+               </div>
+         </div>
+      </div>
+      <div class="row">
+          <div class="col-md-6 col-md-offset-3">
+              <div ng-repeat="user in users">
+                  <a class="btn btn-primary" href="#/user" ng-click="getUser($index)">Edit</a>
+                  {{ user.name }}
+              </div>
+              <hr/>
+          </div>
+      </div>
+</div>

@@ -78,6 +78,7 @@ module.exports = function(passport) {
         // asynchronous
         process.nextTick(function() {
             // if the user is not already logged in:
+            //TODO: tsekkaa mitä tallennetaan sessioon ja käytä jotain uniikkia tässä ehtolauseessa !
             if (!req.user) {
                 User.findOne({'email' :  email}, function(err, user) {
                     // if there are any errors, return the error
@@ -129,11 +130,13 @@ module.exports = function(passport) {
             var mailAddr = (profile.emails[0].value || '').toLowerCase();
             
             //check mail domain (mail address ends with @comiq.fi)
-            if (mailAddr.slice(-9) != '@comiq.fi') {
-                return done(null, false);
-            }
+            //TODO: uncomment later
+ //           if (mailAddr.slice(-9) != '@comiq.fi') {
+ //               return done(null, false);
+ //           }
 
             // check if the user is already logged in
+            //TODO: käytä jotain uniikkia tässä ehtolauseessa, tämä ei toimi !
             if (!req.user) {
 
                 User.findOne({ 'id' : profile.id }, function(err, user) {

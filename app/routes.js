@@ -1,7 +1,7 @@
 
 var UserData = require('./models/user').userData;
 var User = require('./models/user').user;
-var Admin = require('./models/user').admin;
+//var Admin = require('./models/user').admin;
 
 module.exports = function(app, passport) {
 	
@@ -177,6 +177,17 @@ module.exports = function(app, passport) {
             });    	    
     	}
     }); 
+    
+    // dashboard/users
+    // dashboard/managers
+    // get user, only admin and manager
+    app.get('/users/:id', requireRole(['admin', 'manager']), function(req, res) {
+        User.find({'id': req.params.id}, function(err, user) {
+            if (err)
+                res.send(err);
+            res.json(user);         
+        });
+    });    
     
     // dashboard/users
     // dashboard/managers
