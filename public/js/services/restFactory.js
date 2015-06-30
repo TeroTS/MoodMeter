@@ -26,6 +26,10 @@ var restFactory = function($http) {
         return $http.put('/users/' + id, data);
     };
     
+    factory.getManagers = function() {
+        return $http.get('/users?type=manager');
+    };    
+    
     factory.getAdmins = function() {
         return $http.get('/admins');
     };

@@ -159,9 +159,10 @@ module.exports = function(app, passport) {
     // dashboard/managers
     // get users, only admin and manager
     app.get('/users', requireRole(['admin', 'manager']), function(req, res) {
-    	areManagers = req.param('managers');
+    	//areManagers = req.param('managers');
+    	var type = req.query.type;
     	if (req.user.role === 'admin') {
-        	if (areManagers) {
+        	if (type === 'manager') {
     	    	User.find({'role': 'manager'}, function (err, users) { 
     	    		res.json(users);
     	    	});
