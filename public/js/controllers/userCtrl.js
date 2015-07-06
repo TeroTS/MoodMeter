@@ -2,6 +2,7 @@ app.controller('userCtrl', function($scope, restFactory, dataService) {
     
     //read user data from persistent object
     $scope.userData = dataService.readUserData();
+    $scope.managers = [{name :'manager1'}, {name: 'manager2'}];
     
     //get all managers
     restFactory.getManagers()

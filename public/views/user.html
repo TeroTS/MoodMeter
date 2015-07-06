@@ -9,11 +9,11 @@
          <div class="col-md-6 col-md-offset-3">
             <div class="form-group">
                <label for="name">Name</label>
-               <input type="text" class="form-control" ng-model="userData.name" readonly>
+               <input type="text" class="form-control" ng-model="userData.name">
             </div>
          </div>
       </div>
-      <div class="row">
+     <!-- <div class="row">
          <div class="col-md-2 col-md-offset-3">
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="Manager:" readonly>
@@ -22,12 +22,23 @@
                 </span>
             </div>  
          </div>
-      </div>
-      <div ng-hide="isManager" class="ng-hide">
-          <div class="row">
-             <div class="col-md-2 col-md-offset-3">
-        dropdown !!!!!!
-             </div>
-          </div>          
-      </div>
+      </div> -->
+      
+    <!--  <div ng-hide="isManager" class="ng-hide"> -->
+  <div class="row">
+     <div class="col-md-2 col-md-offset-3">
+       <div class="form-group">
+       <label for="manager">Manager</label> 
+            <select class="form-control" ng-model="myManager" ng-options="manager.name for manager in managers"><option value="">-- choose Manager --</option></select>
+        {{ myManager.name }} 
+       </div>          
+     </div>
+  </div>
+    <!--  </div> -->
+  <div class="row">
+    <div class="col-md-2 col-md-offset-3">    
+        <a class="btn btn-primary" href="#/users" ng-click="">Update</a>
+    </div>
+  </div>
+      
 </div>
