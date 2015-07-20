@@ -1,18 +1,22 @@
-app.service('dataService', function() {
-
-   /* userData = {
+app.service('dataService', function($cookieStore) {
+    /*userData = {
         id: "",
         name: "",
         email: ""
     };*/
-    var userData = {};
-    
-    this.writeUserData = function(prop, data) {      
-        userData[prop] = data; 
+
+   userData = {};
+
+    this.writeUserData = function(key, data) {
+        //userData[prop] = data;
+        $cookieStore.put(key, data);
     };
-    
-    this.readUserData = function() {
-        return userData;
+
+    this.readUserData = function(key) {
+        //return userData;
+        data = $cookieStore.get(key);
+        return data;
     };
-       
+
 });
+//angular.module('roodleApp').service('dataService', dataService);

@@ -9,12 +9,12 @@ var cookieParser   = require('cookie-parser');
 var session        = require('express-session');
 
 // configuration ===========================================
-    
+
 //config files
 var db = require('./config/db');
 
 //set port
-var port = process.env.PORT || 8080; 
+var port = process.env.PORT || 8089;
 
 //connect to mongoDB database
 mongoose.connect(db.url);
@@ -43,10 +43,10 @@ require('./app/routes.js')(app, passport);
 
 // start app
 // startup app at http://localhost:8080
-app.listen(port);               
+app.listen(port);
 
-// shoutout to the user                     
+// shoutout to the user
 console.log('Magic happens on port ' + port);
 
-// expose app           
+// expose app
 exports = module.exports = app;

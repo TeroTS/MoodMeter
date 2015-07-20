@@ -1,7 +1,7 @@
-var app = angular.module('roodleApp', ['ngRoute', 'ui.bootstrap', 'chart.js']);
+var app = angular.module('roodleApp', ['ngRoute', 'ui.bootstrap', 'chart.js', 'ngCookies']);
 
 app.config(function($routeProvider, $locationProvider, $httpProvider) {
-	
+
     //================================================
     // Check if the user is connected
     //================================================
@@ -32,7 +32,7 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
       return deferred.promise;
     };
     //================================================
-    
+
     //================================================
     // Add an interceptor for AJAX errors
     //================================================
@@ -50,8 +50,8 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
         }
       };
     });
-    
-    $routeProvider 
+
+    $routeProvider
         // home page
         .when('/login', {
             templateUrl: './views/login.html',
@@ -95,8 +95,8 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
            // resolve: {
            //     loggedin: checkLoggedin
            // }
-        })        
+        })
         .otherwise({
         	redirectTo: '/login'
-        });                      
+        });
 });

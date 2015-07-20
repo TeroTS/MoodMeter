@@ -1,3 +1,3 @@
 module.exports = {
-    url : 'mongodb://localhost/Node-auth'
+    url : 'mongodb://localhost/Mood-meter'
 };

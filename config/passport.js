@@ -77,9 +77,12 @@ module.exports = function(passport) {
 
         // asynchronous
         process.nextTick(function() {
-            // if the user is not already logged in:
-            //TODO: tsekkaa mitä tallennetaan sessioon ja käytä jotain uniikkia tässä ehtolauseessa !
-            if (!req.user) {
+             // user is logged in and already has a local account. Ignore signup.
+             // (You should log out before trying to create a new account)
+            if (req.user && req.user.email === email) {
+                return done(null, req.user);
+            // if the user is not already logged in try to find user from db
+            } else {
                 User.findOne({'email' :  email}, function(err, user) {
                     // if there are any errors, return the error
                     if (err)
@@ -101,10 +104,6 @@ module.exports = function(passport) {
                         });
                     }
                 });
-             // user is logged in and already has a local account. Ignore signup. 
-             // (You should log out before trying to create a new account)
-            } else {           
-                return done(null, req.user);
             }
 
         });
@@ -126,9 +125,7 @@ module.exports = function(passport) {
 
         // asynchronous
         process.nextTick(function() {
-            
             var mailAddr = (profile.emails[0].value || '').toLowerCase();
-            
             //check mail domain (mail address ends with @comiq.fi)
             //TODO: uncomment later
  //           if (mailAddr.slice(-9) != '@comiq.fi') {
@@ -136,9 +133,20 @@ module.exports = function(passport) {
  //           }
 
             // check if the user is already logged in
-            //TODO: käytä jotain uniikkia tässä ehtolauseessa, tämä ei toimi !
-            if (!req.user) {
+            if (req.user && req.user.email === profile.emails[0]) {
 
+                // user already exists and is logged in, we have to link accounts
+                var user = req.user; // pull the user out of the session
+                //these are not needed
+/*                user.id    = profile.id;
+                user.token = token;
+                user.name  = profile.displayName;
+                user.email = (profile.emails[0].value || '').toLowerCase(); // pull the first email*/
+                //return user
+                return done(null, user);
+
+            } else {
+            //if user is not logged in, try to find user or create a new user
                 User.findOne({ 'id' : profile.id }, function(err, user) {
                     if (err)
                         return done(err);
@@ -147,43 +155,31 @@ module.exports = function(passport) {
                         return done(null, user);
                     //if not, create a new user
                     } else {
-                        var newUser          = new User();
+                        var newUser = new User();
 
                         newUser.id    = profile.id;
                         newUser.token = token;
                         newUser.name  = profile.displayName;
                         newUser.email = mailAddr;
                         newUser.role = 'user';
+                        //newUser.managerName = 'test';
 
                         newUser.save(function(err) {
                             if (err)
                                 return done(err);
-                                
+
                             return done(null, newUser);
                         });
                     }
                 });
 
-            } else {
-                // user already exists and is logged in, we have to link accounts
-                var user = req.user; // pull the user out of the session
-                
-                //are these needed ?
-                user.id    = profile.id;
-                user.token = token;
-                user.name  = profile.displayName;
-                user.email = (profile.emails[0].value || '').toLowerCase(); // pull the first email
-                //return user
-                return done(null, user);
-
                 /*user.save(function(err) {
                     if (err)
                         return done(err);
-                        
                     return done(null, user);
                 });*/
 
-            } 
+            }
 
         });
 

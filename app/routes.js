@@ -4,7 +4,7 @@ var User = require('./models/user').user;
 //var Admin = require('./models/user').admin;
 
 module.exports = function(app, passport) {
-	
+
 	// Define a middleware functions to be used for every secured routes
 	//
     //this checks only that user is logged in, all users can access these routes
@@ -14,7 +14,7 @@ module.exports = function(app, passport) {
         else
             next();
     };
-	
+
 	//this is used to check that certain route can be accessed only by user
 	//with certain role
     function requireRole(roleArray) {
@@ -25,40 +25,40 @@ module.exports = function(app, passport) {
             for(var i = 0; i < roleArray.length; i++) {
                 if(req.isAuthenticated() && req.user.role === roleArray[i])
                     authOk = true;
-            };
+            }
             if (authOk)
                 next();
             else
                 res.send(403);
         };
-    };
+    }
 
     // route to handle all angular requests
     app.get('/', function(req, res) {
         res.sendfile('./public/index.html');
     });
-    
+
 	// process the login form
 	app.post('/login', passport.authenticate('local-login'), function(req, res) {
 		res.send(req.user);
 	});
-	
+
 	//sign up
 	app.post('/signup', passport.authenticate('local-signup'), function(req, res) {
 		res.send(req.user);
-	});	
-	
+	});
+
 	// route to test if the user is logged in or not
 	app.get('/loggedin', function(req, res) {
 		res.send(req.isAuthenticated() ? req.user : '0');
 	});
-	
+
 	// route to log out
 	app.post('/logout', function(req, res) {
 		req.logOut();
 		res.send(200);
 	});
-	
+
 	// google ---------------------------------
 
 	// send to google to do the authentication
@@ -66,21 +66,21 @@ module.exports = function(app, passport) {
 
     // the callback after google has authenticated the user
     app.get('/auth/google/callback', passport.authenticate('google', {
-        successRedirect : 'http://localhost:8080/#/home',
-        failureRedirect : 'http://localhost:8080/#/login'
+        successRedirect : 'http://localhost:8089/#/home',
+        failureRedirect : 'http://localhost:8089/#/login'
     }));
-    
+
     // REST API
-    
+
     // get todays date without time
     function dateToday() {
         var d = new Date();
         var day = d.getDate();
         var month = d.getMonth();
         var year = d.getFullYear();
-        return new Date(year, month, day);    	
+        return new Date(year, month, day);
     }
-    
+
     // encode time periods from client from string to milliseconds
     function periodInMilliseconds(period) {
     	var timeMilliseconds;
@@ -96,27 +96,26 @@ module.exports = function(app, passport) {
 	            break;
 	        case '6 months':
 	        	timeMilliseconds = 168*24*60*60*1000;
-	            break;           
+	            break;
     	}
     	return timeMilliseconds;
     }
-     
     // /home
     // user (user and manager) happiness data post
     app.post('/users/:id/data', auth, function(req, res) {
-    	
+
     	var date = dateToday();
-    	
+
     	var query = {$and: [{'user': req.params.id}, {'timeStamp': date}]};
     	//save or update
     	UserData.findOne(query, function(err, data) {
     		if (err) res.send(err);
     		//first write
-    		if (data == null) {
-    	    	var data = new UserData({
+    		if (data === null) {
+    	    	data = new UserData({
     	        	user		: req.params.id,
     	        	timeStamp	: date,
-    	        	value		: req.body.value       		
+    	        	value		: req.body.value
     	    	});
     	    //update
     		} else {
@@ -128,11 +127,11 @@ module.exports = function(app, passport) {
 	            if (err)
 	                res.send(err);
 	            res.json(data);
-	        }); 
+	        });
     	});
-    	
+
     });
-    
+
     // /my-account
     // get user (user and manager) happiness data
     app.get('/users/:id/data', auth, function(req, res) {
@@ -147,14 +146,14 @@ module.exports = function(app, passport) {
             for (var i = 0; i < arrayLength; i++) {
             	var itemAge = dateToday() - data[i].timeStamp;
             	if (itemAge <= timePeriod) {
-            		dataArray.push(data[i].value); 
+            		dataArray.push(data[i].value);
             		dateArray.push(data[i].timeStamp);
             	}
-            } 
+            }
             res.json({data : dataArray, dates : dateArray});
     	});
     });
-    
+
     // dashboard/users
     // dashboard/managers
     // get users, only admin and manager
@@ -163,22 +162,22 @@ module.exports = function(app, passport) {
     	var type = req.query.type;
     	if (req.user.role === 'admin') {
         	if (type === 'manager') {
-    	    	User.find({'role': 'manager'}, function (err, users) { 
+    	    	User.find({'role': 'manager'}, function (err, users) {
     	    		res.json(users);
     	    	});
         	} else {
-    	    	User.find({'role': 'user'}, function (err, users) { 
+    	    	User.find({'role': 'user'}, function (err, users) {
     	    		res.json(users);
     	    	});
-    	    }    		
+    	    }
     	} else {
     	    var query = {$and: [{'role': 'user'}, {'managerName': req.user.name}]};
-            User.find(query, function (err, users) { 
+            User.find(query, function (err, users) {
                 res.json(users);
-            });    	    
+            });
     	}
-    }); 
-    
+    });
+
     // dashboard/users
     // dashboard/managers
     // get user, only admin and manager
@@ -186,10 +185,10 @@ module.exports = function(app, passport) {
         User.find({'id': req.params.id}, function(err, user) {
             if (err)
                 res.send(err);
-            res.json(user);         
+            res.json(user);
         });
-    });    
-    
+    });
+
     // dashboard/users
     // dashboard/managers
     // delete user, only admin
@@ -197,35 +196,35 @@ module.exports = function(app, passport) {
     	User.remove({'id': req.params.id}, function(err, user) {
             if (err)
                 res.send(err);
-            res.json(user);	    	
+            res.json(user);
     	});
     });
-    	
+
     // dashboard/users
     // update user, only admin
     app.put('/users/:id', requireRole(['admin']), function(req, res) {
-    	User.findone({'id': req.params.id}, function(err, user) {
+    	User.findOne({'id': req.params.id}, function(err, user) {
     		if (err) res.send(err);
-    		user.isManager = req.body.user.isManager;
-    		user.managerName = req.body.user.managerName;
+    		user.managerName = req.body.manager;
+            user.markModified('managerName');
 	        user.save(function(err, user) {
 	            if (err)
 	                res.send(err);
 	            res.json(user);
-	        });     		
+	        });
     	});
     });
-    
+
     // dashboard/admins
     // get admins, only admin
     app.get('/admins', requireRole(['admin']), function(req, res) {
     	User.find({role: 'admin'}, function(err, admins) {
             if (err)
                 res.send(err);
-            res.json(admins);    		
-    	});	
+            res.json(admins);
+    	});
     });
-    
+
     // dashboard/admins
     // delete admin, only admin
     app.delete('/admins/:id', requireRole(['admin']), function(req, res) {
@@ -233,10 +232,10 @@ module.exports = function(app, passport) {
     	User.remove(query, function(err, admin) {
             if (err)
                 res.send(err);
-            res.json(admin);	    	
+            res.json(admin);
     	});
     });
-    
+
     //get the number of users, managers and admins
     app.get('/counts', requireRole(['admin', 'manager']), function(req, res) {
          User.count({role: 'admin'}, function(err, adminCount) {
@@ -244,17 +243,16 @@ module.exports = function(app, passport) {
                 res.send(err);
              User.count({role: 'manager'}, function(err, managerCount) {
                 if (err)
-                    res.send(err); 
+                    res.send(err);
                 User.count({role: 'user'}, function(err, userCount) {
                     if (err)
                         res.send(err);
                     res.json({admins: adminCount,
                               managers: managerCount,
-                              users: userCount});              
-                });              
-             });    
+                              users: userCount});
+                });
+             });
          });
-    });    
-        
+    });
 
 };

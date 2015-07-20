@@ -1,7 +1,7 @@
-<div class="container-fluid">     
+<div class="container-fluid">
       <div class="row">
          <div class="col-md-6 col-md-offset-3">
-            <h3>Users/{{ userData.name }}</h3>
+            <h3>Users/{{ name }}</h3>
                <hr/>
          </div>
       </div>
@@ -13,32 +13,18 @@
             </div>
          </div>
       </div>
-     <!-- <div class="row">
-         <div class="col-md-2 col-md-offset-3">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Manager:" readonly>
-                <span class="input-group-addon">
-                   <input type="checkbox" ng-model="isManager">
-                </span>
-            </div>  
-         </div>
-      </div> -->
-      
-    <!--  <div ng-hide="isManager" class="ng-hide"> -->
   <div class="row">
      <div class="col-md-2 col-md-offset-3">
        <div class="form-group">
-       <label for="manager">Manager</label> 
+       <label for="manager">Manager</label>
             <select class="form-control" ng-model="myManager" ng-options="manager.name for manager in managers"><option value="">-- choose Manager --</option></select>
-        {{ myManager.name }} 
-       </div>          
+        {{ myManager.name }}
+       </div>
      </div>
   </div>
-    <!--  </div> -->
   <div class="row">
-    <div class="col-md-2 col-md-offset-3">    
-        <a class="btn btn-primary" href="#/users" ng-click="">Update</a>
+    <div class="col-md-2 col-md-offset-3">
+        <a class="btn btn-primary" href="#/users" ng-click="updateUser()">Update</a>
     </div>
   </div>
-      
 </div>

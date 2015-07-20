@@ -10,26 +10,26 @@ var userSchema = mongoose.Schema({
     email   	: String,
     name    	: String,
     role        : {type: String, enum: ['user', 'manager', 'admin']},
-    managerName	: String,
+    managerName	: {type: String, default: ''},
     password    : String
 
 });
 
 // schema for user data model
 var userDataSchema = mongoose.Schema({
-	
+
 	user		: String, //{type: String, ref: 'User'},
 	timeStamp	: Date,
 	value		: Number
-	
+
 });
 
 // schema for admin model
 /*var adminSchema = mongoose.Schema({
-	
+
     email        : String,
     password     : String,
-    role         : {type: String, default: 'admin'}	
+    role         : {type: String, default: 'admin'}
 
 }); */
 
