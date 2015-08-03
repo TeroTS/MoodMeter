@@ -162,8 +162,8 @@ module.exports = function(app, passport) {
     	var type = req.query.type;
     	if (req.user.role === 'admin') {
         	if (type === 'manager') {
-    	    	User.find({'role': 'manager'}, function (err, users) {
-    	    		res.json(users);
+    	    	User.find({'role': 'manager'}, function (err, managers) {
+    	    		res.json(managers);
     	    	});
         	} else {
     	    	User.find({'role': 'user'}, function (err, users) {
@@ -205,8 +205,10 @@ module.exports = function(app, passport) {
     app.put('/users/:id', requireRole(['admin']), function(req, res) {
     	User.findOne({'id': req.params.id}, function(err, user) {
     		if (err) res.send(err);
+            user.role = req.body.role;
     		user.managerName = req.body.manager;
-            user.markModified('managerName');
+            //user.markModified('role');
+            //user.markModified('managerName');
 	        user.save(function(err, user) {
 	            if (err)
 	                res.send(err);

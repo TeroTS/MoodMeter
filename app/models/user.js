@@ -9,7 +9,7 @@ var userSchema = mongoose.Schema({
     token   	: String,
     email   	: String,
     name    	: String,
-    role        : {type: String, enum: ['user', 'manager', 'admin']},
+    role        : {type: String, enum: ['user', 'manager', 'admin'], default: 'user'},
     managerName	: {type: String, default: ''},
     password    : String
 
