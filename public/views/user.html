@@ -23,8 +23,9 @@
      <div class="col-md-2 col-md-offset-3">
        <div class="form-group">
        <label for="manager">Manager's name</label>
-            <select class="form-control" ng-model="myManager" ng-options="manager.name for manager in managers"><option value="">-- choose Manager --</option></select>
-        {{ myManager.name }}
+            <select class="form-control" ng-model="myManager" ng-options="manager.name for manager in managers">
+             <!-- <option value="">-- choose Manager --</option> -->
+            </select>
        </div>
      </div>
   </div>
