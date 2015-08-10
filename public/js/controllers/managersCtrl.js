@@ -1,9 +1,7 @@
 app.controller('usersCtrl', function($scope, restFactory, dataService) {
 
-  //$scope.users = [];
-
   //get all users
-  restFactory.getUsers()
+  restFactory.getManagers()
       .success(function(data, status, headers, config) {
           $scope.users = data;
           console.log(data);

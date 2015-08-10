@@ -1,10 +1,10 @@
-<div class="container-fluid">     
+<div class="container-fluid">
 	  <div class="row">
 		 <div class="col-md-6 col-md-offset-3">
 			<h3>My Account</h3>
 			<hr/>
 		    <p>selected item is : {{selectedItem}}</p>
-            <select ng-model="selectedItem" ng-change="getPeriodData(userId, selectedItem)">
+            <select ng-model="selectedItem" ng-change="getPeriodData(selectedItem)">
                 <option ng-repeat="timeOption in timeOptions" value="{{timeOption}}">{{timeOption}}</option>
             </select>
 			<canvas id="bar" class="chart chart-bar" data="data" labels="labels" click="onClick" ng-show="selectedItem"></canvas>
