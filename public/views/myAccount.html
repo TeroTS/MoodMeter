@@ -4,8 +4,8 @@
 			<h3>My Account</h3>
 			<hr/>
 		    <p>selected item is : {{selectedItem}}</p>
-            <select ng-model="selectedItem" ng-change="getPeriodData()">
-                <option ng-repeat="item in items" value="{{item}}">{{item}}</option>
+            <select ng-model="selectedItem" ng-change="getPeriodData(userId, selectedItem)">
+                <option ng-repeat="timeOption in timeOptions" value="{{timeOption}}">{{timeOption}}</option>
             </select>
 			<canvas id="bar" class="chart chart-bar" data="data" labels="labels" click="onClick" ng-show="selectedItem"></canvas>
 		 </div>

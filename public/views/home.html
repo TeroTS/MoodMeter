@@ -9,7 +9,7 @@
 		    <span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>		
  		</div>
  		{{rate}}
- 		<br><a href="#/my-account">My Account</a></br>
+ 		<br><a href="#/my-account" ng-click="postData()">My Account</a></br>
 	 </div>
   </div>
 </div>

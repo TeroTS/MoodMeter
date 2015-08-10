@@ -1,8 +1,11 @@
-app.controller('homeCtrl', function($scope, $rootScope, restFactory) {
+app.controller('homeCtrl', function($scope, $rootScope, restFactory, dataService) {
     
   $scope.rate = 7;
   $scope.max = 10;
   $scope.isReadonly = false;
+
+  //remove user data cookie, just to be sure
+  dataService.deleteUserData('data');
 
   $scope.hoveringOver = function(value) {
     $scope.overStar = value;

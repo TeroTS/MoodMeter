@@ -137,11 +137,15 @@ module.exports = function(app, passport) {
     app.get('/users/:id/data', auth, function(req, res) {
     	var period = req.param('period');
     	var timePeriod = periodInMilliseconds(period);
-    	//use lean() to return javascript objects instead of BSON
-    	UserData.find().lean().exec({'user': req.params.id}, function(err, data) {
+ /*       UserData.find({'user': req.params.id}, function(err, data) {
             if (err) res.send(err);
+            res.json(data);
+        });*/
+    	//use lean() to return javascript objects instead of BSON
+    	UserData.find({'user': req.params.id}).lean().exec(function(err, data) {
             var dataArray = [];
             var dateArray = [];
+            if (err) res.send(err);
             var arrayLength = data.length;
             for (var i = 0; i < arrayLength; i++) {
             	var itemAge = dateToday() - data[i].timeStamp;
