@@ -5,6 +5,7 @@ app.controller('userCtrl', function($scope, restFactory, dataService) {
     var userRole = user.role;
     $scope.name = user.name;
     $scope.myManagerName = user.managerName;
+    $scope.myManager = {};
     if (userRole === 'manager')
       $scope.isManager = true;
     else
