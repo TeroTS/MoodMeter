@@ -19,4 +19,15 @@ app.controller('usersCtrl', function($scope, restFactory, dataService) {
       dataService.writeUserData('data', userData);
   };
 
+  $scope.deleteUser = function(idx) {
+      var userData = $scope.users[idx];
+      restFactory.deleteUser(userData.id)
+          .success(function(data, status, headers, config) {
+              console.log(data);
+          })
+          .error(function(data, status, headers, config) {
+              console.log("Error: " + status);
+          });
+  }
+
 });
