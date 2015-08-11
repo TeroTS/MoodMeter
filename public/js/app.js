@@ -103,6 +103,13 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
            //     loggedin: checkLoggedin
            // }
         })
+        .when('/admins', {
+            templateUrl: './views/users.html',
+            controller: 'adminsCtrl',
+           // resolve: {
+           //     loggedin: checkLoggedin
+           // }
+        })
         .otherwise({
         	redirectTo: '/login'
         });

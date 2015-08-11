@@ -1,9 +1,10 @@
-app.controller('managersCtrl', function($scope, restFactory, dataService) {
+app.controller('adminsCtrl', function($scope, restFactory, dataService) {
 
-  $scope.header = 'Managers';
+  $scope.header = 'Admins';
+  $scope.isAdmin = true;
 
   //get all users
-  restFactory.getManagers()
+  restFactory.getAdmins()
       .success(function(data, status, headers, config) {
           $scope.users = data;
           console.log(data);
@@ -21,7 +22,7 @@ app.controller('managersCtrl', function($scope, restFactory, dataService) {
 
   $scope.deleteUser = function(idx) {
       var userData = $scope.users[idx];
-      restFactory.deleteUser(userData.id)
+      restFactory.deleteAdmin(userData.email)
           .success(function(data, status, headers, config) {
               console.log(data);
           })

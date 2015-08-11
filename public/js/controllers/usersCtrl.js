@@ -1,6 +1,6 @@
 app.controller('usersCtrl', function($scope, restFactory, dataService) {
 
-  //$scope.users = [];
+  $scope.header = 'Users';
 
   //get all users
   restFactory.getUsers()
@@ -28,6 +28,6 @@ app.controller('usersCtrl', function($scope, restFactory, dataService) {
           .error(function(data, status, headers, config) {
               console.log("Error: " + status);
           });
-  }
+  };
 
 });
