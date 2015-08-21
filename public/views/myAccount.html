@@ -1,7 +1,12 @@
 <div class="container-fluid">
 	  <div class="row">
 		 <div class="col-md-6 col-md-offset-3">
-			<h3>My Account</h3>
+		 	<ul class="nav nav-tabs">
+	  			<li role="presentation"><a href="#/home"><h3>Home</h3></a></li>
+	  			<li role="presentation" class="active"><a href="#/my-account"><h3>My Account</h3></a></li>
+	  			<li role="presentation" ng-show="isManager"><a href="#/dashboard"><h3>Dashboard</h3></a></li>
+			</ul>
+	<!--		<h3>My Account</h3>  -->
 			<hr/>
 		    <p>selected item is : {{selectedItem}}</p>
             <select ng-model="selectedItem" ng-change="getPeriodData(selectedItem)">

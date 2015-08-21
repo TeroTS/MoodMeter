@@ -3,6 +3,7 @@ app.controller('myAccountCtrl', function($scope, $rootScope, $filter, restFactor
 	  //read user data from persistent object
       var user = dataService.readUserData('data');
       console.log(user);
+      $scope.isManager = ($rootScope.user.role === "manager");
 
 	  $scope.labels = [];
 	  $scope.data = [[]];

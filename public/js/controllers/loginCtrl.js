@@ -19,5 +19,5 @@ app.controller('loginCtrl', function($scope, $rootScope, $http, $location) {
       $location.url('/login');
     });
   };
-  
+
 });

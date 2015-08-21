@@ -1,8 +1,9 @@
 app.controller('homeCtrl', function($scope, $rootScope, restFactory, dataService) {
-    
-  $scope.rate = 7;
+
+  $scope.rate = 5;
   $scope.max = 10;
   $scope.isReadonly = false;
+  $scope.isManager = ($rootScope.user.role === "manager");
 
   //remove user data cookie, just to be sure
   dataService.deleteUserData('data');
@@ -11,8 +12,8 @@ app.controller('homeCtrl', function($scope, $rootScope, restFactory, dataService
     $scope.overStar = value;
     $scope.percent = 100 * (value / $scope.max);
   };
-  
-  // 
+
+  //
   $scope.postData = function() {
 	  var userId = $rootScope.user.id;
 	  //create object for backend json parser
@@ -24,11 +25,8 @@ app.controller('homeCtrl', function($scope, $rootScope, restFactory, dataService
           .error(function(data, status, headers, config) {
               console.log("Error: " + status);
           });
-  };  
-  
-  
-  
-  
+  };
+
 
 /*  $scope.ratingStates = [
     {stateOn: 'glyphicon-ok-sign', stateOff: 'glyphicon-ok-circle'},
@@ -37,7 +35,5 @@ app.controller('homeCtrl', function($scope, $rootScope, restFactory, dataService
     {stateOn: 'glyphicon-heart'},
     {stateOff: 'glyphicon-off'}
   ];*/
-  
-});
 
-    
+});

@@ -1,15 +1,17 @@
-<div class="container-fluid">     
+<div class="container-fluid">
   <div class="row">
 	 <div class="col-md-6 col-md-offset-3">
-		<h3>Home</h3>
+	 	<ul class="nav nav-tabs">
+  			<li role="presentation" class="active"><a href="#/home"><h3>Home</h3></a></li>
+  			<li role="presentation"><a href="#/my-account"><h3>My Account</h3></a></li>
+  			<li role="presentation" ng-show="isManager"><a href="#/dashboard"><h3>Dashboard</h3></a></li>
+		</ul>
 		<hr/>
 		<h4>Happiness Meter</h4>
 		<div class="meter">
 		    <rating ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" ng-click="postData()"></rating>
-		    <span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>		
+		    <span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
  		</div>
- 		{{rate}}
- 		<br><a href="#/my-account" ng-click="postData()">My Account</a></br>
 	 </div>
   </div>
 </div>
