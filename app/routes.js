@@ -244,21 +244,28 @@ module.exports = function(app, passport) {
 
     //get the number of users, managers and admins
     app.get('/counts', requireRole(['admin', 'manager']), function(req, res) {
-         User.count({role: 'admin'}, function(err, adminCount) {
-             if (err)
-                res.send(err);
-             User.count({role: 'manager'}, function(err, managerCount) {
+        if (req.user.role === 'admin') {
+            User.count({role: 'admin'}, function(err, adminCount) {
                 if (err)
                     res.send(err);
-                User.count({role: 'user'}, function(err, userCount) {
+                User.count({role: 'manager'}, function(err, managerCount) {
                     if (err)
                         res.send(err);
-                    res.json({admins: adminCount,
-                              managers: managerCount,
-                              users: userCount});
+                    User.count({role: 'user'}, function(err, userCount) {
+                        if (err)
+                            res.send(err);
+                        res.json({admins: adminCount,
+                                  managers: managerCount,
+                                  users: userCount});
+                    });
                 });
-             });
-         });
+            });
+        } else {
+            var query = {$and: [{'role': 'user'}, {'managerName': req.user.name}]};
+            User.find(query, function (err, users) {
+                res.json({users: users.length});
+            });
+        }
     });
 
 };
