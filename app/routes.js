@@ -175,10 +175,16 @@ module.exports = function(app, passport) {
     	    	});
     	    }
     	} else {
-    	    var query = {$and: [{'role': 'user'}, {'managerName': req.user.name}]};
-            User.find(query, function (err, users) {
-                res.json(users);
-            });
+            if (type === 'manager') {
+                User.find({'role': 'manager'}, function (err, managers) {
+                    res.json(managers);
+                });
+            } else {
+    	        var query = {$and: [{'role': 'user'}, {'managerName': req.user.name}]};
+                User.find(query, function (err, users) {
+                    res.json(users);
+                });
+            }
     	}
     });
 

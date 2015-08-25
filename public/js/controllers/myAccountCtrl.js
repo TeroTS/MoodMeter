@@ -2,8 +2,18 @@ app.controller('myAccountCtrl', function($scope, $rootScope, $filter, restFactor
 
 	  //read user data from persistent object
       var user = dataService.readUserData('data');
-      console.log(user);
+      $scope.adminViewingData =	 false;
+      //console.log(user);
+	  // is user or manager/admin viewing data ?
+	  // depending on who is viewing data, the user id is taken either from logged in user (user viewing his own data) or
+	  // from user data saved in session earlier (manager/admin viewing data)
+      if (typeof user != 'undefined') {
+      	  $scope.adminViewingData =	 true;
+          $scope.name = user.name;
+      }
       $scope.isManager = ($rootScope.user.role === "manager");
+
+	  //$scope.adminViewingData = ($rootScope.user.role != "user"); //(typeof user != 'undefined');
 
 	  $scope.labels = [];
 	  $scope.data = [[]];
@@ -18,13 +28,8 @@ app.controller('myAccountCtrl', function($scope, $rootScope, $filter, restFactor
 	  // get selected time period user data
 	  $scope.getPeriodData = function(period) {
 
-		  // is user or manager/admin viewing data ?
-		  // depending on who is viewing data, the user id is taken either from logged in user (user viewing his own data) or
-		  // from user data saved in session earlier (manager/admin viewing data)
-		  var adminViewingData = (typeof user != 'undefined');
-
 		  var userId = $rootScope.user.id;
-		  if (adminViewingData) {
+		  if ($scope.adminViewingData) {
 		  	userId = user.id;
 		  }
 
