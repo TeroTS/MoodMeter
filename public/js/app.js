@@ -5,7 +5,7 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
     //================================================
     // Check if the user is connected
     //================================================
-    var checkLoggedin = function($q, $timeout, $http, $location, $rootScope){
+    var checkLoggedin = function($q, $timeout, $http, $location, $rootScope) {
       // Initialize a new promise
       var deferred = $q.defer();
 
@@ -25,6 +25,7 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
           console.log('You need to log in.');
           //$timeout(function(){deferred.reject();}, 0);
           deferred.reject();
+          $rootScope.user = {};
           $location.url('/login');
         }
       });
