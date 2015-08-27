@@ -1,5 +1,9 @@
 app.controller('homeCtrl', function($scope, $rootScope, restFactory, dataService) {
 
+  $scope.home = "active";
+  $scope.account = "nonactive";
+  $scope.dashboard = "nonactive";
+
   $scope.rate = 5;
   $scope.max = 10;
   $scope.isReadonly = false;
