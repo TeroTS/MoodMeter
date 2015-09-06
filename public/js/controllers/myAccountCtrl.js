@@ -1,5 +1,10 @@
 app.controller('myAccountCtrl', function($scope, $rootScope, $filter, restFactory, dataService) {
 
+	  $scope.home = "nonactive";
+	  $scope.account = "active";
+	  $scope.dashboard = "nonactive";
+	  $scope.isManager = ($rootScope.user.role === "manager");
+
 	  //read user data from persistent object
       var user = dataService.readUserData('data');
       $scope.adminViewingData =	 false;
@@ -11,7 +16,6 @@ app.controller('myAccountCtrl', function($scope, $rootScope, $filter, restFactor
       	  $scope.adminViewingData =	 true;
           $scope.name = user.name;
       }
-      $scope.isManager = ($rootScope.user.role === "manager");
 
 	  //$scope.adminViewingData = ($rootScope.user.role != "user"); //(typeof user != 'undefined');
 

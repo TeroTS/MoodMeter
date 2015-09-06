@@ -1,4 +1,9 @@
-app.controller('userCtrl', function($scope, restFactory, dataService) {
+app.controller('userCtrl', function($scope, $rootScope, restFactory, dataService) {
+
+    $scope.home = "nonactive";
+    $scope.account = "nonactive";
+    $scope.dashboard = "active";
+    $scope.isManager = ($rootScope.user.role === "manager");
 
     //read user data from persistent object
     var user = dataService.readUserData('data');
@@ -9,9 +14,9 @@ app.controller('userCtrl', function($scope, restFactory, dataService) {
     $scope.myManager = {};
 
     if (userRole === 'manager')
-      $scope.isManager = true;
+      $scope.isUserManager = true;
     else
-      $scope.isManager = false;
+      $scope.isUserManager = false;
 
     //get all managers for drop down selection
     restFactory.getManagers()
@@ -29,7 +34,7 @@ app.controller('userCtrl', function($scope, restFactory, dataService) {
 
     //update user data
     $scope.updateUser = function() {
-      if ($scope.isManager === true) {
+      if ($scope.isUserManager === true) {
         userRole = 'manager';
         $scope.myManager.name = "";
       }

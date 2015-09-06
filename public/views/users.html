@@ -1,45 +1,31 @@
 <div class="container-fluid">
-    <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-    <ul class="nav nav-tabs">
-        <li role="presentation"><a href="#/home"><h3>Home</h3></a></li>
-        <li role="presentation"><a href="#/my-account"><h3>My Account</h3></a></li>
-        <li role="presentation" class="active"><a href="#/dashboard"><h3>Dashboard</h3></a></li>
-    </ul>
-    </div>
-    </div>
-
-      <div class="row">
-         <div class="col-md-6 col-md-offset-3">
-            <h3>{{ header }}</h3>
-               <hr/>
-               <div class="col-xs-4">
-                  <input type="text" class="form-control" placeholder="Name">
-               </div>
-         </div>
-      </div>
-      <div ng-repeat="user in users">
-      <div class="row">
-          <!-- <div class="col-md-1 col-md-offset-3"> -->
-              <!-- <div ng-repeat="user in users"> -->
-                  <div class="col-md-1 col-md-offset-3" ng-hide="isAdmin">
-                      <a class="btn btn-primary" href="#/user" ng-click="getUser($index)">Edit</a>
-                   <!--   <a class="btn btn-primary" href="#/admin" ng-click="getUser($index)" ng-show="isAdmin">Edit</a> -->
-                  </div>
-                  <div class="col-md-2" ng-hide="isAdmin">
-                      {{ user.name }}
-                  </div>
-                  <div class="col-md-2 col-md-offset-3" ng-show="isAdmin">
-                      {{ user.email }}
-                  </div>
-                   <div class="col-md-1" ng-hide="isAdmin">
-                      <a class="btn btn-primary" href="#/my-account" ng-click="getUser($index)">View</a>
-                  </div>
-                   <div class="col-md-1">
-                      <a class="btn btn-danger" ng-click="deleteUser($index)">Delete</a>
-                  </div>
-              <!-- </div> -->
-          <!-- </div> -->
-      </div>
-      </div>
+    <div ng-include="'views/templates/navbar.html'"></div>
+        <div class="row">
+           <div class="col-md-6 col-md-offset-3">
+              <h3>{{ header }}</h3>
+                 <hr/>
+                 <div class="col-xs-4">
+                    <input type="text" class="form-control" placeholder="Name">
+                 </div>
+           </div>
+        </div>
+        <div ng-repeat="user in users">
+            <div class="row">
+                <div class="col-md-1 col-md-offset-3" ng-hide="isAdmin">
+                    <a class="btn btn-primary" href="#/user" ng-click="getUser($index)">Edit</a>
+                </div>
+                <div class="col-md-2" ng-hide="isAdmin">
+                    {{ user.name }}
+                </div>
+                <div class="col-md-2 col-md-offset-3" ng-show="isAdmin">
+                    {{ user.email }}
+                </div>
+                 <div class="col-md-1" ng-hide="isAdmin">
+                    <a class="btn btn-primary" href="#/my-account" ng-click="getUser($index)">View</a>
+                </div>
+                 <div class="col-md-1">
+                    <a class="btn btn-danger" ng-click="deleteUser($index)">Delete</a>
+                </div>
+            </div>
+        </div>
 </div>

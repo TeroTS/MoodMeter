@@ -1,4 +1,9 @@
-app.controller('usersCtrl', function($scope, restFactory, dataService) {
+app.controller('usersCtrl', function($scope, $rootScope, restFactory, dataService) {
+
+  $scope.home = "nonactive";
+  $scope.account = "nonactive";
+  $scope.dashboard = "active";
+  $scope.isManager = ($rootScope.user.role === "manager");
 
   $scope.header = 'Users';
 

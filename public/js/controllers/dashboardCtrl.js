@@ -1,8 +1,12 @@
 app.controller('dashboardCtrl', function($scope, $rootScope, restFactory, dataService) {
 
-	$scope.user = $rootScope.user.role;
+    $scope.home = "nonactive";
+    $scope.account = "nonactive";
+    $scope.dashboard = "active";
     $scope.isManager = ($rootScope.user.role === "manager");
-    console.log($scope.isManager);
+
+	$scope.user = $rootScope.user.role;
+    //console.log($scope.isManager);
 
     //remove user data cookie, just to be sure
     dataService.deleteUserData('data');
