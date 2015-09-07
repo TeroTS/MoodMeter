@@ -9,9 +9,9 @@
 		</div>
 		<div class="col-md-6 col-md-offset-2">
 			<ul class="nav nav-tabs nav-justified">
-				<li role="presentation" ng-class="home" ng-model="home"><a href="#/home"><h3><span class="glyphicon glyphicon-home"></span>Home</h3></a></li>
-				<li role="presentation" ng-class="account" ng-model="account"><a href="#/my-account"><h3><span class="glyphicon glyphicon-eye-open"></span>My Account</h3></a></li>
-				<li role="presentation" ng-class="dashboard" ng-model="dashboard" ng-show="isManager"><a href="#/dashboard"><h3><span class="glyphicon glyphicon-user"></span>Dashboard</h3></a></li>
+				<li role="presentation" ng-class="home" ng-model="home" ng-hide="isAdmin"><a href="#/home"><h3><span class="glyphicon glyphicon-home"></span>Home</h3></a></li>
+				<li role="presentation" ng-class="account" ng-model="account" ng-hide="isAdmin"><a href="#/my-account"><h3><span class="glyphicon glyphicon-eye-open"></span>My Account</h3></a></li>
+				<li role="presentation" ng-class="dashboard" ng-model="dashboard" ng-hide="isUser"><a href="#/dashboard"><h3><span class="glyphicon glyphicon-user"></span>Dashboard</h3></a></li>
 			</ul>
 		</div>
 	</nav>

@@ -1,25 +1,15 @@
-app.controller('myAccountCtrl', function($scope, $rootScope, $filter, restFactory) {
+app.controller('viewUserDataCtrl', function($scope, $rootScope, $filter, restFactory, dataService) {
 
 	  $scope.home = "nonactive";
-	  $scope.account = "active";
-	  $scope.dashboard = "nonactive";
+	  $scope.account = "nonactive";
+	  $scope.dashboard = "active";
     $scope.isAdmin = ($rootScope.user.role === "admin");
     $scope.isUser = ($rootScope.user.role === "user");
 	  //$scope.isManager = ($rootScope.user.role === "manager" || $rootScope.user.role === "admin");
 
 	  //read user data from persistent object
-      //var user = dataService.readUserData('data');
-      //$scope.adminViewingData =	 false;
-      //console.log(user);
-	  // is user or manager/admin viewing data ?
-	  // depending on who is viewing data, the user id is taken either from logged in user (user viewing his own data) or
-	  // from user data saved in session earlier (manager/admin viewing data)
-  //    if (typeof user != 'undefined') {
-  //    	  $scope.adminViewingData =	 true;
-  //        $scope.name = user.name;
-  //    }
-
-	  //$scope.adminViewingData = ($rootScope.user.role != "user"); //(typeof user != 'undefined');
+      $scope.user = dataService.readUserData('data');
+      //console.log();
 
 	  $scope.labels = [];
 	  $scope.data = [[]];
@@ -34,10 +24,7 @@ app.controller('myAccountCtrl', function($scope, $rootScope, $filter, restFactor
 	  // get selected time period user data
 	  $scope.getPeriodData = function(period) {
 
-		  var userId = $rootScope.user.id;
-//		  if ($scope.adminViewingData) {
-//		  	userId = user.id;
-//		  }
+		  var userId = $scope.user.id;
 
 		  if (period !== '') {
 			  restFactory.getData(userId, period)
@@ -47,8 +34,8 @@ app.controller('myAccountCtrl', function($scope, $rootScope, $filter, restFactor
 		    	  for (var i = 0; i < data.dates.length; i++) {
 		    		  $scope.labels.push($filter('date')(data.dates[i], "shortDate"));
 		    	  }
-		    	  console.log($scope.data[0]);
-		    	  console.log($scope.labels);
+		    	  //console.log($scope.data[0]);
+		    	  //console.log($scope.labels);
 		      })
 		      .error(function() {console.log('User data GET failed !');});
 		  }

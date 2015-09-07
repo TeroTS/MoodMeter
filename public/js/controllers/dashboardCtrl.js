@@ -3,9 +3,10 @@ app.controller('dashboardCtrl', function($scope, $rootScope, restFactory, dataSe
     $scope.home = "nonactive";
     $scope.account = "nonactive";
     $scope.dashboard = "active";
-    $scope.isManager = ($rootScope.user.role === "manager");
+    $scope.isAdmin = ($rootScope.user.role === "admin");
+    $scope.isUser = ($rootScope.user.role === "user");
 
-	$scope.user = $rootScope.user.role;
+	//$scope.user = $rootScope.user.role;
     //console.log($scope.isManager);
 
     //remove user data cookie, just to be sure
