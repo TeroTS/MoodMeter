@@ -1,12 +1,14 @@
 app.controller('signupCtrl', function($scope, $rootScope, $http, $location) {
+
+  $scope.user = $rootScope.user;
   // This object will be filled by the form
-  $scope.user = {};
+  $scope.userData = {};
 
   // Register the login() function
   $scope.signup = function() {
     $http.post('/signup', {
-      email: $scope.user.email,
-      password: $scope.user.password,
+      email: $scope.userData.email,
+      password: $scope.userData.password,
     })
     .success(function(user) {
       // No error: authentication OK
@@ -19,5 +21,5 @@ app.controller('signupCtrl', function($scope, $rootScope, $http, $location) {
       $location.url('/signup');
     });
   };
-  
+
 });

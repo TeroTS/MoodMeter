@@ -3,8 +3,7 @@ app.controller('usersCtrl', function($scope, $rootScope, restFactory, dataServic
   $scope.home = "nonactive";
   $scope.account = "nonactive";
   $scope.dashboard = "active";
-  $scope.isAdmin = ($rootScope.user.role === "admin");
-  $scope.isUser = ($rootScope.user.role === "user");
+  $scope.user = $rootScope.user;
 
   $scope.header = 'Users';
 

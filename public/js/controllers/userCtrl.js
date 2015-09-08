@@ -3,8 +3,7 @@ app.controller('userCtrl', function($scope, $rootScope, restFactory, dataService
     $scope.home = "nonactive";
     $scope.account = "nonactive";
     $scope.dashboard = "active";
-    $scope.isAdmin = ($rootScope.user.role === "admin");
-    $scope.isUser = ($rootScope.user.role === "user");
+    $scope.user = $rootScope.user;
 
     //read user data from persistent object
     var user = dataService.readUserData('data');

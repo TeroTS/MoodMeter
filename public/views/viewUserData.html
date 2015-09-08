@@ -2,10 +2,14 @@
 	<div ng-include="'views/templates/navbar.html'"></div>
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
-			<h3>Users/{{ user.name }}</h3>
+			<h3>Users/{{ userData.name }}</h3>
 			<select ng-model="selectedItem" ng-change="getPeriodData(selectedItem)">
-		    <option ng-repeat="timeOption in timeOptions" value="{{timeOption}}">{{ timeOption }}</option>
+		    	<option ng-repeat="timeOption in timeOptions" value="{{timeOption}}">{{ timeOption }}</option>
 			</select>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
 			<canvas id="bar" class="chart chart-bar" data="data" labels="labels" click="onClick" ng-show="selectedItem"></canvas>
 		</div>
 	</div>

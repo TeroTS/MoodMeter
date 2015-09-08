@@ -3,12 +3,11 @@ app.controller('viewUserDataCtrl', function($scope, $rootScope, $filter, restFac
 	  $scope.home = "nonactive";
 	  $scope.account = "nonactive";
 	  $scope.dashboard = "active";
-    $scope.isAdmin = ($rootScope.user.role === "admin");
-    $scope.isUser = ($rootScope.user.role === "user");
+	  $scope.user = $rootScope.user;
 	  //$scope.isManager = ($rootScope.user.role === "manager" || $rootScope.user.role === "admin");
 
 	  //read user data from persistent object
-      $scope.user = dataService.readUserData('data');
+      $scope.userData = dataService.readUserData('data');
       //console.log();
 
 	  $scope.labels = [];
@@ -24,7 +23,7 @@ app.controller('viewUserDataCtrl', function($scope, $rootScope, $filter, restFac
 	  // get selected time period user data
 	  $scope.getPeriodData = function(period) {
 
-		  var userId = $scope.user.id;
+		  var userId = $scope.userData.id;
 
 		  if (period !== '') {
 			  restFactory.getData(userId, period)

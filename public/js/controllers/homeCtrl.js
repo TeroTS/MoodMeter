@@ -3,11 +3,12 @@ app.controller('homeCtrl', function($scope, $rootScope, restFactory, dataService
   $scope.home = "active";
   $scope.account = "nonactive";
   $scope.dashboard = "nonactive";
+  $scope.user = $rootScope.user;
 
   $scope.rate = 5;
   $scope.max = 10;
   $scope.isReadonly = false;
-  $scope.isManager = ($rootScope.user.role === "manager");
+  // $scope.isManager = ($rootScope.user.role === "manager");
 
   //remove user data cookie, just to be sure
   dataService.deleteUserData('data');

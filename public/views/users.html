@@ -23,9 +23,14 @@
                  <div class="col-md-1" ng-hide="user.role === 'admin'">
                     <a class="btn btn-primary" href="#/view-user-data" ng-click="getUser($index)">View</a>
                 </div>
-                 <div class="col-md-1">
+                <div class="col-md-1">
                     <a class="btn btn-danger" ng-click="deleteUser($index)">Delete</a>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1 col-md-offset-3" ng-show="user.role === 'admin'">
+                <a class="btn btn-primary" href="#/signup">Add admin</a>
             </div>
         </div>
 </div>

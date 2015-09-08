@@ -3,8 +3,7 @@ app.controller('myAccountCtrl', function($scope, $rootScope, $filter, restFactor
 	  $scope.home = "nonactive";
 	  $scope.account = "active";
 	  $scope.dashboard = "nonactive";
-    $scope.isAdmin = ($rootScope.user.role === "admin");
-    $scope.isUser = ($rootScope.user.role === "user");
+ 	  $scope.user = $rootScope.user;
 	  //$scope.isManager = ($rootScope.user.role === "manager" || $rootScope.user.role === "admin");
 
 	  //read user data from persistent object

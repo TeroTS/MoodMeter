@@ -3,8 +3,9 @@ app.controller('dashboardCtrl', function($scope, $rootScope, restFactory, dataSe
     $scope.home = "nonactive";
     $scope.account = "nonactive";
     $scope.dashboard = "active";
-    $scope.isAdmin = ($rootScope.user.role === "admin");
-    $scope.isUser = ($rootScope.user.role === "user");
+    $scope.user = $rootScope.user;
+    //$scope.isAdmin = ($rootScope.user.role === "admin");
+    //$scope.isUser = ($rootScope.user.role === "user");
 
 	//$scope.user = $rootScope.user.role;
     //console.log($scope.isManager);
