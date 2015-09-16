@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="roodleApp">
+<html lang="en" ng-app="moodMeter">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,7 +19,19 @@
   </head>
   <body>
 
-	<div ng-view id="view"></div>
+	<nav class="navbar navbar-inverse" role="navigation">
+	    <div class="navbar-header">
+	        <a class="navbar-brand">Comiq</a>
+	    </div>
+	    <ul class="nav navbar-nav">
+	        <li><a ui-sref="home">Home</a></li>
+	        <li><a ui-sref="myAccount">My-Account</a></li>
+	        <li><a ui-sref="dashboard">dashboard</a></li>
+	    </ul>
+	</nav>
+	<div class="container">
+	    <div ui-view></div>
+	</div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
@@ -28,7 +40,8 @@
 	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script> -->
 	<script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="libs/angular/angular.js"></script>
-	<script src="libs/angular-route/angular-route.js"></script>
+	<!-- <script src="libs/angular-route/angular-route.js"></script> -->
+	<script src="libs/angular-ui-router/release/angular-ui-router.min.js"></script>
 	<!-- <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.js"></script> -->
 	<script src="libs/bootstrap-ui/ui-bootstrap-tpls-0.12.1.js"></script>
 	<script src="libs/Chart.js/Chart.min.js"></script>

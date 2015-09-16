@@ -45,4 +45,5 @@ var restFactory = function($http) {
     return factory;
 };
 
-angular.module('roodleApp').factory('restFactory', restFactory);
+app.factory('restFactory', restFactory);
+//angular.module('roodleApp').factory('restFactory', restFactory);

@@ -1,36 +1,29 @@
 <div class="container-fluid">
-    <div ng-include="'views/templates/navbar.html'"></div>
-        <div class="row">
-           <div class="col-md-6 col-md-offset-3">
-              <h3>{{ header }}</h3>
-                 <hr/>
-                 <div class="col-xs-4">
-                    <input type="text" class="form-control" placeholder="Name">
-                 </div>
-           </div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h3>{{ header }}</h3>
+            <hr/>
+            <div class="col-xs-4">
+                <input type="text" class="form-control" placeholder="Name">
+            </div>
         </div>
-        <div ng-repeat="user in users">
-            <div class="row">
-                <div class="col-md-1 col-md-offset-3" ng-hide="user.role === 'admin'">
-                    <a class="btn btn-primary" href="#/user" ng-click="getUser($index)">Edit</a>
-                </div>
-                <div class="col-md-2" ng-hide="user.role === 'admin'">
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="dropdown" ng-repeat = "user in users">
+                <button ng-click="getJobName($index)" class="btn btn-block" type="button" data-toggle="collapse" data-target="#collapseExample-{{$index}}">
                     {{ user.name }}
-                </div>
-                <div class="col-md-2 col-md-offset-3" ng-show="user.role === 'admin'">
-                    {{ user.email }}
-                </div>
-                 <div class="col-md-1" ng-hide="user.role === 'admin'">
-                    <a class="btn btn-primary" href="#/view-user-data" ng-click="getUser($index)">View</a>
-                </div>
-                <div class="col-md-1">
-                    <a class="btn btn-danger" ng-click="deleteUser($index)">Delete</a>
+                    <span class="caret"></span>
+                </button>
+                <div id="collapseExample-{{$index}}" class="panel-collapse collapse">
+                    <ul class="list-group">
+                        <a href="#/user" ng-click="getUser($index)"><li class="list-group-item">Edit</li></a>
+                        <a href="#/view-user-data" ng-click="getUser($index)"><li class="list-group-item"><span class="glyphicon glyphicon-play"></span>View</li></a>
+                        <a href="#/users" ng-click="deleteUser($index)"><li class="list-group-item"><span class="glyphicon glyphicon-list-alt"></span>Delete</li></a>
+                    </ul>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-1 col-md-offset-3" ng-show="user.role === 'admin'">
-                <a class="btn btn-primary" href="#/signup">Add admin</a>
-            </div>
-        </div>
+    </div>
 </div>
+
