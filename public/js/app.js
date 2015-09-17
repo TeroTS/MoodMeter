@@ -67,31 +67,41 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider, $location
             templateUrl: './views/signup.html',
             controller: 'signupCtrl'
         })
-        .state('home', {
-            url: '/home',
+        .state('main', {
+            url: '/',
+            templateUrl: './views/main.html',
+            controller: function($scope, $rootScope) {
+                $scope.user = $rootScope.user;
+            },
+            resolve: {
+               loggedin: checkLoggedin
+            }
+        })
+        .state('main.home', {
+            url: '^/home',
             templateUrl: './views/home.html',
             controller: 'homeCtrl',
             resolve: {
                 loggedin: checkLoggedin
             }
         })
-        .state('myAccount', {
-            url: '/my-account',
+        .state('main.myAccount', {
+            url: '^/my-account',
             templateUrl: './views/myAccount.html',
             controller: 'myAccountCtrl',
             resolve: {
               loggedin: checkLoggedin
             }
         })
-        .state('dashboard', {
-            url: '/dashboard',
+        .state('main.dashboard', {
+            url: '^/dashboard',
             templateUrl: './views/dashboard.html',
             controller: 'dashboardCtrl',
             resolve: {
               loggedin: checkLoggedin
             }
         })
-        .state('users', {
+        .state('main.dashboard.users', {
             url: '/users',
             templateUrl: './views/users.html',
             controller: 'usersCtrl',

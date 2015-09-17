@@ -19,19 +19,7 @@
   </head>
   <body>
 
-	<nav class="navbar navbar-inverse" role="navigation">
-	    <div class="navbar-header">
-	        <a class="navbar-brand">Comiq</a>
-	    </div>
-	    <ul class="nav navbar-nav">
-	        <li><a ui-sref="home">Home</a></li>
-	        <li><a ui-sref="myAccount">My-Account</a></li>
-	        <li><a ui-sref="dashboard">dashboard</a></li>
-	    </ul>
-	</nav>
-	<div class="container">
-	    <div ui-view></div>
-	</div>
+	<div ui-view></div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
@@ -51,6 +39,7 @@
 	<script src="js/app.js"></script>
 	<script src="js/services/restFactory.js"></script>
 	<script src="js/services/dataService.js"></script>
+	<script src="js/controllers/mainCtrl.js"></script>
 	<script src="js/controllers/loginCtrl.js"></script>
 	<script src="js/controllers/homeCtrl.js"></script>
 	<script src="js/controllers/myAccountCtrl.js"></script>
