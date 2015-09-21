@@ -1,7 +1,15 @@
-app.controller('mainCtrl', function($scope, $rootScope) {
+app.controller('mainCtrl', function($scope, $rootScope, restFactory, dataService) {
 
-    $scope.user = $rootScope.user;
-    $scope.title = "test";
-    console.log("main title: " + $scope.title);
+	$scope.user = $rootScope.user;
+
+  $scope.logout = function () {
+    restFactory.logout()
+      .success(function(data, status, headers, config) {
+        console.log(data);
+      })
+        .error(function(data, status, headers, config) {
+        console.log("Error: " + status);
+      });
+  };
 
 });

@@ -62,139 +62,82 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider, $location
             templateUrl: './views/login.html',
             controller: 'loginCtrl'
         })
-        .state('signup', {
-            url: '/signup',
-            templateUrl: './views/signup.html',
-            controller: 'signupCtrl'
-        })
         .state('main', {
+            abstract: true,
             url: '/',
             templateUrl: './views/main.html',
-            controller: function($scope, $rootScope) {
-                $scope.user = $rootScope.user;
-            },
+            controller: 'mainCtrl',
             resolve: {
                loggedin: checkLoggedin
             }
         })
+        .state('main.signup', {
+            url: 'signup',
+            templateUrl: './views/signup.html',
+            controller: 'signupCtrl'
+        })
         .state('main.home', {
-            url: '^/home',
+            url: 'home',
             templateUrl: './views/home.html',
-            controller: 'homeCtrl',
-            resolve: {
-                loggedin: checkLoggedin
-            }
+            controller: 'homeCtrl'
+     //       resolve: {
+     //           loggedin: checkLoggedin
+     //       }
         })
         .state('main.myAccount', {
-            url: '^/my-account',
+            url: 'my-account',
             templateUrl: './views/myAccount.html',
-            controller: 'myAccountCtrl',
-            resolve: {
+            controller: 'myAccountCtrl'
+   /*         resolve: {
               loggedin: checkLoggedin
-            }
+            } */
         })
         .state('main.dashboard', {
-            url: '^/dashboard',
+            url: 'dashboard',
             templateUrl: './views/dashboard.html',
-            controller: 'dashboardCtrl',
-            resolve: {
+            controller: 'dashboardCtrl'
+   /*         resolve: {
               loggedin: checkLoggedin
-            }
+            } */
         })
         .state('main.dashboard.users', {
             url: '/users',
             templateUrl: './views/users.html',
-            controller: 'usersCtrl',
+            controller: 'usersCtrl'
            // resolve: {
            //     loggedin: checkLoggedin
            // }
         })
-        .state('user', {
-            url: '/user',
+        .state('main.dashboard.user', {
+            url: '/users/:id',
             templateUrl: './views/user.html',
-            controller: 'userCtrl',
+            controller: 'userCtrl'
            // resolve: {
            //     loggedin: checkLoggedin
            // }
         })
-        .state('viewUserData', {
-            url: '/view-user-data',
+        .state('main.dashboard.viewUserData', {
+            url: '/users/data/:id',
             templateUrl: './views/viewUserData.html',
             controller: 'viewUserDataCtrl'
            // resolve: {
            //     loggedin: checkLoggedin
            // }
+        })
+        .state('main.dashboard.managers', {
+            url: '/managers',
+            templateUrl: './views/users.html',
+            controller: 'managersCtrl'
+           // resolve: {
+           //     loggedin: checkLoggedin
+           // }
+        })
+        .state('main.dashboard.admins', {
+            url: '/admins',
+            templateUrl: './views/users.html',
+            controller: 'adminsCtrl'
+           // resolve: {
+           //     loggedin: checkLoggedin
+           // }
         });
-
 });
-
-/*    $routeProvider
-        // home page
-        .when('/login', {
-            templateUrl: './views/login.html',
-            controller: 'loginCtrl'
-        })
-        .when('/signup', {
-            templateUrl: './views/signup.html',
-            controller: 'signupCtrl'
-        })
-        .when('/home', {
-            templateUrl: './views/home.html',
-            controller: 'homeCtrl',
-            resolve: {
-            	loggedin: checkLoggedin
-            }
-        })
-        .when('/my-account', {
-            templateUrl: './views/myAccount.html',
-            controller: 'myAccountCtrl',
-            resolve: {
-            	loggedin: checkLoggedin
-            }
-        })
-        .when('/dashboard', {
-            templateUrl: './views/dashboard.html',
-            controller: 'dashboardCtrl',
-            resolve: {
-            	loggedin: checkLoggedin
-            }
-        })
-        .when('/users', {
-            templateUrl: './views/users.html',
-            controller: 'usersCtrl',
-           // resolve: {
-           //     loggedin: checkLoggedin
-           // }
-        })
-        .when('/user', {
-            templateUrl: './views/user.html',
-            controller: 'userCtrl',
-           // resolve: {
-           //     loggedin: checkLoggedin
-           // }
-        })
-        .when('/managers', {
-            templateUrl: './views/users.html',
-            controller: 'managersCtrl',
-           // resolve: {
-           //     loggedin: checkLoggedin
-           // }
-        })
-        .when('/admins', {
-            templateUrl: './views/users.html',
-            controller: 'adminsCtrl',
-           // resolve: {
-           //     loggedin: checkLoggedin
-           // }
-        })
-        .when('/view-user-data', {
-            templateUrl: './views/viewUserData.html',
-            controller: 'viewUserDataCtrl'
-           // resolve: {
-           //     loggedin: checkLoggedin
-           // }
-        })
-        .otherwise({
-        	redirectTo: '/login'
-        });
-}); */

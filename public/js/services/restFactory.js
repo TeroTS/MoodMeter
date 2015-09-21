@@ -42,8 +42,11 @@ var restFactory = function($http) {
         return $http.get('/counts');
     };
 
+    factory.logout = function() {
+        return $http.post('/logout');
+    };
+
     return factory;
 };
 
 app.factory('restFactory', restFactory);
-//angular.module('roodleApp').factory('restFactory', restFactory);

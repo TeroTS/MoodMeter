@@ -1,8 +1,8 @@
 app.controller('adminsCtrl', function($scope, $rootScope, restFactory, dataService) {
 
-  $scope.header = 'Admins';
+  //$scope.header = 'Admins';
   //$scope.isAdmin = true;
-  $scope.user = $rootScope.user;
+  //$scope.user = $rootScope.user;
 
   //get all users
   restFactory.getAdmins()

@@ -1,24 +1,29 @@
 app.controller('dashboardCtrl', function($scope, $rootScope, restFactory, dataService) {
 
-    $scope.home = "nonactive";
-    $scope.account = "nonactive";
-    $scope.dashboard = "active";
-    $scope.user = $rootScope.user;
-    //$scope.isAdmin = ($rootScope.user.role === "admin");
-    //$scope.isUser = ($rootScope.user.role === "user");
+	//get all users
+	restFactory.getUsers()
+	  	.success(function(data, status, headers, config) {
+	      	$scope.users = data;
+	      	console.log(data);
+	 	})
+	  	.error(function(data, status, headers, config) {
+	      	console.log("Error: " + status);
+	  	});
 
-	//$scope.user = $rootScope.user.role;
-    //console.log($scope.isManager);
-
-    //remove user data cookie, just to be sure
-    dataService.deleteUserData('data');
+	$scope.hideUsers = true;
+	$scope.hidePanel = function() {
+		if ($scope.hideUsers)
+	  		$scope.hideUsers = false;
+	  	else
+	  		$scope.hideUsers = true;
+	};
 
 	restFactory.getCounts()
-        .success(function(data, status, headers, config) {
-            $scope.numberOf = {users: data.users, managers: data.managers, admin: data.admins};
-        })
-        .error(function(data, status, headers, config) {
-            console.log("Error: " + status);
-        });
+	    .success(function(data, status, headers, config) {
+	        $scope.numberOf = {users: data.users, managers: data.managers, admin: data.admins};
+	    })
+	    .error(function(data, status, headers, config) {
+	        console.log("Error: " + status);
+	    });
 
 });

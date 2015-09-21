@@ -1,25 +1,5 @@
 app.controller('myAccountCtrl', function($scope, $rootScope, $filter, restFactory) {
 
-	  $scope.home = "nonactive";
-	  $scope.account = "active";
-	  $scope.dashboard = "nonactive";
- 	  $scope.user = $rootScope.user;
-	  //$scope.isManager = ($rootScope.user.role === "manager" || $rootScope.user.role === "admin");
-
-	  //read user data from persistent object
-      //var user = dataService.readUserData('data');
-      //$scope.adminViewingData =	 false;
-      //console.log(user);
-	  // is user or manager/admin viewing data ?
-	  // depending on who is viewing data, the user id is taken either from logged in user (user viewing his own data) or
-	  // from user data saved in session earlier (manager/admin viewing data)
-  //    if (typeof user != 'undefined') {
-  //    	  $scope.adminViewingData =	 true;
-  //        $scope.name = user.name;
-  //    }
-
-	  //$scope.adminViewingData = ($rootScope.user.role != "user"); //(typeof user != 'undefined');
-
 	  $scope.labels = [];
 	  $scope.data = [[]];
 

@@ -1,14 +1,7 @@
-app.controller('viewUserDataCtrl', function($scope, $rootScope, $filter, restFactory, dataService) {
+app.controller('viewUserDataCtrl', function($scope, $stateParams, $filter, restFactory, dataService) {
 
-	  $scope.home = "nonactive";
-	  $scope.account = "nonactive";
-	  $scope.dashboard = "active";
-	  $scope.user = $rootScope.user;
-	  //$scope.isManager = ($rootScope.user.role === "manager" || $rootScope.user.role === "admin");
-
-	  //read user data from persistent object
-      $scope.userData = dataService.readUserData('data');
-      //console.log();
+	  $scope.userFromList = dataService.readUserData('data'); //$scope.users[$stateParams.id];
+	  console.log($scope.user);
 
 	  $scope.labels = [];
 	  $scope.data = [[]];
@@ -23,18 +16,14 @@ app.controller('viewUserDataCtrl', function($scope, $rootScope, $filter, restFac
 	  // get selected time period user data
 	  $scope.getPeriodData = function(period) {
 
-		  var userId = $scope.userData.id;
-
 		  if (period !== '') {
-			  restFactory.getData(userId, period)
+			  restFactory.getData($scope.userFromList.id, period)
 		      .success(function(data, status) {
 		    	  $scope.data[0] = data.data;
 		    	  $scope.labels = [];
 		    	  for (var i = 0; i < data.dates.length; i++) {
 		    		  $scope.labels.push($filter('date')(data.dates[i], "shortDate"));
 		    	  }
-		    	  //console.log($scope.data[0]);
-		    	  //console.log($scope.labels);
 		      })
 		      .error(function() {console.log('User data GET failed !');});
 		  }

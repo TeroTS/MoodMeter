@@ -1,12 +1,6 @@
-app.controller('userCtrl', function($scope, $rootScope, restFactory, dataService) {
+app.controller('userCtrl', function($scope, $stateParams, restFactory, dataService) {
 
-    $scope.home = "nonactive";
-    $scope.account = "nonactive";
-    $scope.dashboard = "active";
-    $scope.user = $rootScope.user;
-
-    //read user data from persistent object
-    var user = dataService.readUserData('data');
+    var user = dataService.readUserData('data'); //$scope.users[$stateParams.id];
     var userRole = user.role;
 
     $scope.name = user.name;

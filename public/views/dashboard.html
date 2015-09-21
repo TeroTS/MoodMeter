@@ -1,18 +1,12 @@
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<h3 class="panel-title">Dashboard</h3>
+<div class="row">
+	<div class="col-md-1" id="userWell">
+		<a ui-sref="main.dashboard.users" ng-click="hidePanel()"><div class="well"><h3><b>{{numberOf.users}}<p>Users</p></b></h3></div></a>
 	</div>
-	<div class="panel-body">
-
-		<div id="userWell">
-			<a ui-sref="main.dashboard.users"><div class="well"><h3><b>{{numberOf.users}}<p>Users</p></b></h3></div></a>
-		</div>
-		<div class="col-md-2" id="managerWell" ng-show="user.role === 'admin'">
-			<a href="#/managers"><div class="well"><h3><b>{{numberOf.managers}}<p>Managers</p></b></h3></div></a>
-		</div>
-		<div class="col-md-2" id="adminWell" ng-show="user.role === 'admin'">
-			<a href="#/admins"><div class="well"><h3><b>{{numberOf.admin}}<p>Admins</p></b></h3></div></a>
-		</div>
-		<div ui-view></div>
+	<div class="col-md-1" id="managerWell" ng-show="user.role === 'admin'">
+		<a ui-sref="main.dashboard.managers"><div class="well"><h3><b>{{numberOf.managers}}<p>Managers</p></b></h3></div></a>
+	</div>
+	<div class="col-md-1" id="adminWell" ng-show="user.role === 'admin'">
+		<a ui-sref="main.dashboard.admins"><div class="well"><h3><b>{{numberOf.admin}}<p>Admins</p></b></h3></div></a>
 	</div>
 </div>
+<div ui-view></div>

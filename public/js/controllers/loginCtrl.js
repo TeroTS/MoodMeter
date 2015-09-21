@@ -13,8 +13,9 @@ app.controller('loginCtrl', function($scope, $rootScope, $http, $location) {
       console.log('Authentication successful!');
       $location.url('/dashboard');
     })
-    .error(function() {
+    .error(function(data) {
       // Error: authentication failed
+      console.log(data);
       console.log('Authentication failed.');
       $location.url('/login');
     });

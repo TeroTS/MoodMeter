@@ -1,21 +1,4 @@
-app.controller('usersCtrl', function($scope, $rootScope, restFactory, dataService) {
-
-  $scope.home = "nonactive";
-  $scope.account = "nonactive";
-  $scope.dashboard = "active";
-  $scope.user = $rootScope.user;
-
-  $scope.header = 'Users';
-
-  //get all users
-  restFactory.getUsers()
-      .success(function(data, status, headers, config) {
-          $scope.users = data;
-          console.log(data);
-      })
-      .error(function(data, status, headers, config) {
-          console.log("Error: " + status);
-      });
+app.controller('usersCtrl', function($scope, restFactory, dataService) {
 
   //write data of the selected user to a persistence object
   //this object is used in other pages related to this user

@@ -1,7 +1,7 @@
 app.controller('managersCtrl', function($scope, $rootScope, restFactory, dataService) {
 
-  $scope.header = 'Managers';
-  $scope.user = $rootScope.user;
+  //$scope.header = 'Managers';
+  //$scope.user = $rootScope.user;
 
   //get all users
   restFactory.getManagers()

@@ -26,7 +26,6 @@ app.controller('homeCtrl', function($scope, $rootScope, restFactory, dataService
           });
   };
 
-
 /*  $scope.ratingStates = [
     {stateOn: 'glyphicon-ok-sign', stateOff: 'glyphicon-ok-circle'},
     {stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'},

@@ -1,16 +1,9 @@
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<h3 class="panel-title">{{ $root.user.name }}</h3>
-	</div>
-	<div class="panel-body">
-		<div class="col-xs-6">
-		<div class="form-group">
-		  	<label>Select period:</label>
-		  	<select class="form-control" ng-model="selectedItem" ng-change="getPeriodData(selectedItem)">
-		    	<option ng-repeat="timeOption in timeOptions">{{ timeOption }}</option>
-		  	</select>
-		</div>
-		</div>
-		<canvas id="bar" class="chart chart-bar" data="data" labels="labels" click="onClick" ng-show="selectedItem"></canvas>
+<div class="col-xs-6">
+	<div class="form-group">
+	  	<label>Select period:</label>
+	  	<select class="form-control" ng-model="selectedItem" ng-change="getPeriodData(selectedItem)">
+	    	<option ng-repeat="timeOption in timeOptions">{{ timeOption }}</option>
+	  	</select>
 	</div>
 </div>
+<canvas id="bar" class="chart chart-bar" data="data" labels="labels" click="onClick" ng-show="selectedItem"></canvas>
