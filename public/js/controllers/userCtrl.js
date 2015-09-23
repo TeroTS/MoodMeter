@@ -1,4 +1,4 @@
-app.controller('userCtrl', function($scope, $stateParams, restFactory, dataService) {
+app.controller('userCtrl', function($scope, $stateParams, $state, $modal, restFactory, dataService) {
 
     var user = dataService.readUserData('data'); //$scope.users[$stateParams.id];
     var userRole = user.role;
@@ -29,8 +29,8 @@ app.controller('userCtrl', function($scope, $stateParams, restFactory, dataServi
     //update user data
     $scope.updateUser = function() {
       if ($scope.isUserManager === true) {
-        userRole = 'manager';
-        $scope.myManager.name = "";
+          userRole = 'manager';
+          $scope.myManager.name = "";
       }
       restFactory.updateUser(user.id, {role: userRole, manager: $scope.myManager.name})
       .success(function(data, status, headers, config) {
@@ -39,6 +39,31 @@ app.controller('userCtrl', function($scope, $stateParams, restFactory, dataServi
       .error(function(data, status, headers, config) {
           console.log("Error: " + status);
       });
+    };
+
+    //delete user data
+    var deleteUser = function() {
+        //var userData = $scope.users[idx];
+        restFactory.deleteUser(user.id)
+            .success(function(data, status, headers, config) {
+                console.log(data);
+            })
+            .error(function(data, status, headers, config) {
+                console.log("Error: " + status);
+            });
+    };
+
+    //delete button modal control
+    $scope.open = function (size) {
+        var modalInstance = $modal.open({
+            templateUrl: './views/templates/modal.html',
+            controller: 'modalWindowCtrl',
+            size: size,
+        });
+        modalInstance.result.then(function () {
+            deleteUser();
+            $state.go('main.dashboard.users');
+        }, function () {});
     };
 
 });

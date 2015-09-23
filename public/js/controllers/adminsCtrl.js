@@ -4,7 +4,7 @@ app.controller('adminsCtrl', function($scope, $rootScope, restFactory, dataServi
   //$scope.isAdmin = true;
   //$scope.user = $rootScope.user;
 
-  //get all users
+  //get all admins
   restFactory.getAdmins()
       .success(function(data, status, headers, config) {
           $scope.users = data;
@@ -21,7 +21,7 @@ app.controller('adminsCtrl', function($scope, $rootScope, restFactory, dataServi
       dataService.writeUserData('data', userData);
   };
 
-  $scope.deleteUser = function(idx) {
+  $scope.deleteAdmin = function(idx) {
       var userData = $scope.users[idx];
       restFactory.deleteAdmin(userData.email)
           .success(function(data, status, headers, config) {

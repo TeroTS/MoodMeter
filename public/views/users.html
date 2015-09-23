@@ -19,7 +19,7 @@
             <ul class="list-group">
                 <a ng-href="#/dashboard/users/{{$index}}" ng-click="getUser($index)" ng-hide="user.role === 'admin'"><li class="list-group-item">Edit</li></a>
                 <a ng-href="#/dashboard/users/data/{{$index}}" ng-click="getUser($index)" ng-hide="user.role === 'admin'"><li class="list-group-item"><span class="glyphicon glyphicon-play"></span>View</li></a>
-                <a ng-href="#/users" ng-click="deleteUser($index)"><li class="list-group-item"><span class="glyphicon glyphicon-list-alt"></span>Delete</li></a>
+                <a ng-href="#/users" ng-click="deleteAdmin($index)"><li class="list-group-item" ng-show="isAdmin"><span class="glyphicon glyphicon-list-alt"></span>Delete</li></a>
             </ul>
         </div>
     </div>

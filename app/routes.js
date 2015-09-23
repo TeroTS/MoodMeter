@@ -203,7 +203,7 @@ module.exports = function(app, passport) {
     // dashboard/users
     // dashboard/managers
     // delete user, only admin
-    app.delete('/users/:id', requireRole(['admin']), function(req, res) {
+    app.delete('/users/:id', requireRole(['admin', 'manager']), function(req, res) {
     	User.remove({'id': req.params.id}, function(err, user) {
             if (err)
                 res.send(err);
@@ -213,7 +213,7 @@ module.exports = function(app, passport) {
 
     // dashboard/users
     // update user, only admin
-    app.put('/users/:id', requireRole(['admin']), function(req, res) {
+    app.put('/users/:id', requireRole(['admin', 'manager']), function(req, res) {
     	User.findOne({'id': req.params.id}, function(err, user) {
     		if (err) res.send(err);
             user.role = req.body.role;

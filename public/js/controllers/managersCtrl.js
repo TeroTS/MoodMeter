@@ -1,9 +1,6 @@
 app.controller('managersCtrl', function($scope, $rootScope, restFactory, dataService) {
 
-  //$scope.header = 'Managers';
-  //$scope.user = $rootScope.user;
-
-  //get all users
+  //get all managers
   restFactory.getManagers()
       .success(function(data, status, headers, config) {
           $scope.users = data;
@@ -18,17 +15,6 @@ app.controller('managersCtrl', function($scope, $rootScope, restFactory, dataSer
   $scope.getUser = function(idx) {
       var userData = $scope.users[idx];
       dataService.writeUserData('data', userData);
-  };
-
-  $scope.deleteUser = function(idx) {
-      var userData = $scope.users[idx];
-      restFactory.deleteUser(userData.id)
-          .success(function(data, status, headers, config) {
-              console.log(data);
-          })
-          .error(function(data, status, headers, config) {
-              console.log("Error: " + status);
-          });
   };
 
 });

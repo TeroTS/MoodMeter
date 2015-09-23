@@ -1,6 +1,6 @@
-app.controller('signupCtrl', function($scope, $rootScope, $http, $location) {
+app.controller('signupCtrl', function($scope, $http, $location) {
 
-  $scope.user = $rootScope.user;
+  //$scope.user = $rootScope.user;
   // This object will be filled by the form
   $scope.userData = {};
 

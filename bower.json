@@ -1,4 +1,4 @@
- {
+{
   "name": "moodmeter",
   "version": "1.0.0",
   "dependencies": {
@@ -8,7 +8,8 @@
     "angular": "latest",
     "angular-chart.js": "~0.5.3",
     "angular-ui-router": "~0.2.15",
-    "angular-resource": "~1.4.6"
+    "angular-resource": "~1.4.6",
+    "angular-bootstrap": "~0.13.4"
   },
   "resolutions": {
     "angular": "1.4.6"

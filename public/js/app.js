@@ -96,48 +96,30 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider, $location
             url: 'dashboard',
             templateUrl: './views/dashboard.html',
             controller: 'dashboardCtrl'
-   /*         resolve: {
-              loggedin: checkLoggedin
-            } */
         })
         .state('main.dashboard.users', {
             url: '/users',
             templateUrl: './views/users.html',
             controller: 'usersCtrl'
-           // resolve: {
-           //     loggedin: checkLoggedin
-           // }
         })
         .state('main.dashboard.user', {
             url: '/users/:id',
             templateUrl: './views/user.html',
             controller: 'userCtrl'
-           // resolve: {
-           //     loggedin: checkLoggedin
-           // }
         })
         .state('main.dashboard.viewUserData', {
             url: '/users/data/:id',
             templateUrl: './views/viewUserData.html',
             controller: 'viewUserDataCtrl'
-           // resolve: {
-           //     loggedin: checkLoggedin
-           // }
         })
         .state('main.dashboard.managers', {
-            url: '/managers',
+            url: '/users',
             templateUrl: './views/users.html',
             controller: 'managersCtrl'
-           // resolve: {
-           //     loggedin: checkLoggedin
-           // }
         })
         .state('main.dashboard.admins', {
             url: '/admins',
             templateUrl: './views/users.html',
             controller: 'adminsCtrl'
-           // resolve: {
-           //     loggedin: checkLoggedin
-           // }
         });
 });
