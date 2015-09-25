@@ -12,6 +12,7 @@ app.controller('dashboardCtrl', function($scope, $rootScope, restFactory, dataSe
 	restFactory.getCounts()
 	    .success(function(data, status, headers, config) {
 	        $scope.numberOf = {users: data.users, managers: data.managers, admin: data.admins};
+	        console.log("dashboard");
 	    })
 	    .error(function(data, status, headers, config) {
 	        console.log("Error: " + status);

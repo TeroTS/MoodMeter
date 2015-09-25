@@ -35,6 +35,7 @@ app.controller('userCtrl', function($scope, $stateParams, $state, $modal, restFa
       restFactory.updateUser(user.id, {role: userRole, manager: $scope.myManager.name})
       .success(function(data, status, headers, config) {
           $scope.user = data;
+          $scope.alerts.push({type: 'success', msg: 'User updated !'});
       })
       .error(function(data, status, headers, config) {
           console.log("Error: " + status);
@@ -62,8 +63,18 @@ app.controller('userCtrl', function($scope, $stateParams, $state, $modal, restFa
         });
         modalInstance.result.then(function () {
             deleteUser();
-            $state.go('main.dashboard.users');
+            $state.go('main.dashboard', {}, {reload: true});
         }, function () {});
     };
+
+
+  $scope.alerts = [];
+  console.log($scope.alerts);
+
+  $scope.closeAlert = function(index) {
+    $scope.alerts.splice(index, 1);
+  };
+
+  //$scope.htmlTooltip = $sce.trustAsHtml('I\'ve been made <b>bold</b>!');
 
 });

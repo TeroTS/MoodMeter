@@ -18,5 +18,6 @@
         </div>
     </div>
 </div>
-<a class="btn btn-primary" href="#/dashboard/users" ng-click="updateUser()">Update</a>
-<a class="btn btn-primary" ng-click="open('sm')">Delete</a>
+<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" dismiss-on-timeout="2000">{{alert.msg}}</alert>
+<div class="btn btn-primary" ng-click="updateUser()">Update</div>
+<div class="btn btn-primary" ng-click="open('sm')">Delete</div>
