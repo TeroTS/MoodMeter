@@ -1,57 +1,38 @@
-app.controller('userCtrl', function($scope, $stateParams, $state, $modal, restFactory, dataService) {
+app.controller('userCtrl', function($scope, $stateParams, $state, $modal, restFactory, dataService, getManagers) {
 
-    var user = dataService.readUserData('data'); //$scope.users[$stateParams.id];
-    var userRole = user.role;
-
-    $scope.name = user.name;
-    $scope.myManagerName = user.managerName;
+    $scope.user = dataService.readUserData('data');
     $scope.myManager = {};
 
-    if (userRole === 'manager')
-      $scope.isUserManager = true;
-    else
-      $scope.isUserManager = false;
+    // get all managers
+    $scope.managers = getManagers.data;
+    //select correct manager from return data and set it to model
+    for (var i = 0; i < getManagers.data.length; i++) {
+        if (getManagers.data[i].name === $scope.user.managerName)
+            $scope.myManager = getManagers.data[i];
+    }
 
-    //get all managers for drop down selection
-    restFactory.getManagers()
-      .success(function(data, status, headers, config) {
-          $scope.managers = data;
-          //select correct manager object from return data and set it to model
-          for (var i = 0; i < data.length; i++) {
-              if (data[i].name === $scope.myManagerName)
-                  $scope.myManager = data[i];
-          }
-      })
-      .error(function(data, status, headers, config) {
-          console.log("Error: " + status);
-      });
+    // this saves the state of the checkbox
+    if ($scope.user.role === 'manager')
+        $scope.isUserManager = true;
+    else
+        $scope.isUserManager = false;
 
     //update user data
     $scope.updateUser = function() {
-      if ($scope.isUserManager === true) {
-          userRole = 'manager';
-          $scope.myManager.name = "";
-      }
-      restFactory.updateUser(user.id, {role: userRole, manager: $scope.myManager.name})
-      .success(function(data, status, headers, config) {
-          $scope.user = data;
-          $scope.alerts.push({type: 'success', msg: 'User updated !'});
-      })
-      .error(function(data, status, headers, config) {
-          console.log("Error: " + status);
-      });
+        if ($scope.isUserManager === true) {
+            $scope.user.role = 'manager';
+            $scope.user.managerName = '';
+        }
+        restFactory.updateUser($scope.user.id, {role: $scope.user.role, manager: $scope.myManager.name})
+            .then(function(response) {
+                $scope.user = response.data;
+                $scope.alerts.push({type: 'success', msg: 'User updated !'});
+            });
     };
 
     //delete user data
     var deleteUser = function() {
-        //var userData = $scope.users[idx];
-        restFactory.deleteUser(user.id)
-            .success(function(data, status, headers, config) {
-                console.log(data);
-            })
-            .error(function(data, status, headers, config) {
-                console.log("Error: " + status);
-            });
+        restFactory.deleteUser($scope.user.id).then(function(response) {});
     };
 
     //delete button modal control
@@ -67,14 +48,11 @@ app.controller('userCtrl', function($scope, $stateParams, $state, $modal, restFa
         }, function () {});
     };
 
-
   $scope.alerts = [];
-  console.log($scope.alerts);
+  //console.log($scope.alerts);
 
   $scope.closeAlert = function(index) {
     $scope.alerts.splice(index, 1);
   };
-
-  //$scope.htmlTooltip = $sce.trustAsHtml('I\'ve been made <b>bold</b>!');
 
 });

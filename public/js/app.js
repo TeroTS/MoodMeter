@@ -100,12 +100,22 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider, $location
         .state('main.dashboard.users', {
             url: '/users',
             templateUrl: './views/users.html',
-            controller: 'usersCtrl'
+            controller: 'usersCtrl',
+            resolve: {
+                getUsers:  function(restFactory) {
+                    return restFactory.getUsers();
+                }
+            }
         })
         .state('main.dashboard.user', {
             url: '/users/:id',
             templateUrl: './views/user.html',
-            controller: 'userCtrl'
+            controller: 'userCtrl',
+            resolve: {
+                getManagers:  function(restFactory) {
+                    return restFactory.getManagers();
+                }
+            }
         })
         .state('main.dashboard.viewUserData', {
             url: '/users/data/:id',
