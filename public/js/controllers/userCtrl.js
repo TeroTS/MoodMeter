@@ -2,6 +2,7 @@ app.controller('userCtrl', function($scope, $stateParams, $state, $modal, restFa
 
     $scope.user = dataService.readUserData('data');
     $scope.myManager = {};
+    $scope.alerts = [];
 
     // get all managers
     $scope.managers = getManagers.data;
@@ -48,11 +49,8 @@ app.controller('userCtrl', function($scope, $stateParams, $state, $modal, restFa
         }, function () {});
     };
 
-  $scope.alerts = [];
-  //console.log($scope.alerts);
-
-  $scope.closeAlert = function(index) {
-    $scope.alerts.splice(index, 1);
-  };
+    $scope.closeAlert = function(index) {
+        $scope.alerts.splice(index, 1);
+    };
 
 });

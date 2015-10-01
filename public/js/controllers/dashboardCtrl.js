@@ -1,21 +1,7 @@
-app.controller('dashboardCtrl', function($scope, $rootScope, restFactory, dataService) {
+app.controller('dashboardCtrl', function($scope, getCounts) {
 
-	$scope.hideUsers = true;  //not used currently !!!!!
-
-	$scope.hidePanel = function() {
-		if ($scope.hideUsers)
-	  		$scope.hideUsers = false;
-	  	else
-	  		$scope.hideUsers = true;
-	};
-
-	restFactory.getCounts()
-	    .success(function(data, status, headers, config) {
-	        $scope.numberOf = {users: data.users, managers: data.managers, admin: data.admins};
-	        console.log("dashboard");
-	    })
-	    .error(function(data, status, headers, config) {
-	        console.log("Error: " + status);
-	    });
+	// get counts of users, managers and admins
+	var data = getCounts.data;
+	$scope.numberOf = {users: data.users, managers: data.managers, admin: data.admins};
 
 });

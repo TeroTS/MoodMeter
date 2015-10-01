@@ -79,10 +79,13 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider, $location
         .state('main.home', {
             url: 'home',
             templateUrl: './views/home.html',
-            controller: 'homeCtrl'
-     //       resolve: {
-     //           loggedin: checkLoggedin
-     //       }
+            controller: 'homeCtrl',
+            resolve: {
+                // delete user data cookie
+                removeUserData: function(dataService) {
+                    dataService.deleteUserData('data');
+                }
+            }
         })
         .state('main.myAccount', {
             url: 'my-account',
@@ -95,14 +98,19 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider, $location
         .state('main.dashboard', {
             url: 'dashboard',
             templateUrl: './views/dashboard.html',
-            controller: 'dashboardCtrl'
+            controller: 'dashboardCtrl',
+            resolve: {
+                getCounts: function(restFactory) {
+                    return restFactory.getCounts();
+                }
+            }
         })
         .state('main.dashboard.users', {
             url: '/users',
             templateUrl: './views/users.html',
             controller: 'usersCtrl',
             resolve: {
-                getUsers:  function(restFactory) {
+                getUsers: function(restFactory) {
                     return restFactory.getUsers();
                 }
             }
@@ -112,7 +120,7 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider, $location
             templateUrl: './views/user.html',
             controller: 'userCtrl',
             resolve: {
-                getManagers:  function(restFactory) {
+                getManagers: function(restFactory) {
                     return restFactory.getManagers();
                 }
             }
@@ -123,13 +131,23 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider, $location
             controller: 'viewUserDataCtrl'
         })
         .state('main.dashboard.managers', {
-            url: '/users',
+            url: '/managers',
             templateUrl: './views/users.html',
-            controller: 'managersCtrl'
+            controller: 'managersCtrl',
+            resolve: {
+                getManagers: function(restFactory) {
+                    return restFactory.getManagers();
+                }
+            }
         })
         .state('main.dashboard.admins', {
             url: '/admins',
             templateUrl: './views/users.html',
-            controller: 'adminsCtrl'
+            controller: 'adminsCtrl',
+            resolve: {
+                getAdmins: function(restFactory) {
+                    return restFactory.getAdmins();
+                }
+            }
         });
 });

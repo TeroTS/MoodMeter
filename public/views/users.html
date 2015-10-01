@@ -15,20 +15,13 @@
             <div ng-show="user.role === 'admin'"> {{ user.email }} <span class="caret"></span> </div>
             <div ng-hide="user.role === 'admin'"> {{ user.name }} <span class="caret"></span></div>
         </button>
-        <!-- <span><a href="#" tooltip-html="htmlTooltip">view</a></span> -->
         <div id="collapseExample-{{$index}}" class="panel-collapse collapse">
             <ul class="list-group">
                 <a ng-href="#/dashboard/users/{{$index}}" ng-click="getUser($index)" ng-hide="user.role === 'admin'"><li class="list-group-item">Edit</li></a>
                 <a ng-href="#/dashboard/users/data/{{$index}}" ng-click="getUser($index)" ng-hide="user.role === 'admin'"><li class="list-group-item"><span class="glyphicon glyphicon-play"></span>View</li></a>
-                <a ng-href="#/users" ng-click="deleteAdmin($index)"><li class="list-group-item" ng-show="isAdmin"><span class="glyphicon glyphicon-list-alt"></span>Delete</li></a>
+                <a ng-href="#/users" ng-click="deleteAdmin($index)"><li class="list-group-item" ng-show="user.role === 'admin'"><span class="glyphicon glyphicon-list-alt"></span>Delete</li></a>
             </ul>
         </div>
     </div>
     </div>
 </div>
-
- <!--   <p>
-        I can even contain HTML. <a href="#" tooltip-placement="right" tooltip-html="htmlTooltip">Check me out!</a>
-    </p>
-    <canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels"></canvas> -->
-<!-- <div ui-view></div>  -->
