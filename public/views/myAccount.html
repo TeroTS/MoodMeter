@@ -1,5 +1,9 @@
+<div ng-show="isAdmin">
+	<hr>
+	<h3>{{ user.name }}</h3>
+</div>
 <div class="col-xs-6">
-	<div><h4>View your past data:</h4></div>
+	<div ng-hide="isAdmin"><h4>View your past data:</h4></div>
 	<div class="form-group">
 	  	<label>Select period:</label>
 	  	<select class="form-control" ng-model="selectedItem" ng-change="getPeriodData(selectedItem)">

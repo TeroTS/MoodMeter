@@ -91,9 +91,6 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider, $location
             url: 'my-account',
             templateUrl: './views/myAccount.html',
             controller: 'myAccountCtrl'
-   /*         resolve: {
-              loggedin: checkLoggedin
-            } */
         })
         .state('main.dashboard', {
             url: 'dashboard',
@@ -127,8 +124,8 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider, $location
         })
         .state('main.dashboard.viewUserData', {
             url: '/users/data/:id',
-            templateUrl: './views/viewUserData.html',
-            controller: 'viewUserDataCtrl'
+            templateUrl: './views/myAccount.html',
+            controller: 'myAccountCtrl'
         })
         .state('main.dashboard.managers', {
             url: '/managers',
