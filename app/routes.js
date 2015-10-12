@@ -1,7 +1,6 @@
 
 var UserData = require('./models/user').userData;
 var User = require('./models/user').user;
-//var Admin = require('./models/user').admin;
 
 module.exports = function(app, passport) {
 
@@ -19,8 +18,6 @@ module.exports = function(app, passport) {
 	//with certain role
     function requireRole(roleArray) {
         return function(req, res, next) {
-            //var session_user = req.session.passport.user;
-            //var req_user = req.user;
             var authOk = false;
             for(var i = 0; i < roleArray.length; i++) {
                 if(req.isAuthenticated() && req.user.role === roleArray[i])
@@ -138,10 +135,6 @@ module.exports = function(app, passport) {
     app.get('/users/:id/data', auth, function(req, res) {
     	var period = req.param('period');
     	var timePeriod = periodInMilliseconds(period);
- /*       UserData.find({'user': req.params.id}, function(err, data) {
-            if (err) res.send(err);
-            res.json(data);
-        });*/
     	//use lean() to return javascript objects instead of BSON
     	UserData.find({'user': req.params.id}).lean().exec(function(err, data) {
             var dataArray = [];

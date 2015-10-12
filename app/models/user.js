@@ -1,4 +1,3 @@
-// load the things we need
 var mongoose = require('mongoose');
 var bcrypt   = require('bcrypt-nodejs');
 
@@ -24,15 +23,6 @@ var userDataSchema = mongoose.Schema({
 
 });
 
-// schema for admin model
-/*var adminSchema = mongoose.Schema({
-
-    email        : String,
-    password     : String,
-    role         : {type: String, default: 'admin'}
-
-}); */
-
 // generating a hash
 userSchema.methods.generateHash = function(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
@@ -45,7 +35,6 @@ userSchema.methods.validPassword = function(password) {
 
 // create the model for users, admins and data and expose it to our app
 module.exports = {
-	user: 		mongoose.model('User', userSchema),
-	userData:	mongoose.model('UserData', userDataSchema),
-	//admin:		mongoose.model('Admin', adminSchema)
+	user:      mongoose.model('User', userSchema),
+	userData:  mongoose.model('UserData', userDataSchema)
 };
