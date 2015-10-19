@@ -2,6 +2,8 @@ app.controller('myAccountCtrl', function($scope, $state, $rootScope, $filter, re
 
 	$scope.labels = [];
 	$scope.data = [[]];
+	$scope.timeOptions = ['1 week', '1 month', '3 months'];
+	$scope.selectedItem = '1 week';
 
 	// if admin/manager viewing user data, take user from cookiestore
 	if ($state.$current.name === 'main.dashboard.viewUserData') {
@@ -16,12 +18,8 @@ app.controller('myAccountCtrl', function($scope, $state, $rootScope, $filter, re
 	    console.log(points, evt);
 	};
 
-	$scope.timeOptions = ['1 week', '1 month', '3 months'];
-	$scope.selectedItem = '1 week';
-
 	// get selected time period user data
 	$scope.getPeriodData = function(period) {
-		//var userId = $rootScope.user.id;
 		if (period !== '') {
 			restFactory.getData($scope.user.id, period)
 			  	.then(function(response) {
