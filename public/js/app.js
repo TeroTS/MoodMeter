@@ -34,25 +34,6 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider, $location
       return deferred.promise;
     };
     //================================================
-
-    //================================================
-    // Add an interceptor for AJAX errors
-    //================================================
-    $httpProvider.interceptors.push(function($q, $location) {
-      return {
-        response: function(response) {
-          // do something on success
-          //console.log(response);
-          return response;
-        },
-        responseError: function(response) {
-          if (response.status === 401)
-              $location.url('/login');
-          return $q.reject(response);
-        }
-      };
-    });
-
     $urlRouterProvider.otherwise('/login');
 
     $stateProvider

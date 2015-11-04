@@ -1,12 +1,21 @@
-//modal window controller
-app.controller('modalWindowCtrl', function ($scope, $modalInstance) {
+(function() {
 
-	$scope.ok = function () {
-		$modalInstance.close();
-	};
+    'use strict';
 
-	$scope.cancel = function () {
-		$modalInstance.dismiss('cancel');
-	};
+    angular
+        .module('moodMeter')
+        .controller('modalWindowCtrl', modalWindowCtrl);
 
-});
+    modalWindowCtrl.$inject = ['$scope', '$modalInstance'];
+
+    function modalWindowCtrl($scope, $modalInstance) {
+		$scope.ok = function () {
+			$modalInstance.close();
+		};
+
+		$scope.cancel = function () {
+			$modalInstance.dismiss('cancel');
+		};
+    }
+
+})();

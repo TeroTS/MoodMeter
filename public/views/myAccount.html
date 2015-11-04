@@ -1,14 +1,14 @@
-<div ng-show="isAdmin">
+<div ng-show="vm.isAdmin">
 	<hr>
-	<h3>{{ user.name }}</h3>
+	<h3>{{ vm.user.name }}</h3>
 </div>
 <div class="col-xs-6">
-	<div ng-hide="isAdmin"><h4>View your past data:</h4></div>
+	<div ng-hide="vm.isAdmin"><h4>View your past data:</h4></div>
 	<div class="form-group">
 	  	<label>Select period:</label>
-	  	<select class="form-control" ng-model="selectedItem" ng-change="getPeriodData(selectedItem)">
-	    	<option ng-repeat="timeOption in timeOptions">{{ timeOption }}</option>
+	  	<select class="form-control" ng-model="vm.selectedItem" ng-change="vm.getPeriodData(vm.selectedItem)">
+	    	<option ng-repeat="timeOption in vm.timeOptions">{{ timeOption }}</option>
 	  	</select>
 	</div>
 </div>
-<canvas id="bar" class="chart chart-bar" data="data" labels="labels" click="onClick" ng-show="selectedItem"></canvas>
+<canvas id="bar" class="chart chart-bar" data="vm.data" labels="vm.labels" click="vm.onClick" ng-show="vm.selectedItem"></canvas>

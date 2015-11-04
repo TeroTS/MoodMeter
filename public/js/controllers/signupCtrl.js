@@ -1,24 +1,29 @@
-app.controller('signupCtrl', function($scope, $http, $location) {
+(function() {
 
-    // This object will be filled by the form
-    $scope.userData = {};
+    'use strict';
 
-    // Register the login() function
-    $scope.signup = function() {
-        $http.post('/signup', {
-            email: $scope.userData.email,
-            password: $scope.userData.password,
-        })
-        .success(function(user) {
-            // No error: authentication OK
-            console.log('Admin created !');
-            $location.url('/login');
-        })
-        .error(function() {
-            // Error: authentication failed
-            console.log('Signup failed.');
-            $location.url('/signup');
-        });
-    };
+    angular
+        .module('moodMeter')
+        .controller('signupCtrl', signupCtrl);
 
-});
+    signupCtrl.$inject = ['$scope', '$http', '$location'];
+
+    function signupCtrl($scope, $http, $location) {
+        // This object will be filled by the form
+        $scope.userData = {};
+
+        $scope.signup = function() {
+            $http.post('/signup', {
+                email: $scope.userData.email,
+                password: $scope.userData.password,
+            })
+            .success(function(user) {
+                $location.url('/login');
+            })
+            .error(function() {
+                $location.url('/signup');
+            });
+        };
+    }
+
+})();

@@ -1,52 +1,62 @@
-var restFactory = function($http) {
+(function() {
 
-    var factory = {};
+    'use strict';
 
-    factory.postData = function(id, data) {
-        return $http.post('/users/' + id + '/data', data);
-    };
+    angular
+        .module('moodMeter')
+        .factory('restFactory', restFactory);
 
-    factory.getData = function(id, timePeriod) {
-        return $http.get('/users/' + id + '/data', {params: {period: timePeriod}});
-    };
+    restFactory.$inject = ['$http'];
 
-    factory.getUsers = function() {
-        return $http.get('/users');
-    };
+    function restFactory($http) {
 
-    factory.getUser = function(id) {
-        return $http.get('/users/' + id);
-    };
+        var factory = {};
 
-    factory.deleteUser = function(id) {
-        return $http.delete('/users/' + id);
-    };
+        factory.postData = function(id, data) {
+            return $http.post('/users/' + id + '/data', data);
+        };
 
-    factory.updateUser = function(id, data) {
-        return $http.put('/users/' + id, data);
-    };
+        factory.getData = function(id, timePeriod) {
+            return $http.get('/users/' + id + '/data', {params: {period: timePeriod}});
+        };
 
-    factory.getManagers = function() {
-        return $http.get('/users?type=manager');
-    };
+        factory.getUsers = function() {
+            return $http.get('/users');
+        };
 
-    factory.getAdmins = function() {
-        return $http.get('/admins');
-    };
+        factory.getUser = function(id) {
+            return $http.get('/users/' + id);
+        };
 
-    factory.deleteAdmin = function(email) {
-        return $http.delete('/admins/' + email);
-    };
+        factory.deleteUser = function(id) {
+            return $http.delete('/users/' + id);
+        };
 
-    factory.getCounts = function() {
-        return $http.get('/counts');
-    };
+        factory.updateUser = function(id, data) {
+            return $http.put('/users/' + id, data);
+        };
 
-    factory.logout = function() {
-        return $http.post('/logout');
-    };
+        factory.getManagers = function() {
+            return $http.get('/users?type=manager');
+        };
 
-    return factory;
-};
+        factory.getAdmins = function() {
+            return $http.get('/admins');
+        };
 
-app.factory('restFactory', restFactory);
+        factory.deleteAdmin = function(email) {
+            return $http.delete('/admins/' + email);
+        };
+
+        factory.getCounts = function() {
+            return $http.get('/counts');
+        };
+
+        factory.logout = function() {
+            return $http.post('/logout');
+        };
+
+        return factory;
+    }
+
+})();
