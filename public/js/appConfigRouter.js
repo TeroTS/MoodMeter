@@ -47,7 +47,8 @@
 	        .state('login', {
 	            url: '/login',
 	            templateUrl: './views/login.html',
-	            controller: 'loginCtrl'
+	            controller: 'loginCtrl',
+	            controllerAs: 'vm'
 	        })
 	        //================================================
 	        .state('main', {
@@ -55,6 +56,7 @@
 	            url: '/',
 	            templateUrl: './views/main.html',
 	            controller: 'mainCtrl',
+	            controllerAs: 'vm',
 	            resolve: {
 	               loggedin: checkLoggedin
 	            }
@@ -63,13 +65,15 @@
 	        .state('main.signup', {
 	            url: 'signup',
 	            templateUrl: './views/signup.html',
-	            controller: 'signupCtrl'
+	            controller: 'signupCtrl',
+	            controllerAs: 'vm'
 	        })
 	        //================================================
 	        .state('main.home', {
 	            url: 'home',
 	            templateUrl: './views/home.html',
 	            controller: 'homeCtrl',
+	            controllerAs: 'vm',
 	            resolve: {
 	                // delete user data cookie
 	                removeUserData: function(dataService) {
@@ -94,6 +98,7 @@
 	            url: 'dashboard',
 	            templateUrl: './views/dashboard.html',
 	            controller: 'dashboardCtrl',
+	            controllerAs: 'vm',
 	            resolve: {
 	                getCounts: function(restFactory) {
 	                    return restFactory.getCounts();
@@ -117,6 +122,7 @@
 	            url: '/users/:id',
 	            templateUrl: './views/user.html',
 	            controller: 'userCtrl',
+	            controllerAs: 'vm',
 	            resolve: {
 	                getManagers: function(restFactory) {
 	                    return restFactory.getManagers();
@@ -140,6 +146,7 @@
 	            url: '/managers',
 	            templateUrl: './views/users.html',
 	            controller: 'managersCtrl',
+	            controllerAs: 'vm',
 	            resolve: {
 	                getManagers: function(restFactory) {
 	                    return restFactory.getManagers();
@@ -151,6 +158,7 @@
 	            url: '/admins',
 	            templateUrl: './views/users.html',
 	            controller: 'adminsCtrl',
+	            controllerAs: 'vm',
 	            resolve: {
 	                getAdmins: function(restFactory) {
 	                    return restFactory.getAdmins();

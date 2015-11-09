@@ -1,8 +1,8 @@
 <div><h4>How was your day ?</h4></div>
 <div><h4>Select rating and click:</h4></div>
-<alert class="text-center" ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" dismiss-on-timeout="2000">{{alert.msg}}</alert>
+<alert class="text-center" ng-repeat="alert in vm.alerts" type="{{alert.type}}" close="vm.closeAlert($index)" dismiss-on-timeout="2000">{{alert.msg}}</alert>
 <div class="meter">
-	<rating ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" ng-click="postData()"></rating>
-	<span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
+	<rating ng-model="vm.rate" max="vm.max" readonly="vm.isReadonly" on-hover="vm.hoveringOver(value)" on-leave="vm.overStar = null" ng-click="vm.postData()"></rating>
+	<span class="label" ng-class="{'label-warning': vm.percent<30, 'label-info': vm.percent>=30 && vm.percent<70, 'label-success': vm.percent>=70}" ng-show="vm.overStar && !vm.isReadonly">{{vm.percent}}%</span>
 </div>
 

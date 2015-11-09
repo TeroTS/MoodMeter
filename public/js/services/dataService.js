@@ -10,6 +10,7 @@
 
     function dataService($cookieStore) {
 
+        /*jshint validthis: true */
         this.writeUserData = function(key, data) {
             $cookieStore.put(key, data);
         };

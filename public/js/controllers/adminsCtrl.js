@@ -10,20 +10,12 @@
 
     function adminsCtrl($scope, restFactory, dataService, getAdmins) {
 
-        //get all admins
-        $scope.users = getAdmins.data;
+        /*jshint validthis: true */
+        var vm = this;
 
-        $scope.deleteAdmin = function(idx) {
-            var userData = $scope.users[idx];
-            restFactory.deleteAdmin(userData._id).then(function(response) {});
-        };
-
-        //write data of the selected user to a persistence object
-        //this object is used in other pages related to this user
-        $scope.getUser = function(idx) {
-            var userData = $scope.users[idx];
-            dataService.writeUserData('data', userData);
-        };
+        vm.users = getAdmins.data;
+        vm.deleteAdmin = restFactory.deleteAdmin(vm.users[idx]._id).then(function(response) {});
+        vm.saveUser = dataService.writeUserData('data', vm.users[idx]);
 
     }
 

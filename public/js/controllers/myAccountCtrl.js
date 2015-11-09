@@ -6,9 +6,9 @@
         .module('moodMeter')
         .controller('myAccountCtrl', myAccountCtrl);
 
-    myAccountCtrl.$inject = ['$scope', '$filter', 'restFactory', 'user', 'dataService'];
+    myAccountCtrl.$inject = ['$scope', 'restFactory', 'user', 'utilsService'];
 
-    function myAccountCtrl($scope, $filter, restFactory, user, dataService) {
+    function myAccountCtrl($scope, restFactory, user, utilsService) {
     	/*jshint validthis: true */
         var vm = this;
 
@@ -17,14 +17,13 @@
 		vm.timeOptions = ['1 week', '1 month', '3 months'];
 		vm.selectedItem = '1 week';
 		vm.isAdmin = user.isAdmin;
-		vm.user = setUser;
+		vm.user = utilsService.setUser(user);
 		vm.getPeriodData = getPeriodData;
 		vm.onClick = onClick;
 
 		activate();
 
 		function activate() {
-			// get default time period of 1 week
 			vm.getPeriodData('1 week');
 		}
 
@@ -36,27 +35,13 @@
 		function getPeriodData(period) {
 			if (period !== '') {
 				restFactory.getData(vm.user.id, period)
-				  	.then(function(response) {
-						vm.data[0] = response.data.data;
-						vm.labels = [];
-						for (var i = 0; i < response.data.dates.length; i++) {
-						  	vm.labels.push($filter('date')(response.data.dates[i], "shortDate"));
-						}
-					});
+				  	.then(function(data) {
+				  		var dataAndLabels = utilsService.setChartDataAndLabels(data);
+				  		vm.data[0] =  dataAndLabels.data;
+				  		vm.labels = dataAndLabels.labels;
+				  	});
 			}
 		}
-
-		// if manager/admin looking for user data => user == selected user from cookiestore
-		// else user looking his own data => user == session user
-		function setUser() {
-			var userData = {};
-			if (user.isAdmin)
-				userData = dataService.readUserData('data');
-			else
-				userData = user.data;
-			return userData;
-		}
-
     }
 
 })();

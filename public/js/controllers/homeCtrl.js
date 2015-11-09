@@ -8,25 +8,29 @@
     homeCtrl.$inject = ['$scope', '$rootScope', 'restFactory'];
 
     function homeCtrl($scope, $rootScope, restFactory) {
+        /*jshint validthis: true */
+        var vm = this;
 
-        $scope.rate = 5;
-        $scope.max = 10;
-        $scope.isReadonly = false;
-        $scope.alerts = [];
+        vm.rate = 5;
+        vm.max = 10;
+        vm.isReadonly = false;
+        vm.alerts = [];
+        vm.hoveringOver = hoveringOver;
+        vm.postData = postData;
 
-        $scope.hoveringOver = function(value) {
-          $scope.overStar = value;
-          $scope.percent = 100 * (value / $scope.max);
-        };
+        function hoveringOver(value) {
+          vm.overStar = value;
+          vm.percent = 100 * (value / vm.max);
+        }
 
-        $scope.postData = function() {
+        function postData() {
           var userId = $rootScope.user.id;
-          var valueObject = {'value' : $scope.rate};
-          restFactory.postData(userId, valueObject).then(function(response) {$scope.alerts.push({type: 'success', msg: 'Data sent succesfully !'});});
-        };
+          var valueObject = {'value' : vm.rate};
+          restFactory.postData(userId, valueObject).then(function(response) {vm.alerts.push({type: 'success', msg: 'Data sent succesfully !'});});
+        }
 
-        $scope.closeAlert = function(index) {
-            $scope.alerts.splice(index, 1);
+        vm.closeAlert = function(index) {
+            vm.alerts.splice(index, 1);
         };
 
     }

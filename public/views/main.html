@@ -3,12 +3,12 @@
         <a class="navbar-brand">Comiq</a>
     </div>
     <ul class="nav navbar-nav">
-        <li><a ui-sref="main.home" ng-hide="user.role === 'admin'">Home</a></li>
-        <li><a ui-sref="main.myAccount" ng-hide="user.role === 'admin'">My-Account</a></li>
-        <li><a ui-sref="main.dashboard" ng-hide="user.role === 'user'">dashboard</a></li>
+        <li><a ui-sref="main.home" ng-hide="$root.user.role === 'admin'">Home</a></li>
+        <li><a ui-sref="main.myAccount" ng-hide="$root.user.role === 'admin'">My-Account</a></li>
+        <li><a ui-sref="main.dashboard" ng-hide="$root.user.role === 'user'">dashboard</a></li>
     </ul>
-        <div class="navbar-text navbar-right"><a ui-sref="main.signup" class="navbar-link">Signup</a></div>
-        <div class="navbar-text navbar-right"><a ng-href="#/logout" class="navbar-link" ng-click="logout()">Logout</a></div>
+        <div class="navbar-text navbar-right"><a ui-sref="main.signup" class="navbar-link" ng-show="$root.user.role === 'admin'">Signup</a></div>
+        <div class="navbar-text navbar-right"><a ng-href="#/logout" class="navbar-link" ng-click="vm.logout()">Logout</a></div>
 </nav>
 <div class="container-fluid">
 	<div class="col-md-6 col-md-offset-3">

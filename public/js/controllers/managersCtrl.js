@@ -9,13 +9,15 @@
     managersCtrl.$inject = ['$scope', 'dataService', 'getManagers'];
 
 	function managersCtrl($scope, dataService, getManagers) {
+        /*jshint validthis: true */
+        var vm = this;
+
         // get all managers
-        $scope.users = getManagers.data;
+        vm.users = getManagers.data;
         //write data of the selected user to a persistence object
         //this object is used in other pages related to this user
-        $scope.getUser = function(idx) {
-            var userData = $scope.users[idx];
-            dataService.writeUserData('data', userData);
+        vm.saveUser = function(idx) {
+            dataService.writeUserData('data', vm.users[idx]);
         };
     }
 

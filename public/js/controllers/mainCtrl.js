@@ -9,7 +9,10 @@
     mainCtrl.$inject = ['$scope', 'restFactory'];
 
 	function mainCtrl($scope, restFactory) {
-		$scope.logout = function () {
+    	/*jshint validthis: true */
+        var vm = this;
+
+		vm.logout = function () {
 		    restFactory.logout().then(function(response) {});
 		};
 	}

@@ -9,10 +9,13 @@
     loginCtrl.$inject = ['$scope', '$http', '$location'];
 
     function loginCtrl($scope, $http, $location) {
-        $scope.login = function() {
+        /*jshint validthis: true */
+        var vm = this;
+
+        vm.login = function() {
             $http.post('/login', {
-                email: $scope.user.email,
-                password: $scope.user.password
+                email: vm.user.email,
+                password: vm.user.password
             })
                 .success(function(user) {
                     $location.url('/dashboard');
