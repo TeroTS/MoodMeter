@@ -9,13 +9,15 @@
     signupCtrl.$inject = ['$scope', '$http', '$location'];
 
     function signupCtrl($scope, $http, $location) {
+        /*jshint validthis: true */
+        var vm = this;
         // This object will be filled by the form
-        $scope.userData = {};
+        vm.userData = {};
 
-        $scope.signup = function() {
+        vm.signup = function() {
             $http.post('/signup', {
-                email: $scope.userData.email,
-                password: $scope.userData.password,
+                email: vm.userData.email,
+                password: vm.userData.password,
             })
             .success(function(user) {
                 $location.url('/login');

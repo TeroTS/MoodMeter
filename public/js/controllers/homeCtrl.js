@@ -17,6 +17,7 @@
         vm.alerts = [];
         vm.hoveringOver = hoveringOver;
         vm.postData = postData;
+        vm.closeAlert = closeAlert;
 
         function hoveringOver(value) {
           vm.overStar = value;
@@ -29,9 +30,9 @@
           restFactory.postData(userId, valueObject).then(function(response) {vm.alerts.push({type: 'success', msg: 'Data sent succesfully !'});});
         }
 
-        vm.closeAlert = function(index) {
+        function closeAlert(index) {
             vm.alerts.splice(index, 1);
-        };
+        }
 
     }
 

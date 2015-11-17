@@ -14,10 +14,9 @@
 		//get all users
         vm.users = getUsers.data;
         //write data of the selected user to a persistence object
-        //this object is used in other pages related to this user
-        vm.getUser = function(idx) {
-            var userData = vm.users[idx];
-            dataService.writeUserData('data', userData);
+        //this object is used in other pages rvm.users[idx]elated to this user
+        vm.saveUser = function(idx) {
+            dataService.writeUserData('data', vm.users[idx]);
         };
     }
 

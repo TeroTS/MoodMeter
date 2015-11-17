@@ -9,45 +9,50 @@
     userCtrl.$inject = ['$scope', '$state', '$modal', 'restFactory', 'getManagers'];
 
     function userCtrl($scope, $state, $modal, restFactory, getManagers) {
-        $scope.user = dataService.readUserData('data');
-        $scope.myManager = {};
-        $scope.alerts = [];
+        /*jshint validthis: true */
+        var vm = this;
 
-        // get all managers
-        $scope.managers = getManagers.data;
+        vm.user = dataService.readUserData('data');
+        vm.managers = getManagers.data;
+        vm.myManager = {};
+        vm.alerts = [];
+        vm.updateUser = updateUser;
+        vm.open = open;
+        vm.closeAlert = closeAlert;
 
-        //select correct manager from return data and set it to model
-        for (var i = 0; i < getManagers.data.length; i++) {
-            if (getManagers.data[i].name === $scope.user.managerName)
-                $scope.myManager = getManagers.data[i];
+        activate();
+
+        function activate() {
+            // this saves the state of the checkbox
+            if (vm.user.role === 'manager')
+                vm.isUserManager = true;
+            else
+                vm.isUserManager = false;
+            //select correct manager
+            for (var i = 0; i < getManagers.data.length; i++) {
+                if (getManagers.data[i].name === vm.user.managerName)
+                    vm.myManager = getManagers.data[i];
+            }
         }
 
-        // this saves the state of the checkbox
-        if ($scope.user.role === 'manager')
-            $scope.isUserManager = true;
-        else
-            $scope.isUserManager = false;
-
-        //update user data
-        $scope.updateUser = function() {
-            if ($scope.isUserManager === true) {
-                $scope.user.role = 'manager';
-                $scope.user.managerName = '';
+        function updateUser() {
+            if (vm.isUserManager === true) {
+                vm.user.role = 'manager';
+                vm.user.managerName = '';
             }
-            restFactory.updateUser($scope.user.id, {role: $scope.user.role, manager: $scope.myManager.name})
+            restFactory.updateUser(vm.user.id, {role: vm.user.role, manager: vm.myManager.name})
                 .then(function(response) {
-                    $scope.user = response.data;
-                    $scope.alerts.push({type: 'success', msg: 'User updated !'});
+                    vm.user = response.data;
+                    vm.alerts.push({type: 'success', msg: 'User updated !'});
                 });
-        };
+        }
 
-        //delete user data
         var deleteUser = function() {
-            restFactory.deleteUser($scope.user.id).then(function(response) {});
+            restFactory.deleteUser(vm.user.id).then(function(response) {});
         };
 
         //delete button modal control
-        $scope.open = function (size) {
+        function open(size) {
             var modalInstance = $modal.open({
                 templateUrl: './views/templates/modal.html',
                 controller: 'modalWindowCtrl',
@@ -57,11 +62,11 @@
                 deleteUser();
                 $state.go('main.dashboard', {}, {reload: true});
             }, function () {});
-        };
+        }
 
-        $scope.closeAlert = function(index) {
-            $scope.alerts.splice(index, 1);
-        };
+        function closealert(index) {
+            vm.alerts.splice(index, 1);
+        }
     }
 
 })();

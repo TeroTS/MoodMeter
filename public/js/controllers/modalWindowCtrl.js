@@ -9,11 +9,14 @@
     modalWindowCtrl.$inject = ['$scope', '$modalInstance'];
 
     function modalWindowCtrl($scope, $modalInstance) {
-		$scope.ok = function () {
+        /*jshint validthis: true */
+        var vm = this;
+
+		vm.ok = function () {
 			$modalInstance.close();
 		};
 
-		$scope.cancel = function () {
+		vm.cancel = function () {
 			$modalInstance.dismiss('cancel');
 		};
     }
