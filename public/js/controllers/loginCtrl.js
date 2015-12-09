@@ -6,9 +6,9 @@
         .module('moodMeter')
         .controller('loginCtrl', loginCtrl);
 
-    loginCtrl.$inject = ['$scope', '$http', '$location'];
+    loginCtrl.$inject = ['$http', '$location'];
 
-    function loginCtrl($scope, $http, $location) {
+    function loginCtrl($http, $location) {
         /*jshint validthis: true */
         var vm = this;
 

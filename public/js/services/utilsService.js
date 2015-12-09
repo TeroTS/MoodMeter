@@ -10,8 +10,8 @@
 
     function utilsService($filter, dataService) {
 
-		// if manager/admin looking for user data => user == selected user from cookiestore
-		// else user looking his own data => user == session user
+		// if manager/admin looking for user data => user = selected user from cookiestore
+		// else user looking his own data => user = session user
 		/*jshint validthis: true */
 	    this.setUser = function(user) {
 			var userData = {};

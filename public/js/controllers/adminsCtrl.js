@@ -6,9 +6,9 @@
         .module('moodMeter')
         .controller('adminsCtrl', adminsCtrl);
 
-    adminsCtrl.$inject = ['$scope', 'restFactory', 'dataService', 'getAdmins'];
+    adminsCtrl.$inject = ['restFactory', 'dataService', 'getAdmins'];
 
-    function adminsCtrl($scope, restFactory, dataService, getAdmins) {
+    function adminsCtrl(restFactory, dataService, getAdmins) {
 
         /*jshint validthis: true */
         var vm = this;

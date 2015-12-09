@@ -6,16 +6,16 @@
         .module('moodMeter')
         .controller('myAccountCtrl', myAccountCtrl);
 
-    myAccountCtrl.$inject = ['$scope', 'restFactory', 'user', 'utilsService'];
+    myAccountCtrl.$inject = ['$scope', 'restFactory', 'user', 'utilsService', 'constants'];
 
-    function myAccountCtrl($scope, restFactory, user, utilsService) {
+    function myAccountCtrl($scope, restFactory, user, utilsService, constants) {
     	/*jshint validthis: true */
         var vm = this;
 
 		vm.labels = [];
 		vm.data = [[]];
-		vm.timeOptions = ['1 week', '1 month', '3 months'];
-		vm.selectedItem = '1 week';
+		vm.timeOptions = constants.TIME_OPTIONS; //['1 week', '1 month', '3 months'];
+		vm.selectedItem = constants.DEFAULT_TIME_OPTION; //'1 week';
 		vm.isAdmin = user.isAdmin;
 		vm.user = utilsService.setUser(user);
 		vm.getPeriodData = getPeriodData;
@@ -24,7 +24,7 @@
 		activate();
 
 		function activate() {
-			vm.getPeriodData('1 week');
+			vm.getPeriodData(constants.DEFAULT_TIME_OPTION);
 		}
 
 		function onClick(points, evt) {
