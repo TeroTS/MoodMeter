@@ -4,14 +4,28 @@
 
     angular
         .module('moodMeter')
-        .controller('managersCtrl', managersCtrl);
+        .controller('managersCtrl', managersCtrl)
+        .config(config);
+
+    config.$inject = ['$stateProvider'];
+    function config($stateProvider) {
+        $stateProvider.state('main.dashboard.managers', {
+            url: '/managers',
+            templateUrl: './views/users.html',
+            controller: 'managersCtrl',
+            controllerAs: 'vm',
+            resolve: {
+                getManagers: function(restFactory) {
+                    return restFactory.getManagers();
+                }
+            }
+        });
+    }
 
     managersCtrl.$inject = ['$scope', 'dataService', 'getManagers'];
-
 	function managersCtrl($scope, dataService, getManagers) {
         /*jshint validthis: true */
         var vm = this;
-
         // get all managers
         vm.users = getManagers.data;
         //write data of the selected user to a persistence object

@@ -6,13 +6,37 @@
         .module('moodMeter')
         .service('utilsService', utilsService);
 
-    dataService.$inject = ['$filter', 'dataService'];
+    utilsService.$inject = ['$q', '$http', '$location', '$rootScope', '$timeout', '$filter', 'dataService'];
+    function utilsService($q, $http, $location, $rootScope, $timeout, $filter, dataService) {
 
-    function utilsService($filter, dataService) {
+	    // Check if the user is logged in
+	    /*jshint validthis: true */
+	    this.checkLoggedin = function() {
+	        var deferred = $q.defer();
+	        $http.get('/loggedin').success(function(user) {
+	            // Authenticated
+	            if (user !== '0') {
+	                console.log('You are logged in.');
+	                //save user object, global session variable
+	                $rootScope.user = user;
+	                console.log(user);
+	                /*$timeout(deferred.resolve, 0);*/
+	                deferred.resolve();
+	            // Not Authenticated
+	            } else {
+	                console.log('You need to log in.');
+	                $timeout(function(){deferred.reject();}, 0);
+	                //deferred.reject();
+	                $rootScope.user = {};
+	                //$timeout(function() {
+	                $location.url('/login');
+	            }
+	        });
+	        return deferred.promise;
+	    };
 
 		// if manager/admin looking for user data => user = selected user from cookiestore
 		// else user looking his own data => user = session user
-		/*jshint validthis: true */
 	    this.setUser = function(user) {
 			var userData = {};
 			if (user.isAdmin)

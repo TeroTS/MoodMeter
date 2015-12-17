@@ -3,14 +3,29 @@
 
     angular
         .module('moodMeter')
-        .controller('homeCtrl', homeCtrl);
+        .controller('homeCtrl', homeCtrl)
+        .config(config);
+
+    config.$inject = ['$stateProvider'];
+    function config($stateProvider) {
+        $stateProvider.state('main.home', {
+            url: 'home',
+            templateUrl: './views/home.html',
+            controller: 'homeCtrl',
+            controllerAs: 'vm',
+            resolve: {
+                // delete user data cookie
+                removeUserData: function(dataService) {
+                    dataService.deleteUserData('data');
+                }
+            }
+        });
+    }
 
     homeCtrl.$inject = ['$scope', '$rootScope', 'restFactory'];
-
     function homeCtrl($scope, $rootScope, restFactory) {
         /*jshint validthis: true */
         var vm = this;
-
         vm.rate = 5;
         vm.max = 10;
         vm.isReadonly = false;

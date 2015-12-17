@@ -4,10 +4,37 @@
 
     angular
         .module('moodMeter')
-        .controller('myAccountCtrl', myAccountCtrl);
+        .controller('myAccountCtrl', myAccountCtrl)
+        .config(config);
+
+    config.$inject = ['$stateProvider'];
+    function config($stateProvider) {
+        $stateProvider
+        	.state('main.myAccount', {
+	            url: 'my-account',
+	            templateUrl: './views/myAccount.html',
+	            controller: 'myAccountCtrl',
+	            controllerAs: 'vm',
+	            resolve: {
+	            	user: function($rootScope) {
+	            		return {data: $rootScope.user, isAdmin: false};
+	            	}
+	            }
+        	})
+	        .state('main.dashboard.viewUserData', {
+	            url: '/users/data/:id',
+	            templateUrl: './views/myAccount.html',
+	            controller: 'myAccountCtrl',
+	            controllerAs: 'vm',
+	            resolve: {
+	            	user: function() {
+	            		return {isAdmin: true};
+	            	}
+	            }
+	        });
+    }
 
     myAccountCtrl.$inject = ['$scope', 'restFactory', 'user', 'utilsService', 'constants'];
-
     function myAccountCtrl($scope, restFactory, user, utilsService, constants) {
     	/*jshint validthis: true */
         var vm = this;

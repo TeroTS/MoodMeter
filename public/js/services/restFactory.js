@@ -7,7 +7,6 @@
         .factory('restFactory', restFactory);
 
     restFactory.$inject = ['$http'];
-
     function restFactory($http) {
 
         var factory = {};

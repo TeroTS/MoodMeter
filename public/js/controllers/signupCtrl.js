@@ -4,10 +4,20 @@
 
     angular
         .module('moodMeter')
-        .controller('signupCtrl', signupCtrl);
+        .controller('signupCtrl', signupCtrl)
+        .config(config);
+
+    config.$inject = ['$stateProvider'];
+    function config($stateProvider) {
+        $stateProvider.state('main.signup', {
+                url: 'signup',
+                templateUrl: './views/signup.html',
+                controller: 'signupCtrl',
+                controllerAs: 'vm'
+        });
+    }
 
     signupCtrl.$inject = ['$scope', '$http', '$location'];
-
     function signupCtrl($scope, $http, $location) {
         /*jshint validthis: true */
         var vm = this;

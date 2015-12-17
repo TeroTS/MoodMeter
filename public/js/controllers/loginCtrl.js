@@ -4,14 +4,23 @@
 
     angular
         .module('moodMeter')
-        .controller('loginCtrl', loginCtrl);
+        .controller('loginCtrl', loginCtrl)
+        .config(config);
+
+    config.$inject = ['$stateProvider'];
+    function config($stateProvider) {
+        $stateProvider.state('login', {
+            url: '/login',
+            templateUrl: './views/login.html',
+            controller: 'loginCtrl',
+            controllerAs: 'vm'
+        });
+    }
 
     loginCtrl.$inject = ['$http', '$location'];
-
     function loginCtrl($http, $location) {
         /*jshint validthis: true */
         var vm = this;
-
         vm.login = function() {
             $http.post('/login', {
                 email: vm.user.email,

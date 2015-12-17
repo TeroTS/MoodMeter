@@ -4,11 +4,26 @@
 
     angular
         .module('moodMeter')
-        .controller('dashboardCtrl', dashboardCtrl);
+        .controller('dashboardCtrl', dashboardCtrl)
+        .config(config);
 
-    dashboardCtrl.$inject = ['$scope', 'getCounts'];
+    config.$inject = ['$stateProvider'];
+    function config($stateProvider) {
+        $stateProvider.state('main.dashboard', {
+            url: 'dashboard',
+            templateUrl: './views/dashboard.html',
+            controller: 'dashboardCtrl',
+            controllerAs: 'vm',
+            resolve: {
+                getCounts: function(restFactory) {
+                    return restFactory.getCounts();
+                }
+            }
+	    });
+    }
 
-	function dashboardCtrl($scope, getCounts) {
+    dashboardCtrl.$inject = ['getCounts'];
+	function dashboardCtrl(getCounts) {
 		/*jshint validthis: true */
         var vm = this;
 	    // get counts of users, managers and admins

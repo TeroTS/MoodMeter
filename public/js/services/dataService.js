@@ -7,7 +7,6 @@
         .service('dataService', dataService);
 
     dataService.$inject = ['$cookieStore'];
-
     function dataService($cookieStore) {
 
         /*jshint validthis: true */
