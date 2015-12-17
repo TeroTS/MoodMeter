@@ -17,8 +17,8 @@
         });
     }
 
-    signupCtrl.$inject = ['$scope', '$http', '$location'];
-    function signupCtrl($scope, $http, $location) {
+    signupCtrl.$inject = ['$http', '$location'];
+    function signupCtrl($http, $location) {
         /*jshint validthis: true */
         var vm = this;
         // This object will be filled by the form

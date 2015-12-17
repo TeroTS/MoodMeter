@@ -22,8 +22,8 @@
         });
     }
 
-    homeCtrl.$inject = ['$scope', '$rootScope', 'restFactory'];
-    function homeCtrl($scope, $rootScope, restFactory) {
+    homeCtrl.$inject = ['$rootScope', 'restFactory'];
+    function homeCtrl($rootScope, restFactory) {
         /*jshint validthis: true */
         var vm = this;
         vm.rate = 5;

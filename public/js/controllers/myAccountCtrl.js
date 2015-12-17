@@ -34,14 +34,14 @@
 	        });
     }
 
-    myAccountCtrl.$inject = ['$scope', 'restFactory', 'user', 'utilsService', 'constants'];
-    function myAccountCtrl($scope, restFactory, user, utilsService, constants) {
+    myAccountCtrl.$inject = ['restFactory', 'user', 'utilsService', 'constants'];
+    function myAccountCtrl(restFactory, user, utilsService, constants) {
     	/*jshint validthis: true */
         var vm = this;
 
 		vm.labels = [];
 		vm.data = [[]];
-		vm.timeOptions = constants.TIME_OPTIONS; //['1 week', '1 month', '3 months'];
+		vm.timeOptions = ['1 week', '1 month', '3 months'];
 		vm.selectedItem = constants.DEFAULT_TIME_OPTION; //'1 week';
 		vm.isAdmin = user.isAdmin;
 		vm.user = utilsService.setUser(user);

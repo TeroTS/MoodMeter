@@ -6,9 +6,9 @@
         .module('moodMeter')
         .controller('userCtrl', userCtrl);
 
-    userCtrl.$inject = ['$scope', '$state', '$modal', 'restFactory', 'getManagers'];
+    userCtrl.$inject = ['$state', '$modal', 'restFactory', 'getManagers'];
 
-    function userCtrl($scope, $state, $modal, restFactory, getManagers) {
+    function userCtrl($state, $modal, restFactory, getManagers) {
         /*jshint validthis: true */
         var vm = this;
 

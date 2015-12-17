@@ -6,9 +6,9 @@
         .module('moodMeter')
         .controller('usersCtrl', usersCtrl);
 
-    usersCtrl.$inject = ['$scope', 'dataService', 'getUsers'];
+    usersCtrl.$inject = ['dataService', 'getUsers'];
 
-	function usersCtrl($scope, dataService, getUsers) {
+	function usersCtrl(dataService, getUsers) {
         /*jshint validthis: true */
         var vm = this;
 		//get all users

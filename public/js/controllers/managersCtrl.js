@@ -22,8 +22,8 @@
         });
     }
 
-    managersCtrl.$inject = ['$scope', 'dataService', 'getManagers'];
-	function managersCtrl($scope, dataService, getManagers) {
+    managersCtrl.$inject = ['dataService', 'getManagers'];
+	function managersCtrl(dataService, getManagers) {
         /*jshint validthis: true */
         var vm = this;
         // get all managers

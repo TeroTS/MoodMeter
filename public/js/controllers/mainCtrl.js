@@ -23,8 +23,8 @@
         });
     }
 
-    mainCtrl.$inject = ['$scope', 'restFactory'];
-	function mainCtrl($scope, restFactory) {
+    mainCtrl.$inject = ['restFactory'];
+	function mainCtrl(restFactory) {
     	/*jshint validthis: true */
         var vm = this;
 		vm.logout = function () {

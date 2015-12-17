@@ -6,8 +6,8 @@
         .module('moodMeter')
         .controller('modalWindowCtrl', modalWindowCtrl);
 
-    modalWindowCtrl.$inject = ['$scope', '$modalInstance'];
-    function modalWindowCtrl($scope, $modalInstance) {
+    modalWindowCtrl.$inject = ['$modalInstance'];
+    function modalWindowCtrl($modalInstance) {
         /*jshint validthis: true */
         var vm = this;
 
