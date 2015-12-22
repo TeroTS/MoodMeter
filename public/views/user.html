@@ -20,4 +20,4 @@
 </div>
 <alert ng-repeat="alert in vm.alerts" type="{{alert.type}}" close="vm.closeAlert($index)" dismiss-on-timeout="2000">{{alert.msg}}</alert>
 <div class="btn btn-primary" ng-click="vm.updateUser()">Update</div>
-<div class="btn btn-primary" ng-click="vm.open('sm')">Delete</div>
+<div class="btn btn-primary" ng-click="vm.open()">Delete</div>

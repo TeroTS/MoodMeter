@@ -6,8 +6,8 @@
         .module('moodMeter')
         .service('utilsService', utilsService);
 
-    utilsService.$inject = ['$q', '$http', '$location', '$rootScope', '$timeout', '$filter', 'dataService'];
-    function utilsService($q, $http, $location, $rootScope, $timeout, $filter, dataService) {
+    utilsService.$inject = ['$q', '$http', '$location', '$rootScope', '$timeout', '$filter', '$modal', 'dataService'];
+    function utilsService($q, $http, $location, $rootScope, $timeout, $filter, $modal, dataService) {
 
 	    // Check if the user is logged in
 	    /*jshint validthis: true */
@@ -55,6 +55,19 @@
 			}
 			return chartDataAndLabels;
 		};
+
+        //delete button modal control
+        this.openModal = function(size, action) {
+            var modalInstance = $modal.open({
+                templateUrl: './views/templates/modal.html',
+                controller: 'modalWindowCtrl',
+                size: size,
+            });
+            modalInstance.result.then(function () {
+                action();
+                $state.go('main.dashboard', {}, {reload: true});
+            }, function () {});
+        };
 
     }
 

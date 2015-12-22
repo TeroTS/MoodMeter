@@ -8,6 +8,11 @@
 			'ui.bootstrap', 
 			'chart.js', 
 			'ngCookies'
-		]);
+		])
+        .config(config);
+
+	function config($urlRouterProvider) {
+		$urlRouterProvider.otherwise('/login');
+	}
 
 })();

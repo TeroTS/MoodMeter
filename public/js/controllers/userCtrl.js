@@ -4,11 +4,26 @@
 
     angular
         .module('moodMeter')
-        .controller('userCtrl', userCtrl);
+        .controller('userCtrl', userCtrl)
+        .config(config);
 
-    userCtrl.$inject = ['$state', '$modal', 'restFactory', 'getManagers'];
+    config.$inject = ['$stateProvider'];
+    function config($stateProvider) {
+        $stateProvider.state('main.dashboard.user', {
+            url: '/users/:id',
+            templateUrl: './views/user.html',
+            controller: 'userCtrl',
+            controllerAs: 'vm',
+            resolve: {
+                getManagers: function(restFactory) {
+                    return restFactory.getManagers();
+                }
+            }
+        });
+    }
 
-    function userCtrl($state, $modal, restFactory, getManagers) {
+    userCtrl.$inject = ['$state', 'restFactory', 'utilsService', 'getManagers'];
+    function userCtrl($state, restFactory, utilsService, getManagers) {
         /*jshint validthis: true */
         var vm = this;
 
@@ -17,7 +32,7 @@
         vm.myManager = {};
         vm.alerts = [];
         vm.updateUser = updateUser;
-        vm.open = open;
+        vm.open = utilsService.openModal('sm', deleteUser);
         vm.closeAlert = closeAlert;
 
         activate();
@@ -50,19 +65,6 @@
         var deleteUser = function() {
             restFactory.deleteUser(vm.user.id).then(function(response) {});
         };
-
-        //delete button modal control
-        function open(size) {
-            var modalInstance = $modal.open({
-                templateUrl: './views/templates/modal.html',
-                controller: 'modalWindowCtrl',
-                size: size,
-            });
-            modalInstance.result.then(function () {
-                deleteUser();
-                $state.go('main.dashboard', {}, {reload: true});
-            }, function () {});
-        }
 
         function closealert(index) {
             vm.alerts.splice(index, 1);
