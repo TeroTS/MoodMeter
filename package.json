@@ -5,25 +5,24 @@
   "name": "moodMeter",
   "main": "server.js",
   "dependencies": {
-    "express": "~4.0.0",
-    "ejs": "~0.8.5",
-    "mongoose": "~3.8.1",
-    "passport": "~0.1.17",
-    "passport-local": "~0.1.6",
+    "express": "~4.13.3",
+    "mongoose": "~4.3.4",
+    "passport": "~0.3.2",
+    "passport-local": "~1.0.0",
     "passport-google-oauth": "~0.1.5",
     "connect-flash": "~0.1.1",
-    "bcrypt-nodejs": "latest",
-    "morgan": "~1.0.0",
-    "body-parser": "~1.0.0",
-    "cookie-parser": "~1.0.0",
-    "method-override": "~1.0.0",
-    "express-session": "~1.0.0"
+    "bcrypt-nodejs": "~0.0.3",
+    "morgan": "~1.6.1",
+    "body-parser": "~1.14.2",
+    "cookie-parser": "~1.4.0",
+    "method-override": "~2.3.5",
+    "express-session": "~1.12.1"
   },
   "devDependencies": {
-    "jasmine-core": "^2.3.4",
-    "karma": "^0.12.31",
-    "karma-jasmine": "^0.3.5",
-    "karma-phantomjs-launcher": "^0.2.1",
-    "phantomjs": "^1.9.19"
+    "jasmine-core": "~2.4.1",
+    "karma": "~0.12.37",
+    "karma-jasmine": "~0.3.6",
+    "karma-phantomjs-launcher": "~0.2.2",
+    "phantomjs": "~1.9.19"
   }
 }

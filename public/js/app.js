@@ -4,10 +4,12 @@
 
 	angular
 		.module('moodMeter', [
-			'ui.router', 
-			'ui.bootstrap', 
-			'chart.js', 
-			'ngCookies'
+			'ui.router',
+			'ui.bootstrap',
+			'chart.js',
+			'ngCookies',
+			'app.admins',
+			'app.dashboard'
 		])
         .config(config);
 

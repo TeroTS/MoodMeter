@@ -32,7 +32,7 @@ app.use(express.static(__dirname + '/public'));
 require('./config/passport')(passport);
 
 //required for passport
-app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
+app.use(session({ secret: 'ilovescotchscotchyscotchscotch', resave: true, saveUninitialized: true })); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session

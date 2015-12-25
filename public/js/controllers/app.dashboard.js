@@ -3,7 +3,7 @@
     'use strict';
 
     angular
-        .module('moodMeter')
+        .module('app.dashboard', ['ui.router'])
         .controller('dashboardCtrl', dashboardCtrl)
         .config(config);
 
