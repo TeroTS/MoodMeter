@@ -9,7 +9,16 @@
 			'chart.js',
 			'ngCookies',
 			'app.admins',
-			'app.dashboard'
+			'app.dashboard',
+			'app.home',
+			'app.login',
+			'app.main',
+			'app.managers',
+		//	'app.modalWindow',
+			'app.myAccount',
+			'app.signup',
+			'app.user',
+			'app.users'
 		])
         .config(config);
 

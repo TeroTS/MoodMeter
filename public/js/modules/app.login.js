@@ -3,7 +3,7 @@
     'use strict';
 
     angular
-        .module('moodMeter')
+        .module('app.login', ['ui.router'])
         .controller('loginCtrl', loginCtrl)
         .config(config);
 

@@ -3,7 +3,7 @@
     'use strict';
 
     angular
-        .module('moodMeter')
+        .module('app.myAccount', ['ui.router'])
         .controller('myAccountCtrl', myAccountCtrl)
         .config(config);
 
@@ -42,7 +42,7 @@
 		vm.labels = [];
 		vm.data = [[]];
 		vm.timeOptions = ['1 week', '1 month', '3 months'];
-		vm.selectedItem = constants.DEFAULT_TIME_OPTION; //'1 week';
+		vm.selectedItem = '1 week'; //constants.DEFAULT_TIME_OPTION; //'1 week';
 		vm.isAdmin = user.isAdmin;
 		vm.user = utilsService.setUser(user);
 		vm.getPeriodData = getPeriodData;
@@ -51,7 +51,7 @@
 		activate();
 
 		function activate() {
-			vm.getPeriodData(constants.DEFAULT_TIME_OPTION);
+			vm.getPeriodData('1 week'); //constants.DEFAULT_TIME_OPTION);
 		}
 
 		function onClick(points, evt) {

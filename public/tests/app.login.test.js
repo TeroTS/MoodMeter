@@ -1,12 +1,11 @@
-describe('ĺoginCtrl', function () {
+describe('app.login module', function () {
 
     var $httpBackend,
         $controller,
         $location,
         authRequestHandler;
-        //controller;
 
-    beforeEach(module('moodMeter'));
+    beforeEach(module('app.login'));
 
     beforeEach(inject(function(_$controller_, _$httpBackend_, _$location_) {
         $location = _$location_;

@@ -3,7 +3,7 @@
     'use strict';
 
     angular
-        .module('moodMeter')
+        .module('app.user', ['ui.router'])
         .controller('userCtrl', userCtrl)
         .config(config);
 
@@ -22,8 +22,8 @@
         });
     }
 
-    userCtrl.$inject = ['$state', 'restFactory', 'utilsService', 'getManagers'];
-    function userCtrl($state, restFactory, utilsService, getManagers) {
+    userCtrl.$inject = ['$state', 'restFactory', 'utilsService', 'dataService', 'getManagers'];
+    function userCtrl($state, restFactory, utilsService, dataService, getManagers) {
         /*jshint validthis: true */
         var vm = this;
 
@@ -32,7 +32,7 @@
         vm.myManager = {};
         vm.alerts = [];
         vm.updateUser = updateUser;
-        vm.open = utilsService.openModal('sm', deleteUser);
+        vm.open = openModal;
         vm.closeAlert = closeAlert;
 
         activate();
@@ -66,8 +66,12 @@
             restFactory.deleteUser(vm.user.id).then(function(response) {});
         };
 
-        function closealert(index) {
+        function closeAlert(index) {
             vm.alerts.splice(index, 1);
+        }
+
+        function openModal() {
+            utilsService.openModal('sm', deleteUser);
         }
     }
 

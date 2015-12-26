@@ -61,6 +61,7 @@
             var modalInstance = $modal.open({
                 templateUrl: './views/templates/modal.html',
                 controller: 'modalWindowCtrl',
+                controllerAs: 'vm',
                 size: size,
             });
             modalInstance.result.then(function () {

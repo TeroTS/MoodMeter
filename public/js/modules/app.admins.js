@@ -27,8 +27,16 @@
         /*jshint validthis: true */
         var vm = this;
         vm.users = getAdmins.data;
-        vm.deleteAdmin = restFactory.deleteAdmin(vm.users[idx]._id).then(function(response) {});
-        vm.saveUser = dataService.writeUserData('data', vm.users[idx]);
+        vm.deleteAdmin = deleteAdmin;
+        vm.saveUser = saveUser;
+
+        function deleteAdmin(idx) {
+            restFactory.deleteAdmin(vm.users[idx].email).then(function(response) {});
+        }
+
+        function saveUser(idx) {
+            dataService.writeUserData('data', vm.users[idx]);
+        }
     }
 
 })();
