@@ -10,32 +10,21 @@
     config.$inject = ['$stateProvider'];
     function config($stateProvider) {
         $stateProvider
-        	.state('main.myAccount', {
-	            url: 'my-account',
-	            templateUrl: './views/myAccount.html',
-	            controller: 'myAccountCtrl',
-	            controllerAs: 'vm',
-	            resolve: {
-	            	user: function($rootScope) {
-	            		return {data: $rootScope.user, isAdmin: false};
-	            	}
-	            }
-        	})
 	        .state('main.dashboard.viewUserData', {
-	            url: '/users/data/:id',
+	            url: '/:users/:id/data',
 	            templateUrl: './views/myAccount.html',
 	            controller: 'myAccountCtrl',
-	            controllerAs: 'vm',
-	            resolve: {
+	            controllerAs: 'vm'
+	      /*      resolve: {
 	            	user: function() {
 	            		return {isAdmin: true};
 	            	}
-	            }
+	            } */
 	        });
     }
 
-    myAccountCtrl.$inject = ['restFactory', 'user', 'utilsService', 'constants'];
-    function myAccountCtrl(restFactory, user, utilsService, constants) {
+    myAccountCtrl.$inject = ['restFactory', 'dataService', 'utilsService', 'constants'];
+    function myAccountCtrl(restFactory, dataService, utilsService, constants) {
     	/*jshint validthis: true */
         var vm = this;
 
@@ -43,8 +32,8 @@
 		vm.data = [[]];
 		vm.timeOptions = ['1 week', '1 month', '3 months'];
 		vm.selectedItem = '1 week'; //constants.DEFAULT_TIME_OPTION; //'1 week';
-		vm.isAdmin = user.isAdmin;
-		vm.user = utilsService.setUser(user);
+		// vm.isAdmin = user.isAdmin;
+		vm.user = dataService.readUserData('data'); //utilsService.setUser(user);
 		vm.getPeriodData = getPeriodData;
 		vm.onClick = onClick;
 

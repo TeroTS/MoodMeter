@@ -41,7 +41,7 @@ module.exports = function(app, passport) {
 	});
 
 	//sign up
-    app.use('/signup', requireRole(['admin']));
+    // app.use('/signup', requireRole(['admin']));
 	app.post('/signup', passport.authenticate('local-signup'), function(req, res) {
 		res.send(req.user);
 	});

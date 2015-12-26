@@ -28,6 +28,7 @@
         var vm = this;
 		//get all users
         vm.users = getUsers.data;
+        vm.roleForUrl = 'users';
 
         vm.saveUser = function(idx) {
             dataService.writeUserData('data', vm.users[idx]);

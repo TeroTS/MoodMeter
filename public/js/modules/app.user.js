@@ -10,7 +10,7 @@
     config.$inject = ['$stateProvider'];
     function config($stateProvider) {
         $stateProvider.state('main.dashboard.user', {
-            url: '/users/:id',
+            url: '/:users/:id',
             templateUrl: './views/user.html',
             controller: 'userCtrl',
             controllerAs: 'vm',
@@ -59,12 +59,19 @@
                 .then(function(response) {
                     vm.user = response.data;
                     vm.alerts.push({type: 'success', msg: 'User updated !'});
+                }, function(reason) {
+                    vm.alerts.push({type: 'danger', msg: 'Update failed, reason: ' + reason});
                 });
         }
 
-        var deleteUser = function() {
-            restFactory.deleteUser(vm.user.id).then(function(response) {});
-        };
+        function deleteUser() {
+            restFactory.deleteUser(vm.user.id)
+                .then(function(response) {
+                    vm.alerts.push({type: 'success', msg: 'User deleted !'});
+                }, function(reason) {
+                    vm.alerts.push({type: 'danger', msg: 'Delete failed, reason: ' + reason});
+                });
+        }
 
         function closeAlert(index) {
             vm.alerts.splice(index, 1);
