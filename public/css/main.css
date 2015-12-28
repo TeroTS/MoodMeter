@@ -28,6 +28,9 @@ select {
 	text-align: center;
     display: table-cell;
     vertical-align: middle;
+    color: white;
+ 	background: green;
+ 	border-radius: 10px;
 }
 
 h3 {
@@ -37,4 +40,56 @@ h3 {
 #userWell, #managerWell, #adminWell {
 	width:  200px;
 }
+
+tr {
+	background-color: green;
+}
+
+/*#name {
+	color: white;
+	font-weight: bold;
+} */
+
+.glyphicon.glyphicon-pencil, .glyphicon.glyphicon-trash, .glyphicon.glyphicon-picture {
+	color: white;
+}
+
+#name-column {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+	color: white;
+	font-weight: bold;
+}
+
+#delete-column {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.panel-default > .panel-heading {
+  	background: green;
+}
+
+.panel-default {
+	border-color: green;
+}
+
+hr {
+	border-color: green;
+}
+
+.navbar {
+	background: green;
+	color: white;
+}
+
+body {
+	background-color: #CBCBCF;
+	background: linear-gradient(#CBCBCF, #D8D8DB);
+    background-image: url("../images/background.jpg");
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+}
+
 

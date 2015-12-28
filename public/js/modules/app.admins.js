@@ -22,33 +22,33 @@
         });
     }
 
-    adminsCtrl.$inject = ['restFactory', 'dataService', 'utilsService', 'getAdmins'];
-    function adminsCtrl(restFactory, dataService, utilsService, getAdmins) {
+    adminsCtrl.$inject = ['$state', 'restFactory', 'dataService', 'utilsService', 'getAdmins'];
+    function adminsCtrl($state, restFactory, dataService, utilsService, getAdmins) {
         /*jshint validthis: true */
         var vm = this;
         var adminEmail = '';
         vm.users = getAdmins.data;
-        // vm.deleteAdmin = deleteAdmin;
         vm.open = openModal;
-        vm.saveUser = saveUser;
+        //vm.saveUser = saveUser;
 
-        function deleteAdmin() {
-            restFactory.deleteAdmin(adminEmail). //vm.users[idx].email).
+        function deleteAdmin(idx) {
+            restFactory.deleteAdmin(vm.users[idx].email).
                 then(function(response) {
-                    vm.alerts.push({type: 'success', msg: 'Admin deleted !'});
+                    $state.go($state.current, {}, {reload: true});
+                    // vm.alerts.push({type: 'success', msg: 'Admin deleted !'});
                 }, function(reason) {
                     vm.alerts.push({type: 'danger', msg: 'Delete failed, reason: ' + reason});
                 });
         }
 
-        function saveUser(idx) {
-            dataService.writeUserData('data', vm.users[idx]);
+        function openModal(idx) {
+            utilsService.openModal('sm', deleteAdmin, [idx]);
         }
 
-        function openModal(idx) {
-            adminEmail = vm.users[idx].email;
-            utilsService.openModal('sm', deleteAdmin);
+        function closeAlert(index) {
+            vm.alerts.splice(index, 1);
         }
+
     }
 
 })();

@@ -57,7 +57,7 @@
 		};
 
         //delete button modal control
-        this.openModal = function(size, action) {
+        this.openModal = function(size, action, args) {
             var modalInstance = $modal.open({
                 templateUrl: './views/templates/modal.html',
                 controller: 'modalWindowCtrl',
@@ -65,8 +65,8 @@
                 size: size,
             });
             modalInstance.result.then(function () {
-                action();
-                $state.go('main.dashboard', {}, {reload: true});
+                action.apply(this, args);
+                // $state.go('main.dashboard.users', {}, {reload: true});
             }, function () {});
         };
 
