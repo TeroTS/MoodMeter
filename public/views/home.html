@@ -1,8 +1,15 @@
-<div><h4>How was your day ?</h4></div>
-<div><h4>Select rating and click:</h4></div>
-<alert class="text-center" ng-repeat="alert in vm.alerts" type="{{alert.type}}" close="vm.closeAlert($index)" dismiss-on-timeout="2000">{{alert.msg}}</alert>
-<div class="meter">
-	<rating ng-model="vm.rate" max="vm.max" readonly="vm.isReadonly" on-hover="vm.hoveringOver(value)" on-leave="vm.overStar = null" ng-click="vm.postData()"></rating>
-	<span class="label" ng-class="{'label-warning': vm.percent<30, 'label-info': vm.percent>=30 && vm.percent<70, 'label-success': vm.percent>=70}" ng-show="vm.overStar && !vm.isReadonly">{{vm.percent}}%</span>
+<div id="header">Mikä fiilis tänään ?</div>
+<div id="sub-header">Valitse fiilis ja lähetä eteenpäin.</div>
+<div id="rating-header">Mikä fiilis tämän työpäivän jälkeen ?</div>
+<div class="text-center">
+	<ul id="rating-buttons">
+		<li ng-repeat="ratingButton in vm.ratingButtons">
+			<img ng-class="{'opacity-half': ratingButton.notActive, 'opacity-almostfull': ratingButton.mouseover, 'opacity-full': ratingButton.selected}" ng-mouseover="vm.setMouseover($index)" ng-mouseleave="vm.unsetMouseover($index)" ng-click="vm.setSelected($index)" ng-src="images/icon_{{$index}}.png">
+			</img>
+		</li>
+	</ul>
 </div>
-
+<alert class="text-center" ng-repeat="alert in vm.alerts" type="{{alert.type}}" close="vm.closeAlert($index)" dismiss-on-timeout="2000">{{alert.msg}}</alert>
+<div class="text-center">
+	<div id="send-button" class="btn btn-primary" ng-click="vm.postData()">Lähetä !</div>
+</div>

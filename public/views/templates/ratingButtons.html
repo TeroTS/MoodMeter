@@ -1,0 +1,3 @@
+<div ng-repeat="ratingButton in vm.ratingButtons">
+	<img ng-class="{opacity-half: ratingButton.notActive, opacity-almostfull: ratingButton.mouseOver, opacity-full: ratingButton.selected}" ng-mouseover="vm.setMouseover($index)" ng-mouseleave="vm.unsetMouseover($index)" ng-click="setSelected($index)" ng-src="../images/icon_{{$index}}.png"></img>
+</div>
