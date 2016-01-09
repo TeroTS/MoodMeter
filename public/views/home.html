@@ -9,7 +9,9 @@
 		</li>
 	</ul>
 </div>
-<alert class="text-center" ng-repeat="alert in vm.alerts" type="{{alert.type}}" close="vm.closeAlert($index)" dismiss-on-timeout="2000">{{alert.msg}}</alert>
+<div class="text-center" id="alert">
+	<alert ng-repeat="alert in vm.alerts" type="{{alert.type}}" close="vm.closeAlert($index)" dismiss-on-timeout="2000" template-url="views/templates/alert.html">{{alert.msg}}</alert>
+</div>
 <div class="text-center">
 	<div id="send-button" class="btn btn-primary" ng-click="vm.postData()">Lähetä !</div>
 </div>

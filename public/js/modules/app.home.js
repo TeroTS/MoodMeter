@@ -24,6 +24,9 @@
 
     homeCtrl.$inject = ['$rootScope', 'restFactory', 'ratingButtonService'];
     function homeCtrl($rootScope, restFactory, ratingButtonService) {
+
+        var rate = 0;
+        //var alert = {};
         /*jshint validthis: true */
         var vm = this;
         vm.postData = postData;
@@ -32,12 +35,13 @@
         vm.setMouseover = setMouseover;
         vm.unsetMouseover = unsetMouseover;
         vm.setSelected = setSelected;
+        vm.alerts = [];
 
         activate();
 
         function activate() {
             for (var i=0; i<5; i++) {
-                vm.ratingButtons.push({notActive: true, mouseover: false, selected: false});
+                vm.ratingButtons.push({notActive: true, mouseover: false, selected: false, value: i+1});
             }
         }
 
@@ -46,39 +50,22 @@
         }
 
         function unsetMouseover(idx) {
-            for (var i=0; i<vm.ratingButtons.length; i++) {
-                vm.ratingButtons[i].mouseover = false;
-                if (i === idx) {
-                    if (vm.ratingButtons[i].selected === true) {
-                        vm.ratingButtons[i].notActive = false;
-                    } else {
-                        vm.ratingButtons[i].notActive = true;
-                    }
-
-                } else {
-                    vm.ratingButtons[i].notActive = true;
-                }
-            }
+            ratingButtonService.unsetMouseover(idx, vm.ratingButtons);
         }
 
         function setSelected(idx) {
-            for (var i=0; i<vm.ratingButtons.length; i++) {
-                if (i === idx) {
-                    vm.ratingButtons[i].notActive = false;
-                    vm.ratingButtons[i].mouseover = false;
-                    vm.ratingButtons[i].selected = true;
-                } else {
-                    vm.ratingButtons[i].notActive = true;
-                    vm.ratingButtons[i].mouseover = false;
-                    vm.ratingButtons[i].selected = false;
-                }
-            }
+            rate = vm.ratingButtons[idx].value;
+            ratingButtonService.setSelected(idx, vm.ratingButtons);
         }
 
         function postData() {
             var userId = $rootScope.user.id;
-            var valueObject = {'value' : vm.rate};
-            restFactory.postData(userId, valueObject).then(function(response) {vm.alerts.push({type: 'success', msg: 'Data sent succesfully !'});});
+            var valueObject = {'value' : rate};
+            restFactory.postData(userId, valueObject).then(function(response) {
+                if (vm.alerts.length === 0) {
+                    vm.alerts.push({type: 'success', msg: 'Kiitos palautteesta !'});
+                }
+            });
         }
 
         function closeAlert(index) {

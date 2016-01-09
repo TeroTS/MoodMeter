@@ -154,7 +154,7 @@ module.exports = function(app, passport) {
 
     // dashboard/users
     // dashboard/managers
-    // get users, only admin and manager
+    // get users
     app.get('/users', requireRole(['admin', 'manager']), function(req, res) {
     	//areManagers = req.param('managers');
     	var type = req.query.type;
@@ -184,7 +184,7 @@ module.exports = function(app, passport) {
 
     // dashboard/users
     // dashboard/managers
-    // get user, only admin and manager
+    // get user
     app.get('/users/:id', requireRole(['admin', 'manager']), function(req, res) {
         User.find({'id': req.params.id}, function(err, user) {
             if (err)
@@ -195,7 +195,7 @@ module.exports = function(app, passport) {
 
     // dashboard/users
     // dashboard/managers
-    // delete user, only admin
+    // delete user
     app.delete('/users/:id', requireRole(['admin', 'manager']), function(req, res) {
     	User.remove({'id': req.params.id}, function(err, user) {
             if (err)
@@ -205,7 +205,7 @@ module.exports = function(app, passport) {
     });
 
     // dashboard/users
-    // update user, only admin
+    // update user
     app.put('/users/:id', requireRole(['admin', 'manager']), function(req, res) {
     	User.findOne({'id': req.params.id}, function(err, user) {
     		if (err) res.send(err);
@@ -222,7 +222,7 @@ module.exports = function(app, passport) {
     });
 
     // dashboard/admins
-    // get admins, only admin
+    // get admins
     app.get('/admins', requireRole(['admin']), function(req, res) {
     	User.find({role: 'admin'}, function(err, admins) {
             if (err)
