@@ -25,6 +25,7 @@ module.exports = function(config) {
         'public/libs/angular-chart.js/dist/angular-chart.min.js',
         'public/libs/angular-cookies/angular-cookies.min.js',
         'public/js/app.js',
+        'public/js/services/*.js',
         'public/js/modules/app.*.js',
         'public/tests/*.test.js'
     ],

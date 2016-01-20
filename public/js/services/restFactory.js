@@ -3,6 +3,7 @@
     'use strict';
 
     angular
+        //.module('app.restFactory', []);
         .module('moodMeter')
         .factory('restFactory', restFactory);
 

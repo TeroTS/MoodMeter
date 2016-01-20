@@ -22,20 +22,19 @@
         });
     }
 
-    adminsCtrl.$inject = ['$state', 'restFactory', 'dataService', 'utilsService', 'getAdmins'];
-    function adminsCtrl($state, restFactory, dataService, utilsService, getAdmins) {
+    adminsCtrl.$inject = ['$state', 'restFactory', 'utilsService', 'getAdmins'];
+    function adminsCtrl($state, restFactory, utilsService, getAdmins) {
         /*jshint validthis: true */
         var vm = this;
-        var adminEmail = '';
         vm.users = getAdmins.data;
         vm.open = openModal;
-        //vm.saveUser = saveUser;
+        vm.closeAlert = closeAlert;
+        vm.alerts = [];
 
         function deleteAdmin(idx) {
             restFactory.deleteAdmin(vm.users[idx].email).
                 then(function(response) {
                     $state.go($state.current, {}, {reload: true});
-                    // vm.alerts.push({type: 'success', msg: 'Admin deleted !'});
                 }, function(reason) {
                     vm.alerts.push({type: 'danger', msg: 'Delete failed, reason: ' + reason});
                 });
