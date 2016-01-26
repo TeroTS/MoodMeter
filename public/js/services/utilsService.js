@@ -35,17 +35,6 @@
 	        return deferred.promise;
 	    };
 
-		// if manager/admin looking for user data => user = selected user from cookiestore
-		// else user looking his own data => user = session user
-	/*    this.setUser = function(user) {
-			var userData = {};
-			if (user.isAdmin)
-				userData = dataService.readUserData('data');
-			else
-				userData = user.data;
-			return userData;
-		}; */
-
 		this.setChartDataAndLabels = function(response) {
 			var chartDataAndLabels = {};
 			chartDataAndLabels.data = response.data.data;

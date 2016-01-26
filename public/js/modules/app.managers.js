@@ -32,10 +32,11 @@
         vm.open = openModal;
         vm.alerts = [];
         vm.closeAlert = closeAlert;
+        vm.saveUser = saveUser;
 
-        vm.saveUser = function(idx) {
+        function saveUser(idx) {
             dataService.writeUserData('data', vm.users[idx]);
-        };
+        }
 
         function deleteUser(idx) {
             restFactory.deleteUser(vm.users[idx].id)

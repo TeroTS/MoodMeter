@@ -26,7 +26,6 @@
     function homeCtrl($rootScope, restFactory, ratingButtonService) {
 
         var rate = 0;
-        //var alert = {};
         /*jshint validthis: true */
         var vm = this;
         vm.postData = postData;
@@ -38,6 +37,7 @@
         vm.alerts = [];
 
         activate();
+
 
         function activate() {
             for (var i=0; i<5; i++) {

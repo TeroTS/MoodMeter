@@ -1,4 +1,4 @@
-describe('app.admins module', function () {
+describe('app.managers module', function () {
 
     var $controller,
         _utilsService,
@@ -6,14 +6,15 @@ describe('app.admins module', function () {
 
     beforeEach(module('moodMeter'));
 
-    beforeEach(inject(function(_$controller_, utilsService) {
+    beforeEach(inject(function(_$controller_, dataService, utilsService, restFactory, getManagers) {
         spyOn(utilsService, 'openModal');
+        spyOn(dataService, 'writeUserData').and.callThrough();
         _utilsService = utilsService;
-        _getAdmins = {data : [{email: 'anna.admin@mail.com'}]};
-        $controller = _$controller_('adminsCtrl', {restFactory: {}, utilsService: _utilsService, getAdmins: _getAdmins});
+        _getManagers = {data : [{id: 1234}]};
+        $controller = _$controller_('managersCtrl', {restFactory: {}, utilsService: _utilsService, getManagers: _getManagers});
     }));
 
-    it('should get admin data', function () {
+    it('should persist user', function () {
         expect($controller.users[0].email).toBe('anna.admin@mail.com');
     });
 
