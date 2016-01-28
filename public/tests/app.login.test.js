@@ -9,7 +9,6 @@ describe('app.login module', function () {
 
     beforeEach(inject(function(_$controller_, _$httpBackend_, _$location_) {
         $location = _$location_;
-        // $controller = _$controller_;
         $httpBackend = _$httpBackend_;
         authRequestHandler = $httpBackend.when('POST', '/login')
                              .respond(200, '');

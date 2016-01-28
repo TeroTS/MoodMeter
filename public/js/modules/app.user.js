@@ -32,7 +32,6 @@
         vm.myManager = {};
         vm.alerts = [];
         vm.updateUser = updateUser;
-        //vm.open = openModal;
         vm.closeAlert = closeAlert;
 
         activate();
@@ -64,22 +63,10 @@
                 });
         }
 
-   /*     function deleteUser() {
-            restFactory.deleteUser(vm.user.id)
-                .then(function(response) {
-                    vm.alerts.push({type: 'success', msg: 'User deleted !'});
-                }, function(reason) {
-                    vm.alerts.push({type: 'danger', msg: 'Delete failed, reason: ' + reason});
-                });
-        } */
-
         function closeAlert(index) {
             vm.alerts.splice(index, 1);
         }
 
-  /*      function openModal() {
-            utilsService.openModal('sm', deleteUser);
-        } */
     }
 
 })();

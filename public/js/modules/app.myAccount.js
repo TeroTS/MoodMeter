@@ -15,11 +15,6 @@
 	            templateUrl: './views/myAccount.html',
 	            controller: 'myAccountCtrl',
 	            controllerAs: 'vm'
-	      /*      resolve: {
-	            	user: function() {
-	            		return {isAdmin: true};
-	            	}
-	            } */
 	        });
     }
 
@@ -31,9 +26,8 @@
 		vm.labels = [];
 		vm.data = [[]];
 		vm.timeOptions = ['1 week', '1 month', '3 months'];
-		vm.selectedItem = '1 week'; //constants.DEFAULT_TIME_OPTION; //'1 week';
-		// vm.isAdmin = user.isAdmin;
-		vm.user = dataService.readUserData('data'); //utilsService.setUser(user);
+		vm.selectedItem = '1 week'; //constants.DEFAULT_TIME_OPTION;
+		vm.user = dataService.readUserData('data');
 		vm.getPeriodData = getPeriodData;
 		vm.onClick = onClick;
 
